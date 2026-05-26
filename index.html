@@ -4,10 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dulcinea Designer - Blog</title>
+    
+    <!-- Importación de Fuentes de Google como alternativa/estilo si no están locales -->
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Dancing+Script&display=swap" rel="stylesheet">
+    
     <style>
-        /* Importación de fuentes de Google Fonts como alternativas de estilo */
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Pacifico&display=swap');
+        /* Fuentes personalizadas */
+        @font-face {
+            font-family: 'Vito Bold';
+            src: local('Vito Bold'), local('Vito-Bold');
+            font-weight: bold;
+        }
 
+        @font-face {
+            font-family: 'Amore';
+            src: local('Amore');
+        }
+
+        /* Estilos Generales y Fondo Matizado */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -15,41 +29,46 @@
         }
 
         body {
-            /* Fondo matizado rosa, lila y azul */
-            background: linear-gradient(135deg, #ffc0cb, #e6e6fa, #add8e6);
-            background-attachment: fixed;
+            background: linear-gradient(135deg, #ffbcd9, #e0b0ff, #b4d6f2);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
             padding: 20px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* Contenedor Principal */
+        /* Contenedor Principal (Estilo Facebook/Blog) */
         .main-container {
             width: 100%;
             max-width: 800px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
         }
 
-        /* --- SECCIÓN PERFIL --- */
+        /* --- PERFIL --- */
         .profile-card {
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(5px);
             border-radius: 15px;
             padding: 20px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* Foto de perfil de 80x80px con círculo parpadeante */
         .profile-img-container {
             width: 80px;
             height: 80px;
-            margin: 0 auto 15px auto;
             position: relative;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Animación de parpadeo del borde del círculo */
+            animation: blinkCircle 2s infinite alternate;
         }
 
         .profile-img-container img {
@@ -57,331 +76,297 @@
             height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            display: block;
-            position: relative;
-            z-index: 2;
         }
 
-        /* Efecto parpadeo colores: morado, rosa, lila, azul en el borde */
-        .profile-img-container::before {
-            content: '';
-            position: absolute;
-            top: -5px; left: -5px; right: -5px; bottom: -5px;
-            border-radius: 50%;
-            z-index: 1;
-            animation: borderFlicker 2s infinite alternate;
-        }
-
-        @keyframes borderFlicker {
-            0% { box-shadow: 0 0 15px #800080; background: #800080; }      /* Morado */
-            33% { box-shadow: 0 0 15px #ff69b4; background: #ff69b4; }     /* Rosa */
-            66% { box-shadow: 0 0 15px #da70d6; background: #da70d6; }     /* Lila */
-            100% { box-shadow: 0 0 15px #00bfff; background: #00bfff; }    /* Azul */
-        }
-
-        /* Nombre Dulcinea: Fuente Vito Bold (simulada), tamaño 20, Efecto 4D y parpadeo lila/rosa/azul */
+        /* Nombre Dulcinea Letra 4D (Efecto de relieve con sombras) */
         .profile-name {
-            font-family: 'Fredoka', 'Arial Black', sans-serif; /* Alternativa robusta a Vito Bold */
-            font-weight: 900;
+            font-family: 'Vito Bold', sans-serif;
             font-size: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-top: 10px;
-            display: inline-block;
-            /* Efecto Estilo 4D con sombras múltiples */
+            margin-top: 15px;
+            color: #ffffff;
             text-shadow: 
-                1px 1px 0px #fff,
-                2px 2px 0px rgba(0,0,0,0.15),
-                3px 3px 5px rgba(0,0,0,0.3);
-            animation: textFlicker 3s infinite;
+                0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 
+                0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 
+                0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 
+                0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
+            /* Animación de parpadeo de texto */
+            animation: blinkText 2.5s infinite;
         }
 
-        @keyframes textFlicker {
-            0%, 100% { color: #da70d6; } /* Lila */
-            33% { color: #ff69b4; }      /* Rosa */
-            66% { color: #00bfff; }      /* Azul */
-        }
-
-        /* --- MENSAJE ANIMADO --- */
-        .banner-message {
+        /* --- MENSAJE ANMADO (Aparece y Desaparece) --- */
+        .announcement-message {
             font-size: 15px;
-            color: #800080; /* Morado */
+            color: #4a0e4e; /* Morado */
             font-weight: bold;
             text-align: center;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 10px;
-            /* Efecto aparecer y desaparecer */
-            animation: opacityBlink 2.5s infinite ease-in-out;
+            margin: 10px 0;
+            animation: fadeInOut 3s infinite ease-in-out;
         }
 
-        @keyframes opacityBlink {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
+        /* --- PUBLICACIONES / SECCIONES --- */
+        .post-container {
+            background-color: #4a0e4e; /* Cuarto largo color Morado */
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
-        /* --- SECCIÓN GALERÍA --- */
-        .gallery-section {
-            background-color: #e6e6fa; /* Color dentro galería Lila */
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        /* Disposición en línea para los cuadros medianos */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-        }
-
-        /* Cuadro mediano de cada item de la galería */
-        .gallery-item {
-            background-color: #e6e6fa; /* Fondo lila en cada sección */
-            padding: 12px;
+        .gallery-box {
+            background-color: #e6d8f2; /* Fondo lila dentro de la galería */
             border-radius: 8px;
-            text-align: center;
+            padding: 15px;
+        }
+
+        .gallery-title {
+            font-family: 'Vito Bold', sans-serif;
+            font-size: 18px;
+            color: #4a0e4e;
+            margin-bottom: 15px;
+            border-bottom: 2px dashed #4a0e4e;
+            padding-bottom: 5px;
+        }
+
+        /* Grid de imágenes alineadas */
+        .grid-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 15px;
+            justify-content: center;
+        }
+
+        /* Items de la Galería */
+        .gallery-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
+            text-align: center;
         }
 
-        /* Nombre arriba del link con parpadeo azul lila */
-        .gallery-item h4 {
-            font-size: 14px;
-            margin-bottom: 8px;
-            animation: blueLilaFlicker 2s infinite alternate;
-        }
-
-        @keyframes blueLilaFlicker {
-            0% { color: #00bfff; text-shadow: 0 0 5px rgba(0,191,255,0.5); } /* Azul */
-            100% { color: #9370db; text-shadow: 0 0 5px rgba(147,112,219,0.5); } /* Lila */
-        }
-
-        /* Medida chica para los gifs */
-        .gif-thumb {
-            width: 100px;
-            height: 100px;
-            object-fit: cubic-bezier;
-            border-radius: 4px;
-            margin-bottom: 8px;
-        }
-
-        /* Cuadro contor linea putudiada color negro en cada foto */
-        .photo-border-box {
-            border: 2px dashed #000000;
-            padding: 5px;
-            background: #fff;
-            display: inline-block;
-            margin-bottom: 8px;
-        }
-
-        /* Sub-etiquetas requeridas dentro de cada cuadro */
-        .tags-container {
-            font-size: 11px;
-            color: #444;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4px;
-            width: 100%;
-            background: rgba(255,255,255,0.5);
-            padding: 5px;
-            border-radius: 4px;
-        }
-
-        .tags-container span {
-            background: #fff;
-            padding: 2px;
-            border-radius: 2px;
-            border: 1px solid #ddd;
-        }
-
-        /* --- SECCIÓN PUBLICACIONES (CUADROS LARGOS) --- */
-        .posts-container {
+        .item-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            height: 32px; /* Espacio fijo para alineación */
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Cuarto largo color Morado para separar cada publicación */
-        .post-long-card {
-            background-color: #800080; /* Cuadro largo Morado */
-            color: #fff;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        /* Contenedor de la imagen con línea punteada negra */
+        .img-wrapper {
+            border: 2px dashed #000000; /* Cuadro contorno linea putudiada color negro */
+            padding: 4px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 120px; /* Medida chica para los GIFs */
+            aspect-ratio: 1 / 1;
         }
 
-        /* Interior del post mantiene fondo lila según instrucción */
-        .post-body {
-            background-color: #e6e6fa; /* Fondo lila cada sección */
-            color: #000;
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 5px;
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         /* --- PIE DE PÁGINA --- */
         footer {
             margin-top: 40px;
-            margin-bottom: 20px;
+            padding: 15px;
             text-align: center;
             width: 100%;
         }
 
-        /* Fuente amore (simulada con Pacifico elegante), tamaño 1 */
         .footer-text {
-            font-family: 'Pacifico', cursive, sans-serif;
-            font-size: 12px; /* Equivalente a tamaño chico/1 en web */
-            color: #555;
-            letter-spacing: 1px;
+            font-family: 'Amore', 'Dancing Script', cursive;
+            font-size: 14px; /* Tamaño adaptado visualmente para legibilidad */
+            color: #4a0e4e;
         }
 
-        /* Responsividad para pantallas muy chicas */
+        /* ------ ANIMACIONES (KEYFRAMES) ------ */
+        
+        /* Parpadeo de color lila rosa azul morado (Círculo Perfil) */
+        @keyframes blinkCircle {
+            0% { border: 4px solid #e0b0ff; box-shadow: 0 0 10px #e0b0ff; }
+            33% { border: 4px solid #ffbcd9; box-shadow: 0 0 10px #ffbcd9; }
+            66% { border: 4px solid #b4d6f2; box-shadow: 0 0 10px #b4d6f2; }
+            100% { border: 4px solid #8a2be2; box-shadow: 0 0 10px #8a2be2; }
+        }
+
+        /* Parpadeo de texto lila rosa azul (Nombre) */
+        @keyframes blinkText {
+            0%, 100% { color: #e0b0ff; }
+            33% { color: #ffbcd9; }
+            66% { color: #b4d6f2; }
+        }
+
+        /* Aparecer y desaparecer (Mensaje de atención) */
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* Responsive adjustments */
         @media (max-width: 480px) {
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-            .tags-container {
-                grid-template-columns: 1fr;
+            .grid-gallery {
+                grid-template-columns: repeat(2, 1fr); /* 2 columnas en celulares pequeños */
             }
         }
     </style>
 </head>
 <body>
 
-<div class="main-container">
-
-    <!-- PERFIL -->
-    <div class="profile-card">
-        <div class="profile-img-container">
-            <img src="https://xatimg.com/image/qdh7T2GNGQAd.png" alt="Dulcinea Perfil">
-        </div>
-        <div>
-            <h1 class="profile-name">Dulcinea</h1>
-        </div>
-    </div>
-
-    <!-- MENSAJE ANIMADO -->
-    <div class="banner-message">
-        ✨ ¡Atención!🌸 • Espacio creativo y personalizado con mucho amor.✨
-    </div>
-
-    <!-- GALERÍA (Todos los cuadros alineados) -->
-    <div class="gallery-section">
-        <div class="gallery-grid">
-            
-            <!-- Item 1 -->
-            <div class="gallery-item">
-                <h4>Gif4d After 314</h4>
-                <div class="photo-border-box">
-                    <img class="gif-thumb" src="https://i.ibb.co/TMxDzm4B/314-gisse-gif.gif" alt="After 314">
-                </div>
-                <div class="tags-container">
-                    <span>Parpadeos</span><span>Pcback</span>
-                    <span>Pcback Gif</span><span>Pstyle</span>
-                    <span>Pstyle Gif</span><span>Gif4d</span>
-                </div>
-            </div>
-
-            <!-- Item 2 -->
-            <div class="gallery-item">
-                <h4>Gif4d After 608</h4>
-                <div class="photo-border-box">
-                    <img class="gif-thumb" src="https://i.ibb.co/twtZb0BS/608-Gisse.gif" alt="After 608">
-                </div>
-                <div class="tags-container">
-                    <span>Parpadeos</span><span>Pcback</span>
-                    <span>Pcback Gif</span><span>Pstyle</span>
-                    <span>Pstyle Gif</span><span>Gif4d</span>
-                </div>
-            </div>
-
-            <!-- Item 3 -->
-            <div class="gallery-item">
-                <h4>Gif4d After 377</h4>
-                <div class="photo-border-box">
-                    <img class="gif-thumb" src="https://i.ibb.co/4gj6D0cR/377-pareja-dorado-gif.gif" alt="After 377">
-                </div>
-                <div class="tags-container">
-                    <span>Parpadeos</span><span>Pcback</span>
-                    <span>Pcback Gif</span><span>Pstyle</span>
-                    <span>Pstyle Gif</span><span>Gif4d</span>
-                </div>
-            </div>
-
-            <!-- Item 4 -->
-            <div class="gallery-item">
-                <h4>Gif4d After Jahlize</h4>
-                <div class="photo-border-box">
-                    <img class="gif-thumb" src="https://i.ibb.co/WNJ7Sbxr/600-Affter-jahlize.gif" alt="After Jahlize">
-                </div>
-                <div class="tags-container">
-                    <span>Parpadeos</span><span>Pcback</span>
-                    <span>Pcback Gif</span><span>Pstyle</span>
-                    <span>Pstyle Gif</span><span>Gif4d</span>
-                </div>
-            </div>
-
-            <!-- Item 5 -->
-            <div class="gallery-item">
-                <h4>Gif4d After 601</h4>
-                <div class="photo-border-box">
-                    <img class="gif-thumb" src="https://i.ibb.co/KcSkBrwV/601-jahlize.gif" alt="After 601">
-                </div>
-                <div class="tags-container">
-                    <span>Parpadeos</span><span>Pcback</span>
-                    <span>Pcback Gif</span><span>Pstyle</span>
-                    <span>Pstyle Gif</span><span>Gif4d</span>
-                </div>
-            </div>
-
-            <!-- Item 6 -->
-            <div class="gallery-item">
-                <h4>Gif4d After 604</h4>
-                <div class="photo-border-box">
-                    <img class="gif-thumb" src="https://i.ibb.co/ynmbd90R/604-jahlize.gif" alt="After 604">
-                </div>
-                <div class="tags-container">
-                    <span>Parpadeos</span><span>Pcback</span>
-                    <span>Pcback Gif</span><span>Pstyle</span>
-                    <span>Pstyle Gif</span><span>Gif4d</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- SECCIÓN PUBLICACIONES (Separadas por cuadros largos morados con fondo interno lila) -->
-    <div class="posts-container">
+    <div class="main-container">
         
-        <!-- Publicación 1 -->
-        <div class="post-long-card">
-            <div class="post-body">
-                <p><strong>Novedades del espacio creativo</strong></p>
-                <p style="margin-top: 5px; font-size: 14px;">Aquí puedes añadir los textos o descripciones de tus diseños principales de manera fluida.</p>
+        <!-- SECCIÓN DE PERFIL -->
+        <div class="profile-card">
+            <div class="profile-img-container">
+                <img src="https://xatimg.com/image/qdh7T2GNGQAd.png" alt="Dulcinea">
+            </div>
+            <div class="profile-name">Dulcinea</div>
+        </div>
+
+        <!-- MENSAJE DE ATENCIÓN ANMADO -->
+        <div class="announcement-message">
+            ✨ ¡Atención!🌸 • Espacio creativo y personalizado con mucho amor.✨
+        </div>
+
+        <!-- PUBLICACIÓN 1: Gif4d -->
+        <div class="post-container">
+            <div class="gallery-box">
+                <div class="gallery-title">Gif4d</div>
+                <div class="grid-gallery">
+                    
+                    <div class="gallery-item">
+                        <span class="item-title">After 314</span>
+                        <div class="img-wrapper">
+                            <img src="https://i.ibb.co/TMxDzm4B/314-gisse-gif.gif" alt="After 314">
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <span class="item-title">After 608</span>
+                        <div class="img-wrapper">
+                            <img src="https://i.ibb.co/twtZb0BS/608-Gisse.gif" alt="After 608">
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <span class="item-title">After 377</span>
+                        <div class="img-wrapper">
+                            <img src="https://i.ibb.co/4gj6D0cR/377-pareja-dorado-gif.gif" alt="After 377">
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <span class="item-title">Affter jahlize</span>
+                        <div class="img-wrapper">
+                            <img src="https://i.ibb.co/WNJ7Sbxr/600-Affter-jahlize.gif" alt="Affter jahlize">
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <span class="item-title">After 601</span>
+                        <div class="img-wrapper">
+                            <img src="https://i.ibb.co/KcSkBrwV/601-jahlize.gif" alt="After 601">
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <span class="item-title">After 604</span>
+                        <div class="img-wrapper">
+                            <img src="https://i.ibb.co/ynmbd90R/604-jahlize.gif" alt="After 604">
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
 
-        <!-- Publicación 2 -->
-        <div class="post-long-card">
-            <div class="post-body">
-                <p><strong>Zona de Actualizaciones</strong></p>
-                <p style="margin-top: 5px; font-size: 14px;">Cada bloque está separado individualmente manteniendo la estética limpia y vibrante.</p>
+        <!-- PUBLICACIÓN 2: Parpadeos -->
+        <div class="post-container">
+            <div class="gallery-box">
+                <div class="gallery-title">Parpadeos</div>
+                <div class="grid-gallery">
+                    <div class="gallery-item">
+                        <span class="item-title">Muestra</span>
+                        <div class="img-wrapper">
+                            <img src="https://ibb.co/G3TKGx0y" alt="Parpadeos">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PUBLICACIÓN 3: Pcback -->
+        <div class="post-container">
+            <div class="gallery-box">
+                <div class="gallery-title">Pcback</div>
+                <div class="grid-gallery">
+                    <div class="gallery-item">
+                        <span class="item-title">Muestra</span>
+                        <div class="img-wrapper">
+                            <img src="https://ibb.co/G3TKGx0y" alt="Pcback">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PUBLICACIÓN 4: Pcback Gif -->
+        <div class="post-container">
+            <div class="gallery-box">
+                <div class="gallery-title">Pcback Gif</div>
+                <div class="grid-gallery">
+                    <div class="gallery-item">
+                        <span class="item-title">Muestra</span>
+                        <div class="img-wrapper">
+                            <img src="https://ibb.co/G3TKGx0y" alt="Pcback Gif">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PUBLICACIÓN 5: Pstyle -->
+        <div class="post-container">
+            <div class="gallery-box">
+                <div class="gallery-title">Pstyle</div>
+                <div class="grid-gallery">
+                    <div class="gallery-item">
+                        <span class="item-title">Muestra</span>
+                        <div class="img-wrapper">
+                            <img src="https://ibb.co/G3TKGx0y" alt="Pstyle">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PUBLICACIÓN 6: Pstyle Gif -->
+        <div class="post-container">
+            <div class="gallery-box">
+                <div class="gallery-title">Pstyle Gif</div>
+                <div class="grid-gallery">
+                    <div class="gallery-item">
+                        <span class="item-title">Muestra</span>
+                        <div class="img-wrapper">
+                            <img src="https://ibb.co/G3TKGx0y" alt="Pstyle Gif">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
 
-</div>
-
-<!-- PIE DE PÁGINA CENTRAL -->
-<footer>
-    <div class="footer-text">
-        2030 Creado por Dulcinea
-    </div>
-</footer>
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        <div class="footer-text">2030 Creado por Dulcinea</div>
+    </footer>
 
 </body>
 </html>
