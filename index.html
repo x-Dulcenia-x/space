@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dulcinea Designer</title>
+    <!-- Fuente Romance Script (Pinyon Script) para el pie de página -->
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <style>
+        :root {
+            --rosa-pastel: #FFF0F5;
+            --lila-pastel: #E6E6FA;
+            --azul-pastel: #E0F7FA;
+            --lila-oscuro: #9370DB;
+            --morado-fuerte: #4A148C;
+            --gradiente-lila-morado: linear-gradient(45deg, #9370DB, #6A0DAD, #4A148C);
+            --gradiente-tornasol: linear-gradient(135deg, #9370DB, #E6E6FA, #87CEFA, #FFB6C1, #9370DB);
+        }
+
+        /* --- BLOQUEO DE COPIAR Y SELECCIÓN --- */
+        body {
+            background: linear-gradient(135deg, var(--rosa-pastel), var(--lila-pastel), var(--azul-pastel));
+            background-size: 400% 400%;
+            animation: fondoMatizado 15s ease infinite; /* Fondo matizado con movimiento */
+            color: #4A4A4A;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @keyframes fondoMatizado {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Bloqueo visual de arrastre de imágenes */
+        img {
+            pointer-events: none;
+            -webkit-user-drag: none;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--lila-pastel);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .titulo-marca {
+            font-size: 26px;
+            font-weight: bold;
+            background: var(--gradiente-lila-morado);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .foto-perfil {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--lila-oscuro);
+            object-fit: cover;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* --- EFECTO PARPADEO (Blink) --- */
+        .parpadeo {
+            animation: parpadear 1.5s infinite;
+        }
+
+        @keyframes parpadear {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        /* --- MENU SECCIONES ESTILO WEB --- */
+        .nav-secciones {
+            background: white;
+            padding: 10px;
+            border-bottom: 1px solid rgba(147, 112, 219, 0.2);
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn-seccion {
+            color: #555;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .btn-seccion:hover {
+            color: var(--morado-fuerte);
+        }
+
+        .btn-seccion::after {
+            content: '🔽'; /* Flechita abajo */
+            font-size: 10px;
+            margin-top: 2px;
+        }
+
+        /* --- DISEÑO PRINCIPAL (RESPONSIVE) --- */
+        .main-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 2.5fr 1fr;
+            gap: 20px;
+        }
+
+        .feed-facebook {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .post-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid rgba(147, 112, 219, 0.15);
+            position: relative;
+        }
+
+        .post-card::before {
+            content: '🦋';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            opacity: 0.25;
+            font-size: 22px;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        /* --- SECCIÓN GIF 4D (Cuadro Tornasol) --- */
+        .cuadro-tornasol {
+            background: var(--gradiente-tornasol);
+            background-size: 200% 200%;
+            animation: tornasolMov 6s ease infinite;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 15px rgba(147, 112, 219, 0.2);
+            margin-top: 10px;
+        }
+
+        @keyframes tornasolMov {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .cuadro-tornasol h4 {
+            color: var(--morado-fuerte);
+            margin-bottom: 12px;
+            font-size: 15px;
+            text-shadow: 1px 1px 1px rgba(255,255,255,0.6);
+        }
+
+        .gif-4d-asset {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            border: 1px solid white;
+        }
+
+        .letras-chicas {
+            font-size: 11px;
+            color: #555;
+            display: block;
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        /* --- COMPONENTES FACEBOOK --- */
+        .fb-actions {
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 10px;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #65676B;
+        }
+        .fb-btn { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+
+        /* --- PIE DE PÁGINA --- */
+        footer {
+            text-align: center;
+            padding: 30px 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-top: 1px solid var(--lila-pastel);
+            margin-top: 40px;
+        }
+
+        .firma-romance {
+            font-family: 'Pinyon Script', cursive, serif;
+            font-size: 32px; /* Tamaño destacado para la fuente manuscrita */
+            color: var(--morado-fuerte);
+            display: block;
+        }
+
+        /* --- RESPONSIVO --- */
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<!-- Bloqueo extra mediante atributos HTML contra click derecho e inspección simple -->
+<body oncontextmenu="return false" onkeydown="return false">
+
+    <!-- ENCABEZADO -->
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <div class="titulo-marca">Dulcinea Designer</div>
+                <span class="parpadeo" style="font-size: 18px;">🦋🌸</span>
+            </div>
+            <img src="https://xatimg.com/image/qdh7T2GNGQAd.png" class="foto-perfil" alt="Perfil">
+        </div>
+    </header>
+
+    <!-- MENU SECCIONES CON FLECHAS -->
+    <nav class="nav-secciones">
+        <div class="nav-container">
+            <a href="#pcback" class="btn-seccion">Pcback Gif</a>
+            <a href="#pstyle-gif" class="btn-seccion">Pcback Pstyle Gif</a>
+            <a href="#pstyle" class="btn-seccion">Pstyle</a>
+            <a href="#gif-4d" class="btn-seccion">Gif 4D</a>
+        </div>
+    </nav>
+
+    <!-- CUERPO PRINCIPAL -->
+    <div class="main-container">
+        
+        <!-- FEED ESTILO FACEBOOK / BLOG -->
+        <main class="feed-facebook">
+            
+            <!-- Entrada Fija de Facebook -->
+            <div class="post-card">
+                <div class="post-header">
+                    <img src="https://xatimg.com/image/qdh7T2GNGQAd.png" style="width:40px; height:40px; border-radius:50%;" alt="Avatar">
+                    <div>
+                        <strong style="color: var(--morado-fuerte);">Dulcinea Designer</strong>
+                        <div style="font-size:12px; color:#777;">Publicado ahora mismo • 🌍</div>
+                    </div>
+                </div>
+                <p>Explorando nuevos horizontes artísticos, texturas brillantes y movimientos fluidos. ✨ ¡Echa un vistazo a los nuevos diseños!</p>
+                
+                <div class="fb-actions">
+                    <div class="fb-btn">🌸 Me gusta</div>
+                    <div class="fb-btn">💬 Comentar</div>
+                    <div class="fb-btn">🦋 Compartir</div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN GIF 4D CON CUADRO TORNASOL -->
+            <section id="gif-4d" class="post-card">
+                <div class="post-header">
+                    <img src="https://xatimg.com/image/qdh7T2GNGQAd.png" style="width:40px; height:40px; border-radius:50%;" alt="Avatar">
+                    <div>
+                        <strong style="color: var(--morado-fuerte);">Sección: Gif 4D</strong>
+                        <div style="font-size:12px; color:#777;">Categoría Especial de Diseños</div>
+                    </div>
+                </div>
+                
+                <!-- Cuadro chiquito tornasol morado, lila y azul -->
+                <div class="cuadro-tornasol">
+                    <h4>Diseños chicas</h4>
+                    <!-- Archivo GIF Protegido -->
+                    <img src="https://xatimg.com/image/oNtkoZ1Jjdbo.gif" class="gif-4d-asset" alt="Diseño Animado">
+                    <span class="letras-chicas">Affter 314</span>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- BARRA LATERAL (ESTILO BLOG) -->
+        <aside class="feed-facebook">
+            <div class="post-card" id="pcback">
+                <h3 style="color: var(--lila-oscuro); margin-bottom: 10px;">Pcback Gif</h3>
+                <p style="font-size: 14px; color:#666;">Espacio dedicado a fondos dinámicos optimizados para ordenadores.</p>
+            </div>
+            
+            <div class="post-card" id="pstyle-gif">
+                <h3 style="color: var(--lila-oscuro); margin-bottom: 10px;">Pcback Pstyle Gif</h3>
+                <p style="font-size: 14px; color:#666;">Combinación de estilos personalizados con animaciones en bucle.</p>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        <span class="firma-romance">Hecho x Dulcinea 2030</span>
+    </footer>
+
+    <!-- SCRIPT DE SEGURIDAD (ANTI-COPIA Y ANTI-EXTRACCIÓN) -->
+    <script>
+        // Bloquear clic derecho
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Bloquear combinaciones de teclado comunes (Ctrl+C, Ctrl+U, F12, Ctrl+S)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 73)) {
+                e.preventDefault();
+                return false;
+            }
+            if (e.keyCode === 123) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Deshabilitar el arrastre de elementos para evitar que salven los links guardando la imagen
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>
