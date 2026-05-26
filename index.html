@@ -1,373 +1,301 @@
-<!DOCTYPE html> 
+      <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dulcinea Designer</title>
-    <!-- Fuente Romance Script (Pinyon Script) para el pie de página -->
-    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <title>Dulcinea Space</title>
     <style>
-        :root {
-            --rosa-pastel: #FFF0F5;
-            --lila-pastel: #E6E6FA;
-            --azul-pastel: #E0F7FA;
-            --lila-oscuro: #9370DB;
-            --morado-fuerte: #4A148C;
-            --gradiente-lila-morado: linear-gradient(45deg, #9370DB, #6A0DAD, #4A148C);
-            --gradiente-tornasol: linear-gradient(135deg, #9370DB, #E6E6FA, #87CEFA, #FFB6C1, #9370DB);
+        /* Fuentes de Google para estilos alternativos si no están locales */
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Ubuntu:wght@700&display=swap');
+
+        /* Animación de fondo: Paisaje animado en tonos rosa, lila y azul */
+        @keyframes paisajeAnimado {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* --- BLOQUEO DE COPIAR Y SELECCIÓN --- */
-        body {
-            background: linear-gradient(135deg, var(--rosa-pastel), var(--lila-pastel), var(--azul-pastel));
-            background-size: 400% 400%;
-            animation: fondoMatizado 15s ease infinite; /* Fondo matizado con movimiento */
-            color: #4A4A4A;
+        /* Animaciones de Parpadeo (Blinking) */
+        @keyframes parpadeoTextoNombre {
+            0%, 100% { text-shadow: 0 0 10px #da70d6, 0 0 20px #da70d6, 2px 2px 0px #0000ff; color: #ffc0cb; }
+            50% { text-shadow: 0 0 10px #0000ff, 0 0 20px #0000ff, 2px 2px 0px #da70d6; color: #da70d6; }
+        }
+
+        @keyframes parpadeoTextoMensaje {
+            0%, 100% { color: #ffb6c1; text-shadow: 0 0 5px #ba55d3; }
+            50% { color: #e6e6fa; text-shadow: 0 0 5px #00bfff; }
+        }
+
+        @keyframes parpadeoBorde {
+            0%, 100% { border-color: #ff69b4; box-shadow: 0 0 8px #ff69b4; }
+            33% { border-color: #da70d6; box-shadow: 0 0 8px #da70d6; }
+            66% { border-color: #1e90ff; box-shadow: 0 0 8px #1e90ff; }
+        }
+
+        /* Estilos Generales */
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
         }
 
-        @keyframes fondoMatizado {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Bloqueo visual de arrastre de imágenes */
-        img {
-            pointer-events: none;
-            -webkit-user-drag: none;
-        }
-
-        /* --- HEADER --- */
-        header {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 12px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 2px solid var(--lila-pastel);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .header-container {
-            max-width: 1200px;
-            margin: auto;
+        body {
+            background: linear-gradient(-45deg, #ffc0cb, #e6e6fa, #b0c4de, #da70d6);
+            background-size: 400% 400%;
+            animation: paisajeAnimado 15s ease infinite;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .titulo-marca {
-            font-size: 26px;
-            font-weight: bold;
-            background: var(--gradiente-lila-morado);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .foto-perfil {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid var(--lila-oscuro);
-            object-fit: cover;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        /* --- EFECTO PARPADEO (Blink) --- */
-        .parpadeo {
-            animation: parpadear 1.5s infinite;
-        }
-
-        @keyframes parpadear {
-            0% { opacity: 0.3; }
-            50% { opacity: 1; }
-            100% { opacity: 0.3; }
-        }
-
-        /* --- MENU SECCIONES ESTILO WEB --- */
-        .nav-secciones {
-            background: white;
+            min-height: 100vh;
             padding: 10px;
-            border-bottom: 1px solid rgba(147, 112, 219, 0.2);
-            overflow-x: auto;
-            white-space: nowrap;
         }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: auto;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .btn-seccion {
-            color: #555;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .btn-seccion:hover {
-            color: var(--morado-fuerte);
-        }
-
-        .btn-seccion::after {
-            content: '🔽'; /* Flechita abajo */
-            font-size: 10px;
-            margin-top: 2px;
-        }
-
-        /* --- DISEÑO PRINCIPAL (RESPONSIVE) --- */
+        /* Contenedor Principal (Estilo Feed de Red Social) */
         .main-container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 15px;
-            display: grid;
-            grid-template-columns: 2.5fr 1fr;
-            gap: 20px;
+            width: 100%;
+            max-width: 650px;
+            margin-bottom: 60px;
         }
 
-        .feed-facebook {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .post-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            border: 1px solid rgba(147, 112, 219, 0.15);
-            position: relative;
-        }
-
-        .post-card::before {
-            content: '🦋';
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            opacity: 0.25;
-            font-size: 22px;
-        }
-
-        .post-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        /* --- SECCIÓN GIF 4D (Cuadro Tornasol) --- */
-        .cuadro-tornasol {
-            background: var(--gradiente-tornasol);
-            background-size: 200% 200%;
-            animation: tornasolMov 6s ease infinite;
-            border-radius: 10px;
+        /* Perfil de Usuario */
+        .perfil-card {
+            background: rgba(230, 230, 250, 0.9); /* Fondo Lila Claro dentro de galería/perfil */
+            border: 2px solid #da70d6;
+            border-radius: 15px;
             padding: 15px;
             text-align: center;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 4px 15px rgba(147, 112, 219, 0.2);
-            margin-top: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        @keyframes tornasolMov {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #da70d6;
+            margin-bottom: 8px;
         }
 
-        .cuadro-tornasol h4 {
-            color: var(--morado-fuerte);
-            margin-bottom: 12px;
+        /* Nombre Dulcinea Letra 4D y Vito Bold */
+        .nombre-usuario {
+            font-family: 'Vito Bold', 'Ubuntu', sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: parpadeoTextoNombre 2.5s infinite;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        /* Mensaje de Atención */
+        .mensaje-atencion {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 15px 0 5px 0;
             font-size: 15px;
-            text-shadow: 1px 1px 1px rgba(255,255,255,0.6);
-        }
-
-        .gif-4d-asset {
-            max-width: 100%;
-            height: auto;
-            border-radius: 6px;
-            border: 1px solid white;
-        }
-
-        .letras-chicas {
-            font-size: 11px;
-            color: #555;
-            display: block;
-            margin-top: 6px;
-            font-weight: 500;
-        }
-
-        /* --- COMPONENTES FACEBOOK --- */
-        .fb-actions {
-            display: flex;
-            justify-content: space-around;
-            border-top: 1px solid #f0f0f0;
-            padding-top: 10px;
-            margin-top: 15px;
-            font-size: 13px;
-            color: #65676B;
-        }
-        .fb-btn { display: flex; align-items: center; gap: 5px; cursor: pointer; }
-
-        /* --- PIE DE PÁGINA --- */
-        footer {
+            font-weight: bold;
             text-align: center;
-            padding: 30px 15px;
-            background: rgba(255, 255, 255, 0.7);
-            border-top: 1px solid var(--lila-pastel);
-            margin-top: 40px;
+            animation: parpadeoTextoMensaje 2s infinite;
+            border: 1px dashed #da70d6;
         }
 
-        .firma-romance {
-            font-family: 'Pinyon Script', cursive, serif;
-            font-size: 32px; /* Tamaño destacado para la fuente manuscrita */
-            color: var(--morado-fuerte);
+        /* Publicaciones Individuales (Cuadros Largos Color Lila) */
+        .publicacion {
+            background: #e6e6fa; /* Color lila dentro de la galería */
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px; /* Separación entre cada publicación */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            border: 1px solid #b0c4de;
+        }
+
+        .publicacion-titulo {
+            font-family: 'Vito Bold', sans-serif;
+            font-size: 18px;
+            color: #4b0082;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #da70d6;
+            padding-bottom: 5px;
+            font-weight: bold;
+        }
+
+        /* Grid de Contenido Interno */
+        .galeria-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        /* Cada bloque de imagen/gif interno (Cuadro Mediano) */
+        .item-galeria {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1 1 calc(50% - 15px); /* Dos por fila en pantallas medianas */
+            max-width: 280px;
+            min-width: 140px;
+        }
+
+        .item-titulo {
+            font-size: 12px;
+            font-weight: bold;
+            color: #4b0082;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        /* Ajuste de imágenes chicas con borde parpadeante individual */
+        .img-chica {
+            width: 100%;
+            max-width: 130px; /* Medida chica solicitada */
+            height: auto;
+            border-radius: 5px;
+            border: 3px solid #ff69b4;
+            animation: parpadeoBorde 2s infinite;
             display: block;
+            margin: 0 auto;
         }
 
-        /* --- RESPONSIVO --- */
-        @media (max-width: 900px) {
-            .main-container {
-                grid-template-columns: 1fr;
+        /* Pie de página */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            background: rgba(230, 230, 250, 0.9);
+            border-top: 1px solid #da70d6;
+        }
+
+        /* Fuente Amore / Estilo Romance Script */
+        .footer-texto {
+            font-family: 'Amore', 'Great Vibes', cursive;
+            font-size: 14px; /* Tamaño chico/número 1 equivalente sutil */
+            color: #4b0082;
+            letter-spacing: 1px;
+        }
+
+        /* Adaptabilidad para Celulares */
+        @media (max-width: 480px) {
+            .item-galeria {
+                flex: 1 1 100%; /* Una sola columna en móviles pequeños */
+                max-width: 100%;
+            }
+            .nombre-usuario {
+                font-size: 18px;
             }
         }
     </style>
 </head>
-<!-- Bloqueo extra mediante atributos HTML contra click derecho e inspección simple -->
-<body oncontextmenu="return false" onkeydown="return false">
+<body>
 
-    <!-- ENCABEZADO -->
-    <header>
-        <div class="header-container">
-            <div class="header-left">
-                <div class="titulo-marca">Dulcinea Designer</div>
-                <span class="parpadeo" style="font-size: 18px;">🦋🌸</span>
-            </div>
-            <img src="https://xatimg.com/image/qdh7T2GNGQAd.png" class="foto-perfil" alt="Perfil">
-        </div>
-    </header>
-
-    <!-- MENU SECCIONES CON FLECHAS -->
-    <nav class="nav-secciones">
-        <div class="nav-container">
-            <a href="#pcback" class="btn-seccion">Pcback Gif</a>
-            <a href="#pstyle-gif" class="btn-seccion">Pcback Pstyle Gif</a>
-            <a href="#pstyle" class="btn-seccion">Pstyle</a>
-            <a href="#gif-4d" class="btn-seccion">Gif 4D</a>
-        </div>
-    </nav>
-
-    <!-- CUERPO PRINCIPAL -->
     <div class="main-container">
-        
-        <!-- FEED ESTILO FACEBOOK / BLOG -->
-        <main class="feed-facebook">
-            
-            <!-- Entrada Fija de Facebook -->
-            <div class="post-card">
-                <div class="post-header">
-                    <img src="https://xatimg.com/image/qdh7T2GNGQAd.png" style="width:40px; height:40px; border-radius:50%;" alt="Avatar">
-                    <div>
-                        <strong style="color: var(--morado-fuerte);">Dulcinea Designer</strong>
-                        <div style="font-size:12px; color:#777;">Publicado ahora mismo • 🌍</div>
-                    </div>
-                </div>
-                <p>Explorando nuevos horizontes artísticos, texturas brillantes y movimientos fluidos. ✨ ¡Echa un vistazo a los nuevos diseños!</p>
+
+        <!-- BLOQUE DE PERFIL (Estilo Red Social) -->
+        <div class="perfil-card">
+            <!-- Foto de perfil de 80x80px -->
+            <img src="https://xatimg.com/image/qdh7T2GNGQAd.png" alt="Perfil" class="avatar">
+            <br>
+            <!-- Nombre abajo de la foto, letra 4D parpadeante -->
+            <span class="nombre-usuario">Dulcinea</span>
+
+            <!-- Mensaje de Atención integrado -->
+            <div class="mensaje-atencion">
+                ✨ ¡Atención!🌸 • Espacio creativo y personalizado con mucho amor.✨
+            </div>
+        </div>
+
+        <!-- PUBLICACIÓN 1: Gif4d -->
+        <div class="publicacion">
+            <div class="publicacion-titulo">Gif4d</div>
+            <div class="galeria-grid">
                 
-                <div class="fb-actions">
-                    <div class="fb-btn">🌸 Me gusta</div>
-                    <div class="fb-btn">💬 Comentar</div>
-                    <div class="fb-btn">🦋 Compartir</div>
+                <div class="item-galeria">
+                    <div class="item-titulo">After 314</div>
+                    <img src="https://i.ibb.co/TMxDzm4B/314-gisse-gif.gif" class="img-chica" alt="Gif">
+                </div>
+
+                <div class="item-galeria">
+                    <div class="item-titulo">After 377</div>
+                    <img src="https://i.ibb.co/4gj6D0cR/377-pareja-dorado-gif.gif" class="img-chica" alt="Gif">
+                </div>
+
+                <div class="item-galeria">
+                    <div class="item-titulo">After 600</div>
+                    <img src="https://i.ibb.co/WNJ7Sbxr/600-Affter-jahlize.gif" class="img-chica" alt="Gif">
+                </div>
+
+                <div class="item-galeria">
+                    <div class="item-titulo">After 600</div>
+                    <img src="https://i.ibb.co/KcSkBrwV/601-jahlize.gif" class="img-chica" alt="Gif">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PUBLICACIÓN 2: Parpadeos -->
+        <div class="publicacion">
+            <div class="publicacion-titulo">Parpadeos</div>
+            <div class="galeria-grid">
+                <div class="item-galeria">
+                    <img src="https://xatimg.com/image/Z1bycZx2vevA.jpg" class="img-chica" alt="Imagen">
                 </div>
             </div>
+        </div>
 
-            <!-- SECCIÓN GIF 4D CON CUADRO TORNASOL -->
-            <section id="gif-4d" class="post-card">
-                <div class="post-header">
-                    <img src="https://xatimg.com/image/qdh7T2GNGQAd.png" style="width:40px; height:40px; border-radius:50%;" alt="Avatar">
-                    <div>
-                        <strong style="color: var(--morado-fuerte);">Sección: Gif 4D</strong>
-                        <div style="font-size:12px; color:#777;">Categoría Especial de Diseños</div>
-                    </div>
+        <!-- PUBLICACIÓN 3: Pcback -->
+        <div class="publicacion">
+            <div class="publicacion-titulo">Pcback</div>
+            <div class="galeria-grid">
+                <div class="item-galeria">
+                    <img src="https://xatimg.com/image/Z1bycZx2vevA.jpg" class="img-chica" alt="Imagen">
                 </div>
-                
-                <!-- Cuadro chiquito tornasol morado, lila y azul -->
-                <div class="cuadro-tornasol">
-                    <h4>Diseños chicas</h4>
-                    <!-- Archivo GIF Protegido -->
-                    <img src="https://xatimg.com/image/oNtkoZ1Jjdbo.gif" class="gif-4d-asset" alt="Diseño Animado">
-                    <span class="letras-chicas">Affter 314</span>
+            </div>
+        </div>
+
+        <!-- PUBLICACIÓN 4: Pcback Gif -->
+        <div class="publicacion">
+            <div class="publicacion-titulo">Pcback Gif</div>
+            <div class="galeria-grid">
+                <div class="item-galeria">
+                    <img src="https://xatimg.com/image/Z1bycZx2vevA.jpg" class="img-chica" alt="Imagen">
                 </div>
-            </section>
-
-        </main>
-
-        <!-- BARRA LATERAL (ESTILO BLOG) -->
-        <aside class="feed-facebook">
-            <div class="post-card" id="pcback">
-                <h3 style="color: var(--lila-oscuro); margin-bottom: 10px;">Pcback Gif</h3>
-                <p style="font-size: 14px; color:#666;">Espacio dedicado a fondos dinámicos optimizados para ordenadores.</p>
             </div>
-            
-            <div class="post-card" id="pstyle-gif">
-                <h3 style="color: var(--lila-oscuro); margin-bottom: 10px;">Pcback Pstyle Gif</h3>
-                <p style="font-size: 14px; color:#666;">Combinación de estilos personalizados con animaciones en bucle.</p>
+        </div>
+
+        <!-- PUBLICACIÓN 5: Pstyle -->
+        <div class="publicacion">
+            <div class="publicacion-titulo">Pstyle</div>
+            <div class="galeria-grid">
+                <div class="item-galeria">
+                    <img src="https://xatimg.com/image/Z1bycZx2vevA.jpg" class="img-chica" alt="Imagen">
+                </div>
             </div>
-        </aside>
+        </div>
+
+        <!-- PUBLICACIÓN 6: Pstyle Gif -->
+        <div class="publicacion">
+            <div class="publicacion-titulo">Pstyle Gif</div>
+            <div class="galeria-grid">
+                <div class="item-galeria">
+                    <img src="https://xatimg.com/image/Z1bycZx2vevA.jpg" class="img-chica" alt="Imagen">
+                </div>
+            </div>
+        </div>
 
     </div>
 
-    <!-- PIE DE PÁGINA -->
+    <!-- PIE DE PÁGINA CENTRAL -->
     <footer>
-        <span class="firma-romance">Hecho x Dulcinea 2030</span>
+        <div class="footer-texto">2030 Creado por Dulcinea</div>
     </footer>
 
-    <!-- SCRIPT DE SEGURIDAD (ANTI-COPIA Y ANTI-EXTRACCIÓN) -->
-    <script>
-        // Bloquear clic derecho
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-
-        // Bloquear combinaciones de teclado comunes (Ctrl+C, Ctrl+U, F12, Ctrl+S)
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 73)) {
-                e.preventDefault();
-                return false;
-            }
-            if (e.keyCode === 123) {
-                e.preventDefault();
-                return false;
-            }
-        });
-
-        // Deshabilitar el arrastre de elementos para evitar que salven los links guardando la imagen
-        document.addEventListener('dragstart', function(e) {
-            e.preventDefault();
-        });
-    </script>
 </body>
 </html>
