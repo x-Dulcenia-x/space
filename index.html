@@ -4,38 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dulcinea Designer - Blog</title>
-    <!-- Importación de fuentes de Google Fonts como alternativas estilizadas si no están instaladas localmente -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Pacifico&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
-    
     <style>
-        /* Definición de Fuentes Requeridas */
-        @font-face {
-            font-family: 'Vito Bold';
-            src: local('Vito Bold'), local('Vito-Bold'), url('#') format('woff2'); /* Reemplazar '#' con link real de la fuente si se aloja online */
-            font-weight: bold;
-        }
-        @font-face {
-            font-family: 'Amore';
-            src: local('Amore'), url('#') format('woff2');
+        /* Importación de fuentes elegantes alternativas para simular Vito Bold y Amore */
+        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Dosis:wght@500&family=Great+Vibes&display=swap');
+
+        /* --- Variables de Colores --- */
+        :root {
+            --morado: #8a2be2;
+            --rosa: #ff69b4;
+            --lila: #da70d6;
+            --azul: #1e90ff;
+            --fondo-lila-suave: #f3e5f5;
         }
 
-        /* Estilos Generales y Fondo Matizado */
+        /* --- Estilos Generales --- */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            user-select: none; /* Bloquea la selección de texto e imágenes */
+            -webkit-user-drag: none; /* Evita arrastrar imágenes */
         }
 
         body {
-            background: linear-gradient(135deg, #8a2be2, #ff69b4, #b666d2, #1e90ff);
+            /* Fondo matizado morado, rosa, lila y azul */
+            background: linear-gradient(135deg, var(--morado), var(--rosa), var(--lila), var(--azul));
             background-size: 400% 400%;
             animation: gradientBg 15s ease infinite;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Dosis', sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px 10px;
+            padding: 20px;
+            color: #333;
         }
 
         @keyframes gradientBg {
@@ -44,7 +46,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Contenedor Principal Perfil */
+        /* --- Perfil de Usuario --- */
         .profile-container {
             display: flex;
             flex-direction: column;
@@ -53,63 +55,59 @@
             text-align: center;
         }
 
-        /* Foto de Perfil 80x80 con Círculo de Parpadeo de Colores */
         .profile-pic-wrapper {
             width: 80px;
             height: 80px;
             border-radius: 50%;
+            padding: 4px; /* Espacio para el efecto de parpadeo */
             display: flex;
-            justify-content: center;
             align-items: center;
-            position: relative;
-            animation: borderBlink 4s linear infinite;
-            background: padding-box, linear-gradient(to right, #8a2be2, #ff69b4, #b666d2, #1e90ff) border-box;
-            border: 4px solid transparent;
+            justify-content: center;
+            animation: borderBlink 3s linear infinite;
         }
 
         .profile-pic-wrapper img {
-            width: 100%;
-            height: 100%;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             object-fit: cover;
+            pointer-events: none;
         }
 
+        /* Parpadeo de colores del círculo: morado, rosa, lila, azul */
         @keyframes borderBlink {
-            0%, 100% { border-color: #8a2be2; box-shadow: 0 0 10px #8a2be2; }
-            25% { border-color: #ff69b4; box-shadow: 0 0 15px #ff69b4; }
-            50% { border-color: #b666d2; box-shadow: 0 0 10px #b666d2; }
-            75% { border-color: #1e90ff; box-shadow: 0 0 15px #1e90ff; }
+            0%, 100% { background-color: var(--morado); box-shadow: 0 0 10px var(--morado); }
+            25% { background-color: var(--rosa); box-shadow: 0 0 10px var(--rosa); }
+            50% { background-color: var(--lila); box-shadow: 0 0 10px var(--lila); }
+            75% { background-color: var(--azul); box-shadow: 0 0 10px var(--azul); }
         }
 
-        /* Nombre Dulcinea (Efecto 4D / 3D Extruido) */
+        /* Nombre Dulcinea (Letra 4D simulada con múltiples sombras) */
         .profile-name {
-            font-family: 'Vito Bold', 'Ubuntu', sans-serif;
+            font-family: 'Archivo Black', sans-serif; /* Alternativa a Vito Bold */
             font-size: 20px;
-            font-weight: bold;
-            color: #ffffff;
+            color: #fff;
             margin-top: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            /* Efecto 4D con sombras múltiples */
             text-shadow: 
-                0 1px 0 #ccc, 0 2px 0 #c5c5c5, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 
-                0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 
-                0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 
-                0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 
-                0 20px 20px rgba(0,0,0,.15);
+                1px 1px 0px var(--lila),
+                2px 2px 0px var(--morado),
+                3px 3px 0px var(--azul),
+                4px 4px 5px rgba(0,0,0,0.5);
         }
 
-        /* Mensaje con efecto Aparece/Desaparece (Fading) */
-        .fading-message {
+        /* --- Mensaje Especial Animado --- */
+        .alert-message {
             font-size: 15px;
-            color: #4a0e4e; /* Morado Oscuro para legibilidad */
+            color: #4a0e4e; /* Tono morado oscuro para legibilidad */
             font-weight: bold;
-            text-align: center;
-            margin: 15px 0 25px 0;
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.85);
             padding: 10px 20px;
             border-radius: 20px;
-            max-width: 90%;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             animation: fadeInOut 3s ease-in-out infinite;
         }
 
@@ -118,249 +116,291 @@
             50% { opacity: 1; }
         }
 
-        /* Contenedor del Feed de Publicaciones (Alineados) */
-        .feed-container {
+        /* --- Contenedor de la Galería Lila --- */
+        .gallery-container {
+            background-color: #e8dbf0; /* Color dentro de la galería lila */
             width: 100%;
-            max-width: 600px; /* Tamaño ideal tipo muro de Facebook */
-            display: flex;
-            flex-direction: column;
-            gap: 20px; /* Separación entre cada publicación */
+            max-width: 1100px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
 
-        /* Cada Publicación (Cuadro mediano, fondo lila) */
+        /* --- Secciones de la Galería --- */
+        .gallery-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: #fff;
+            background: var(--morado);
+            padding: 8px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: inline-block;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Grid que alinea los cuadros en línea de forma responsive */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        /* --- Cuadros de Publicación --- */
         .post-card {
-            background-color: #e6e6fa; /* Fondo lila */
-            border-radius: 12px;
-            padding: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            background-color: var(--fondo-lila-suave); /* Fondo de cada publicación lila chico */
+            border: 2px dashed #000000; /* Cuadro contorno línea punteada color negro */
+            border-radius: 10px;
+            padding: 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            position: relative;
         }
 
-        /* Títulos de las publicaciones */
-        .post-title {
-            font-size: 14px;
+        /* Nombre arriba del contenido multimedia */
+        .item-title {
+            font-size: 15px;
             font-weight: bold;
-            color: #4b0082;
+            color: #333;
             margin-bottom: 8px;
             text-align: center;
         }
 
-        /* Cuadro de Contorno de Línea Punteada Negra para cada foto/imagen */
+        /* Parpadeo Azul y Lila específico para la sección Gif4d */
+        .blink-blue-lilac {
+            animation: blueLilacBlink 2s linear infinite;
+        }
+
+        @keyframes blueLilacBlink {
+            0%, 100% { color: var(--azul); text-shadow: 0 0 5px var(--azul); }
+            50% { color: var(--morado); text-shadow: 0 0 5px var(--morado); }
+        }
+
+        /* Contenedor de la Imagen/GIF (Tamaño mediano/chico controlado) */
         .media-box {
-            border: 2px dashed #000000; /* Línea punteada negra */
-            padding: 5px;
-            background-color: #ffffff;
-            display: inline-block;
-            max-width: 100%;
-            margin-bottom: 12px;
+            width: 100%;
+            height: 160px; /* Cuadro mediano estándar */
+            background-color: var(--morado); /* Cuarto largo interno color Morado */
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
         }
 
         .media-box img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            max-height: 250px; /* Mantiene el cuadro mediano controlado */
-            object-fit: contain;
-        }
-
-        /* Cuarto Largo inferior de cada link (Contenedor Morado) */
-        .link-section {
-            background-color: #800080; /* Color Morado */
             width: 100%;
-            padding: 8px;
-            border-radius: 6px;
-            text-align: center;
-            margin-top: auto;
+            height: 100%;
+            object-fit: contain; /* Ajusta la imagen sin deformarla */
+            pointer-events: none; /* Bloquea interacciones sobre la imagen */
         }
 
-        /* Links de Medida Chica */
-        .link-section a {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 11px; /* Medida chica */
-            font-weight: 500;
-            word-break: break-all; /* Evita que links largos rompan el diseño en celular */
+        /* Capa protectora transparente para evitar click derecho y arrastre en celulares */
+        .shield {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 10;
         }
 
-        .link-section a:hover {
-            text-decoration: underline;
-        }
-
-        /* Parpadeo Azul/Lila para títulos específicos */
-        .blink-blue-lila {
-            animation: blueLilaBlink 2s linear infinite;
-        }
-
-        @keyframes blueLilaBlink {
-            0%, 100% { color: #1e90ff; text-shadow: 0 0 5px #1e90ff; }
-            50% { color: #ba55d3; text-shadow: 0 0 5px #ba55d3; }
-        }
-
-        /* Pie de Página */
+        /* --- Pie de Página --- */
         footer {
-            margin-top: 40px;
-            padding: 20px;
+            margin-top: auto;
+            padding: 25px 0 10px 0;
             text-align: center;
             width: 100%;
         }
 
         .footer-text {
-            font-family: 'Amore', 'Pacifico', cursive; /* Amore como principal, Pacifico como alternativa */
-            font-size: 11px; /* Tamaño número 1 / chico */
-            color: #ffffff;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            font-family: 'Great Vibes', cursive; /* Fuente tipo Amore/Romántica */
+            font-size: 19px; /* Tamaño número 19 aprox (cercano a 1) */
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+        }
+
+        /* --- Ajustes Móviles --- */
+        @media (max-width: 600px) {
+            .items-grid {
+                grid-template-columns: 1fr; /* Un solo cuadro por fila en pantallas muy chicas */
+            }
+            .gallery-container {
+                padding: 15px;
+            }
         }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;"> <!-- Bloquea click derecho en todo el sitio -->
 
     <!-- Sección de Perfil -->
     <div class="profile-container">
         <div class="profile-pic-wrapper">
-            <!-- Foto de Perfil 80x80 px con parpadeo circular -->
             <img src="https://xatimg.com/image/qdh7T2GNGQAd.png" alt="Perfil Dulcinea">
         </div>
-        <!-- Nombre Dulcinea abajo de la foto, letra 4D, tamaño 20 -->
         <h1 class="profile-name">Dulcinea</h1>
     </div>
 
-    <!-- Mensaje con efecto aparece/desaparece (tamaño 15, morado) -->
-    <div class="fading-message">
+    <!-- Mensaje Animado -->
+    <div class="alert-message">
         ✨ ¡Atención!🌸 • Espacio creativo y personalizado con mucho amor.✨
     </div>
 
-    <!-- Contenedor de Galería estilo Muro (Línea de cuadros seguidos) -->
-    <div class="feed-container">
+    <!-- Contenedor Principal de la Galería (Lila) -->
+    <div class="gallery-container">
 
-        <!-- PUBLICACIÓN 1: After 314 (Con parpadeo azul lila) -->
-        <div class="post-card">
-            <div class="post-title blink-blue-lila">After 314</div>
-            <div class="media-box">
-                <img src="https://i.ibb.co/TMxDzm4B/314-gisse-gif.gif" alt="After 314">
-            </div>
-            <div class="link-section">
-                <a href="https://i.ibb.co/TMxDzm4B/314-gisse-gif.gif" target="_blank">https://i.ibb.co/TMxDzm4B/314-gisse-gif.gif</a>
+        <!-- SECCIÓN: GIF4D -->
+        <div class="gallery-section">
+            <div class="section-title">Gif4d</div>
+            <div class="items-grid">
+                
+                <!-- Publicación 1 -->
+                <div class="post-card">
+                    <div class="item-title blink-blue-lilac">After 314</div>
+                    <div class="media-box">
+                        <div class="shield"></div>
+                        <img src="https://i.ibb.co/TMxDzm4B/314-gisse-gif.gif" alt="Gif">
+                    </div>
+                </div>
+
+                <!-- Publicación 2 -->
+                <div class="post-card">
+                    <div class="item-title blink-blue-lilac">After 608</div>
+                    <div class="media-box">
+                        <div class="shield"></div>
+                        <img src="https://i.ibb.co/twtZb0BS/608-Gisse.gif" alt="Gif">
+                    </div>
+                </div>
+
+                <!-- Publicación 3 -->
+                <div class="post-card">
+                    <div class="item-title blink-blue-lilac">After 377</div>
+                    <div class="media-box">
+                        <div class="shield"></div>
+                        <img src="https://i.ibb.co/4gj6D0cR/377-pareja-dorado-gif.gif" alt="Gif">
+                    </div>
+                </div>
+
+                <!-- Publicación 4 -->
+                <div class="post-card">
+                    <div class="item-title blink-blue-lilac">After 600</div>
+                    <div class="media-box">
+                        <div class="shield"></div>
+                        <img src="https://i.ibb.co/WNJ7Sbxr/600-Affter-jahlize.gif" alt="Gif">
+                    </div>
+                </div>
+
+                <!-- Publicación 5 -->
+                <div class="post-card">
+                    <div class="item-title blink-blue-lilac">After 601</div>
+                    <div class="media-box">
+                        <div class="shield"></div>
+                        <img src="https://i.ibb.co/KcSkBrwV/601-jahlize.gif" alt="Gif">
+                    </div>
+                </div>
+
+                <!-- Publicación 6 -->
+                <div class="post-card">
+                    <div class="item-title blink-blue-lilac">After 604</div>
+                    <div class="media-box">
+                        <div class="shield"></div>
+                        <img src="https://i.ibb.co/ynmbd90R/604-jahlize.gif" alt="Gif">
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <!-- PUBLICACIÓN 2: After 608 -->
-        <div class="post-card">
-            <div class="post-title">After 608</div>
-            <div class="media-box">
-                <img src="https://i.ibb.co/twtZb0BS/608-Gisse.gif" alt="After 608">
-            </div>
-            <div class="link-section">
-                <a href="https://i.ibb.co/twtZb0BS/608-Gisse.gif" target="_blank">https://i.ibb.co/twtZb0BS/608-Gisse.gif</a>
-            </div>
-        </div>
-
-        <!-- PUBLICACIÓN 3: After 377 -->
-        <div class="post-card">
-            <div class="post-title">After 377</div>
-            <div class="media-box">
-                <img src="https://i.ibb.co/4gj6D0cR/377-pareja-dorado-gif.gif" alt="After 377">
-            </div>
-            <div class="link-section">
-                <a href="https://i.ibb.co/4gj6D0cR/377-pareja-dorado-gif.gif" target="_blank">https://i.ibb.co/4gj6D0cR/377-pareja-dorado-gif.gif</a>
+        <!-- SECCIÓN: PARPADEOS -->
+        <div class="gallery-section">
+            <div class="section-title">Parpadeos</div>
+            <div class="items-grid">
+                <div class="post-card">
+                    <div class="item-title">Parpadeo Spec</div>
+                    <div class="media-box">
+                        <div class="shield"></div>
+                        <img src="https://xatimg.com/image/Z1bycZx2vevA.jpg" alt="Imagen">
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- PUBLICACIÓN 4: After 600 -->
-        <div class="post-card">
-            <div class="post-title">After 600</div>
-            <div class="media-box">
-                <img src="https://i.ibb.co/WNJ7Sbxr/600-Affter-jahlize.gif" alt="After 600">
-            </div>
-            <div class="link-section">
-                <a href="https://i.ibb.co/WNJ7Sbxr/600-Affter-jahlize.gif" target="_blank">https://i.ibb.co/WNJ7Sbxr/600-Affter-jahlize.gif</a>
-            </div>
-        </div>
-
-        <!-- PUBLICACIÓN 5: After 601 -->
-        <div class="post-card">
-            <div class="post-title">After 601</div>
-            <div class="media-box">
-                <img src="https://i.ibb.co/KcSkBrwV/601-jahlize.gif" alt="After 601">
-            </div>
-            <div class="link-section">
-                <a href="https://i.ibb.co/KcSkBrwV/601-jahlize.gif" target="_blank">https://i.ibb.co/KcSkBrwV/601-jahlize.gif</a>
-            </div>
-        </div>
-
-        <!-- PUBLICACIÓN 6: After 604 -->
-        <div class="post-card">
-            <div class="post-title">After 604</div>
-            <div class="media-box">
-                <img src="https://i.ibb.co/ynmbd90R/604-jahlize.gif" alt="After 604">
-            </div>
-            <div class="link-section">
-                <a href="https://i.ibb.co/ynmbd90R/604-jahlize.gif" target="_blank">https://i.ibb.co/ynmbd90R/604-jahlize.gif</a>
+        <!-- SECCIÓN: PCBACK -->
+        <div class="gallery-section">
+            <div class="section-title">Pcback</div>
+            <div class="items-grid">
+                <div class="post-card">
+                    <div class="item-title">Pcback Base</div>
+                    <div class="media-box">
+                        <div class="shield"></div>
+                        <img src="https://xatimg.com/image/Z1bycZx2vevA.jpg" alt="Imagen">
+                    </div>
+                </div>
+                <div class="post-card">
+                    <div class="item-title">Pcback Gif</div>
+                    <div class="media-box">
+                        <div class="shield"></div>
+                        <img src="https://xatimg.com/image/Z1bycZx2vevA.jpg" alt="Imagen">
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- PUBLICACIÓN 7: Parpadeos -->
-        <div class="post-card">
-            <div class="post-title">Parpadeos</div>
-            <div class="media-box">
-                <img src="https://xatimg.com/image/Z1bycZx2vevA.jpg" alt="Parpadeos">
-            </div>
-            <div class="link-section">
-                <a href="https://xatimg.com/image/Z1bycZx2vevA.jpg" target="_blank">https://xatimg.com/image/Z1bycZx2vevA.jpg</a>
-            </div>
-        </div>
-
-        <!-- PUBLICACIÓN 8: Pcback -->
-        <div class="post-card">
-            <div class="post-title">Pcback</div>
-            <div class="media-box">
-                <img src="https://xatimg.com/image/Z1bycZx2vevA.jpg" alt="Pcback">
-            </div>
-            <div class="link-section">
-                <a href="https://xatimg.com/image/Z1bycZx2vevA.jpg" target="_blank">https://xatimg.com/image/Z1bycZx2vevA.jpg</a>
-            </div>
-        </div>
-
-        <!-- PUBLICACIÓN 9: Pcback Gif -->
-        <div class="post-card">
-            <div class="post-title">Pcback Gif</div>
-            <div class="media-box">
-                <img src="https://xatimg.com/image/Z1bycZx2vevA.jpg" alt="Pcback Gif">
-            </div>
-            <div class="link-section">
-                <a href="https://xatimg.com/image/Z1bycZx2vevA.jpg" target="_blank">https://xatimg.com/image/Z1bycZx2vevA.jpg</a>
-            </div>
-        </div>
-
-        <!-- PUBLICACIÓN 10: Pstyle -->
-        <div class="post-card">
-            <div class="post-title">Pstyle</div>
-            <div class="media-box">
-                <img src="https://xatimg.com/image/Z1bycZx2vevA.jpg" alt="Pstyle">
-            </div>
-            <div class="link-section">
-                <a href="https://xatimg.com/image/Z1bycZx2vevA.jpg" target="_blank">https://xatimg.com/image/Z1bycZx2vevA.jpg</a>
-            </div>
-        </div>
-
-        <!-- PUBLICACIÓN 11: Pstyle Gif -->
-        <div class="post-card">
-            <div class="post-title">Pstyle Gif</div>
-            <div class="media-box">
-                <img src="https://xatimg.com/image/Z1bycZx2vevA.jpg" alt="Pstyle Gif">
-            </div>
-            <div class="link-section">
-                <a href="https://xatimg.com/image/Z1bycZx2vevA.jpg" target="_blank">https://xatimg.com/image/Z1bycZx2vevA.jpg</a>
+        <!-- SECCIÓN: PSTYLE -->
+        <div class="gallery-section">
+            <div class="section-title">Pstyle</div>
+            <div class="items-grid">
+                <div class="post-card">
+                    <div class="item-title">Pstyle Base</div>
+                    <div class="media-box">
+                        <div class="shield"></div>
+                        <img src="https://xatimg.com/image/Z1bycZx2vevA.jpg" alt="Imagen">
+                    </div>
+                </div>
+                <div class="post-card">
+                    <div class="item-title">Pstyle Gif</div>
+                    <div class="media-box">
+                        <div class="shield"></div>
+                        <img src="https://xatimg.com/image/Z1bycZx2vevA.jpg" alt="Imagen">
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
 
-    <!-- Pie de Página Centralizado -->
+    <!-- Pie de Página Central -->
     <footer>
         <div class="footer-text">2030 Creado por Dulcinea</div>
     </footer>
 
+    <!-- Script de seguridad para bloquear descargas y guardado de imágenes -->
+    <script>
+        // Deshabilitar atajos de teclado comunes para guardar o inspeccionar (Ctrl+S, Ctrl+U, F12)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) {
+                e.preventDefault();
+            }
+            if (e.key === 'F12') {
+                e.preventDefault();
+            }
+        });
+
+        // Bloqueo adicional para pantallas táctiles (evita mantener presionado para guardar imagen)
+        document.querySelectorAll('.shield').forEach(shield => {
+            shield.addEventListener('contextmenu', e => e.preventDefault());
+            shield.addEventListener('touchstart', e => {
+                // Permite el scroll pero previene el menú contextual del móvil
+            }, {passive: true});
+        });
+    </script>
 </body>
 </html>
