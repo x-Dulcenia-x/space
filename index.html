@@ -1,450 +1,956 @@
 <!DOCTYPE html>
-<html lang="es" oncontextmenu="return false;">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Blog / Facebook - Dulcinea</title>
-    <!-- Importación de Google Fonts para simular la fuente Rosette y estilos elegantes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dulcinea Hechizera 💜🖤</title>
     <style>
-        /* --- ESTILOS GENERALES Y CONFIGURACIÓN --- */
+        :root {
+            --bg-color: #0d0614;
+            --panel-bg: rgba(25, 13, 36, 0.85);
+            --neon-purple: #9d4edd;
+            --neon-lila: #c77dff;
+            --neon-pink: #ff758c;
+            --neon-blue: #4ea8de;
+            --text-color: #f3e8ff;
+            --border-radius: 20px;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none; /* Bloquea selección de texto */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            /* Fondo matizado morado, rosa, lila y azul con movimiento suave */
-            background: linear-gradient(-45deg, #4a148c, #d81b60, #ba68c8, #1e88e5);
-            background-size: 400% 400%;
-            animation: gradientBg 15s ease infinite;
-            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(157, 78, 221, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 117, 140, 0.15) 0%, transparent 40%);
+            color: var(--text-color);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
             overflow-x: hidden;
-            padding-bottom: 40px;
         }
 
-        /* --- ANIMACIONES GENERALES --- */
-        @keyframes gradientBg {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Parpadeo multicolor de la foto de perfil: Morado, Rosa, Lila, Azul */
-        @keyframes borderBlink {
-            0%, 100% { border-color: #4a148c; box-shadow: 0 0 15px #4a148c; }
-            25% { border-color: #d81b60; box-shadow: 0 0 15px #d81b60; }
-            50% { border-color: #ba68c8; box-shadow: 0 0 15px #ba68c8; }
-            75% { border-color: #1e88e5; box-shadow: 0 0 15px #1e88e5; }
-        }
-
-        /* Efecto aparecer y desaparecer (Fade In/Out) */
-        @keyframes flashEffect {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
-        }
-
-        /* Parpadeo Azul y Morado para títulos de la Galería */
-        @keyframes bluePurpleBlink {
-            0%, 100% { color: #00e5ff; text-shadow: 0 0 8px #00e5ff; }
-            50% { color: #bd00ff; text-shadow: 0 0 8px #bd00ff; }
-        }
-
-        /* --- CONTENEDOR DE PERFIL (ESTILO RED SOCIAL) --- */
-        .profile-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            width: 95%;
-            max-width: 800px;
-            padding: 25px;
-            margin-top: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Foto Perfil: Medida exacta 90x90px con círculo parpadeante */
-        .profile-pic {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            border: 4px solid #4a148c;
-            object-fit: cover;
-            animation: borderBlink 4s infinite;
-            pointer-events: none; /* Bloquea interacciones sobre la imagen */
-        }
-
-        /* Nombre Dulcinea: Letra 4D, Font Rosette (Cinzel Dec.), Tamaño 20, óvalo morado abajo de la foto */
-        .profile-name-box {
-            background-color: #4a148c;
-            padding: 8px 30px;
-            border-radius: 50px; /* Forma ovalada */
-            margin-top: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            display: inline-block;
-        }
-
-        .profile-name {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 20px;
-            color: #fff;
-            font-weight: bold;
-            letter-spacing: 2px;
-            /* Efecto tridimensional / 4D avanzado usando múltiples sombras de colores */
-            text-shadow: 
-                1px 1px 0px #ba68c8, 
-                2px 2px 0px #d81b60, 
-                3px 3px 0px #1e88e5, 
-                4px 4px 5px rgba(0,0,0,0.8);
-        }
-
-        /* Mensaje de Atención: Tamaño 15, efecto aparecer/desaparecer, color morado */
-        .attention-msg {
-            font-size: 15px;
-            color: #310057;
-            font-weight: bold;
-            margin-top: 20px;
-            padding: 10px;
-            text-align: center;
-            animation: flashEffect 3s infinite ease-in-out;
-            max-width: 90%;
-        }
-
-        /* --- ESTRUCTURA DE LA GALERÍA (COLOR LILA) --- */
-        .gallery-wrapper {
-            background-color: #e1bee7; /* Color dentro de la galería lila */
-            width: 95%;
-            max-width: 1100px;
-            border-radius: 25px;
-            padding: 25px;
-            margin-top: 25px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.15), 0 10px 25px rgba(0,0,0,0.3);
-        }
-
-        /* --- BOTONES DE ENCABEZADO DE PUBLICACIÓN --- */
-        .main-section-title {
-            display: inline-block;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-
-        /* Gif4: Letras lila tamaño 18, cuadro ovalado violeta */
-        .title-gif4 {
-            background-color: #7b1fa2; /* Violeta */
-            color: #e1bee7; /* Lila */
-            font-size: 18px;
-            padding: 10px 35px;
-            border-radius: 50px; /* Óvalado */
-        }
-
-        /* Títulos Estándar para las demás publicaciones */
-        .title-standard {
-            background-color: #4a148c;
-            color: #fff;
-            font-size: 18px;
-            padding: 10px 35px;
-            border-radius: 50px;
-        }
-
-        /* --- CATEGORÍAS INTERNAS (LETRAS CHICAS) --- */
-        .sub-category-title {
-            font-size: 14px;
-            color: #4a148c;
-            font-weight: 600;
-            margin: 15px 0 10px 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* --- FILAS DE PUBLICACIONES HORIZONTALES --- */
-        .horizontal-row {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto; /* Permite deslizar horizontalmente en celulares */
-            padding: 10px 5px 20px 5px;
-            width: 100%;
-            scrollbar-width: thin;
-            scrollbar-color: #7b1fa2 rgba(0,0,0,0.05);
-        }
-
-        /* Optimización de barra de desplazamiento para navegadores Webkit */
-        .horizontal-row::-webkit-scrollbar {
-            height: 6px;
-        }
-        .horizontal-row::-webkit-scrollbar-thumb {
-            background: #7b1fa2;
-            border-radius: 10px;
-        }
-
-        /* --- TARJETAS PUBLICACIONES Y CUADROS ACCORDING TO NAMES --- */
-        /* Contorno con líneas punteadas violetas independientes para cada cuadro de link */
-        .card-item {
-            flex: 0 0 auto;
-            width: 280px; /* Diseño adaptado en bloque cuadrado */
-            background: rgba(255, 255, 255, 0.4);
-            border: 2px dashed #7b1fa2; /* Línea punteada violeta regulada */
+        /* Reproductor Superior Izquierdo */
+        .top-player {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: var(--panel-bg);
+            border: 2px solid var(--neon-lila);
+            padding: 8px 12px;
             border-radius: 15px;
-            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 15px rgba(199, 125, 255, 0.3);
+            font-size: 0.85rem;
+        }
+
+        .top-player audio {
+            height: 25px;
+            width: 140px;
+        }
+
+        /* Botón Tuerca Admin Superior Derecho */
+        .admin-gear {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: var(--panel-bg);
+            border: 2px solid var(--neon-purple);
+            color: var(--neon-lila);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 1.4rem;
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .admin-gear:hover {
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        /* Cabecera y Navegación */
+        header {
+            text-align: center;
+            padding: 60px 20px 20px;
+        }
+
+        /* Letras 3D con movimiento de ola en colores lila, azul cielo, rosa y blanco */
+        .title-3d {
+            font-size: 3rem;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-shadow: 
+                0 1px 0 #ccc,
+                0 2px 0 #c77dff,
+                0 3px 0 #4ea8de,
+                0 4px 0 #ff758c,
+                0 5px 10px rgba(0,0,0,0.8),
+                0 0 20px rgba(199, 125, 255, 0.6);
+            animation: waveEffect 3s ease-in-out infinite alternate;
+            margin-bottom: 20px;
+        }
+
+        @keyframes waveEffect {
+            0% {
+                transform: translateY(0px) skewX(0deg);
+                text-shadow: 0 1px 0 #ccc, 0 2px 0 #c77dff, 0 3px 0 #4ea8de, 0 4px 0 #ff758c, 0 5px 10px rgba(0,0,0,0.8);
+            }
+            50% {
+                transform: translateY(-6px) skewX(-2deg);
+                text-shadow: 0 1px 0 #ccc, 0 2px 0 #4ea8de, 0 3px 0 #ff758c, 0 4px 0 #c77dff, 0 8px 15px rgba(78, 168, 222, 0.5);
+            }
+            100% {
+                transform: translateY(0px) skewX(0deg);
+                text-shadow: 0 1px 0 #ccc, 0 2px 0 #ff758c, 0 3px 0 #c77dff, 0 4px 0 #4ea8de, 0 5px 10px rgba(0,0,0,0.8);
+            }
+        }
+
+        nav.nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        nav.nav-buttons button {
+            background: var(--panel-bg);
+            border: 2px solid var(--neon-purple);
+            color: var(--text-color);
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        nav.nav-buttons button:hover, nav.nav-buttons button.active {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            border-color: var(--neon-lila);
+            box-shadow: 0 0 15px var(--neon-lila);
+            transform: translateY(-2px);
+        }
+
+        /* Contenedor Principal / Secciones */
+        .main-container {
+            max-width: 900px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .section-view {
+            display: none;
+            background: var(--panel-bg);
+            border: 2px solid rgba(199, 125, 255, 0.3);
+            border-radius: var(--border-radius);
+            padding: 35px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section-view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Estilos de Sección Perfil (Centrado) */
+        .profile-box {
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        /* Tamaño para formatos estandarizados de Fondos PCBack (1920x1080 nativo escalado) */
-        .card-pcback {
-            width: 320px;
-        }
-
-        /* El nombre que aparece arriba de cada foto con parpadeo azul morado */
-        .item-name {
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 10px;
             text-align: center;
-            animation: bluePurpleBlink 3s infinite alternate;
-            letter-spacing: 0.5px;
+            gap: 15px;
         }
 
-        /* Contenedor multimedia para contener la protección física */
-        .media-box {
-            width: 100%;
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            background: rgba(0,0,0,0.1);
-        }
-
-        .card-item img {
-            width: 100%;
-            height: auto;
-            display: block;
+        .profile-avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 4px solid var(--neon-lila);
             object-fit: cover;
-            pointer-events: none;
-            -webkit-user-drag: none; /* Inhabilita arrastrar el archivo */
+            box-shadow: 0 0 25px rgba(199, 125, 255, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s;
         }
 
-        /* Escudo Invisible Antirrobo Avanzado */
-        .image-shield {
-            position: absolute;
+        .profile-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 25px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .stat-badge {
+            background: rgba(13, 6, 20, 0.6);
+            border: 1px solid var(--neon-purple);
+            padding: 10px 20px;
+            border-radius: 15px;
+        }
+
+        .stat-badge h4 {
+            color: var(--neon-lila);
+            font-size: 1.1rem;
+        }
+
+        .stat-badge p {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Estilos de Portafolio / Tienda (Cuadrados con esquinas curvas) */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .kawaii-card {
+            background: rgba(13, 6, 20, 0.5);
+            border: 2px solid var(--neon-purple);
+            border-radius: 20px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .kawaii-card:hover {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 15px rgba(255, 117, 140, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .kawaii-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        /* Estilos Amigos / Relación */
+        .friends-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .friend-card {
+            background: rgba(13, 6, 20, 0.6);
+            border: 2px solid var(--neon-lila);
+            border-radius: 20px;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .friend-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--neon-pink);
+            cursor: pointer;
+        }
+
+        /* Redes Sociales Inferiores */
+        .social-footer-bar {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 25px 0 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-mini-box {
+            background: rgba(13, 6, 20, 0.7);
+            border: 1px solid var(--neon-blue);
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            color: var(--neon-blue);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .social-mini-box:hover {
+            background: var(--neon-blue);
+            color: var(--bg-color);
+        }
+
+        /* Panel de Administración */
+        .admin-modal {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: transparent;
-            z-index: 10;
-            cursor: default;
-        }
-
-        /* Marcador de cuadro vacío o pendiente de publicación */
-        .empty-placeholder {
-            color: #7b1fa2;
-            font-size: 12px;
-            font-style: italic;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
             padding: 20px;
-            text-align: center;
-            border: 1px dashed rgba(123, 31, 162, 0.4);
-            width: 100%;
-            border-radius: 8px;
-            background: rgba(255,255,255,0.2);
         }
 
-        /* --- PIE DE PÁGINA CENTRAL --- */
+        .admin-panel-content {
+            background: #150924;
+            border: 3px solid var(--neon-purple);
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 850px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(157, 78, 221, 0.6);
+        }
+
+        .admin-section-box {
+            background: rgba(25, 13, 36, 0.9);
+            border: 1px solid var(--neon-lila);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .admin-section-box h3 {
+            color: var(--neon-lila);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+            border-bottom: 1px dashed var(--neon-purple);
+            padding-bottom: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 10px;
+            background: #0d0614;
+            border: 1px solid var(--neon-purple);
+            border-radius: 10px;
+            color: white;
+            font-size: 0.95rem;
+        }
+
+        .btn-admin-action {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 8px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-admin-action:hover {
+            opacity: 0.9;
+        }
+
+        .close-admin {
+            float: right;
+            background: none;
+            border: none;
+            color: var(--neon-pink);
+            font-size: 1.8rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        /* Pie de página */
         footer {
-            margin-top: 40px;
             text-align: center;
-            width: 100%;
+            padding: 20px;
+            margin-top: auto;
+            font-size: 0.9rem;
+            color: var(--neon-lila);
+            border-top: 1px solid rgba(199, 125, 255, 0.2);
         }
 
-        .footer-text {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 15px;
-            color: #fff;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-        }
-
-        /* --- RESPONSIVIDAD GENERAL --- */
-        @media (min-width: 768px) {
-            /* En pantallas de computadora las filas pueden romper o ensancharse cómodamente */
-            .horizontal-row {
-                flex-wrap: wrap;
-                overflow-x: visible;
-            }
+        /* Notificaciones flotantes / Modales simples */
+        .popup-msg {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--panel-bg);
+            border: 2px solid var(--neon-pink);
+            padding: 15px 25px;
+            border-radius: 15px;
+            z-index: 3000;
+            display: none;
+            box-shadow: 0 0 20px rgba(255, 117, 140, 0.4);
         }
     </style>
 </head>
-<body onselectstart="return false;" ondragstart="return false;">
+<body>
 
-    <!-- --- CONTENEDOR DE PERFIL PRINCIPAL --- -->
-    <div class="profile-container">
-        <!-- Foto de Perfil (90x90px con círculo parpadeante multicolor) -->
-        <img src="https://xatimg.com/image/qdh7T2GNGQAd.png" alt="Perfil" class="profile-pic">
-        
-        <!-- Caja Ovalada con el Nombre 4D Dulcinea abajo de la foto -->
-        <div class="profile-name-box">
-            <h1 class="profile-name">Dulcinea</h1>
-        </div>
-        
-        <!-- Mensaje de Atención con efecto aparecer/desaparecer -->
-        <div class="attention-msg">
-            ✨ ¡Atención!🌸 • Espacio creativo y personalizado con mucho amor.✨
-        </div>
+    <!-- Reproductor Superior Izquierdo -->
+    <div class="top-player" id="topPlayerContainer">
+        <span>🎧 <span id="playerTitleLabel">Música Kawaii</span></span>
+        <audio id="mainAudio" controls>
+            <source id="audioSource" src="" type="audio/mpeg">
+            Tu navegador no soporta audio.
+        </audio>
     </div>
 
-
-    <!-- --- SECCIÓN DE GALERÍA (FONDO LILA) --- -->
-    <div class="gallery-wrapper">
-
-        <!-- ================= PUBLICACIÓN 1: GIF4 ================= -->
-        <div class="main-section-title title-gif4">Gif4</div>
-        
-        <!-- Sub-renglón: Mujeres -->
-        <div class="sub-category-title">🌹 Mujeres</div>
-        <div class="horizontal-row">
-            <!-- Cuadro Publicación: After 314 -->
-            <div class="card-item">
-                <div class="item-name">After 314</div>
-                <div class="media-box">
-                    <div class="image-shield"></div> <!-- Escudo protector -->
-                    <img src="https://i.ibb.co/TMxDzm4B/314-gisse-gif.gif" alt="After 314">
-                </div>
-            </div>
-        </div>
-
-        <!-- Sub-renglón: Pareja -->
-        <div class="sub-category-title">👫 Pareja</div>
-        <div class="horizontal-row">
-            <!-- Cuadro Publicación: After 377 -->
-            <div class="card-item">
-                <div class="item-name">After 377</div>
-                <div class="media-box">
-                    <div class="image-shield"></div>
-                    <img src="https://i.ibb.co/4gj6D0cR/377-pareja-dorado-gif.gif" alt="After 377">
-                </div>
-            </div>
-        </div>
-
-        <!-- Sub-renglón: Hombres -->
-        <div class="sub-category-title">🧍 Hombres</div>
-        <div class="horizontal-row">
-            <div class="empty-placeholder">Espacio creativo listo para próximos trabajos...</div>
-        </div>
-
-
-        <!-- ================= PUBLICACIÓN 2: PCBACK ================= -->
-        <div class="main-section-title title-standard" style="margin-top: 30px;">Pcback</div>
-        
-        <div class="sub-category-title">🌹 Mujeres</div>
-        <div class="horizontal-row">
-            <div class="empty-placeholder">Espacio para publicaciones Pcback Mujeres...</div>
-        </div>
-
-        <div class="sub-category-title">🧍 Hombres</div>
-        <div class="horizontal-row">
-            <div class="empty-placeholder">Espacio para publicaciones Pcback Hombres...</div>
-        </div>
-
-
-        <!-- ================= PUBLICACIÓN 3: PCBACK GIF ================= -->
-        <div class="main-section-title title-standard" style="margin-top: 30px;">Pcback Gif</div>
-        
-        <div class="sub-category-title">🌹 Mujeres</div>
-        <div class="horizontal-row">
-            <!-- Cuadro Publicación: Najma (Medidas 1920x1080 ocultas sin texto) -->
-            <div class="card-item card-pcback">
-                <div class="item-name">Najma</div>
-                <div class="media-box">
-                    <div class="image-shield"></div>
-                    <img src="https://i.ibb.co/rKHL1V6L/Pcback-1-a.gif" alt="Najma">
-                </div>
-            </div>
-        </div>
-
-        <div class="sub-category-title">🧍 Hombres</div>
-        <div class="horizontal-row">
-            <div class="empty-placeholder">Espacio para publicaciones Pcback Gif Hombres...</div>
-        </div>
-
-
-        <!-- ================= PUBLICACIÓN 4: PSTYLE ================= -->
-        <div class="main-section-title title-standard" style="margin-top: 30px;">Pstyle</div>
-        
-        <div class="sub-category-title">🌹 Mujeres</div>
-        <div class="horizontal-row">
-            <div class="empty-placeholder">Espacio para publicaciones Pstyle Mujeres...</div>
-        </div>
-
-        <div class="sub-category-title">🧍 Hombres</div>
-        <div class="horizontal-row">
-            <div class="empty-placeholder">Espacio para publicaciones Pstyle Hombres...</div>
-        </div>
-
-
-        <!-- ================= PUBLICACIÓN 5: PSTYLE GIF ================= -->
-        <div class="main-section-title title-standard" style="margin-top: 30px;">Pstyle Gif</div>
-        
-        <div class="sub-category-title">🌹 Mujeres</div>
-        <div class="horizontal-row">
-            <div class="empty-placeholder">Espacio para publicaciones Pstyle Gif Mujeres...</div>
-        </div>
-
-        <div class="sub-category-title">🧍 Hombres</div>
-        <div class="horizontal-row">
-            <div class="empty-placeholder">Espacio para publicaciones Pstyle Gif Hombres...</div>
-        </div>
-
-
-        <!-- ================= PUBLICACIÓN 6: PCBACK SALA ================= -->
-        <div class="main-section-title title-standard" style="margin-top: 30px;">Pcback Sala</div>
-        <div class="horizontal-row">
-            <div class="empty-placeholder">Espacio general de diseños para salas de chat...</div>
-        </div>
-
+    <!-- Tuerca de Administrador (Sin Clave / Directa) -->
+    <div class="admin-gear" onclick="toggleAdminPanel()" title="Panel de Administración">
+        ⚙️
     </div>
 
-    <!-- --- PIE DE PÁGINA CENTRAL --- -->
+    <!-- Cabecera -->
+    <header>
+        <h1 class="title-3d" id="mainTitleDisplay">Dulcinea Hechizera</h1>
+        <nav class="nav-buttons">
+            <button onclick="switchTab('profile', this)" class="active">Perfil</button>
+            <button onclick="switchTab('portfolio', this)">Portafolio</button>
+            <button onclick="switchTab('store', this)">Tienda</button>
+            <button onclick="switchTab('friends', this)">Amigos</button>
+            <button onclick="switchTab('relation', this)">Relación</button>
+        </nav>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="main-container">
+
+        <!-- SECCIÓN PERFIL -->
+        <section id="profile" class="section-view active">
+            <div class="profile-box">
+                <img id="profileAvatarImg" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300" alt="Avatar" class="profile-avatar" onclick="triggerPhotoLink()">
+                <h2 id="profileNameDisplay" style="color: var(--neon-lila); font-size: 1.8rem;">Dulcinea Hechizera</h2>
+                <p id="profileUserTag" style="color: var(--neon-blue);">@DulcineaHechizera ✦ Creadora</p>
+                <p id="profileSubText" style="margin-top: 5px; font-size: 0.95rem;">Rincon Kawaii magico.</p>
+                
+                <div class="profile-stats">
+                    <div class="stat-badge">
+                        <h4>Poder Mágico</h4>
+                        <p id="statMp">9999 MP</p>
+                    </div>
+                    <div class="stat-badge">
+                        <h4>Seguidores</h4>
+                        <p id="statFollowers">15.8K</p>
+                    </div>
+                    <div class="stat-badge">
+                        <h4>Amor</h4>
+                        <p id="statLove">100% 💖</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN PORTAFOLIO -->
+        <section id="portfolio" class="section-view">
+            <h2 style="color: var(--neon-lila); margin-bottom: 15px; text-align: center;">Portafolio Estelar</h2>
+            <div class="grid-cards" id="portfolioGrid">
+                <!-- Generado por JS -->
+            </div>
+        </section>
+
+        <!-- SECCIÓN TIENDA -->
+        <section id="store" class="section-view">
+            <h2 style="color: var(--neon-pink); margin-bottom: 15px; text-align: center;">Tienda Mágica de Diseños</h2>
+            <div class="grid-cards" id="storeGrid">
+                <!-- Generado por JS -->
+            </div>
+        </section>
+
+        <!-- SECCIÓN AMIGOS -->
+        <section id="friends" class="section-view">
+            <h2 style="color: var(--neon-lila); margin-bottom: 5px; text-align: center;">Amigos del Hechizo 🎀</h2>
+            <p style="text-align: center; font-size: 0.9rem; margin-bottom: 20px; color: var(--neon-blue);">Círculo de Amigos Especiales</p>
+            <div class="friends-grid" id="friendsGrid">
+                <!-- Generado por JS -->
+            </div>
+        </section>
+
+        <!-- SECCIÓN RELACIÓN -->
+        <section id="relation" class="section-view">
+            <h2 style="color: var(--neon-pink); margin-bottom: 15px; text-align: center;">Recuerdos Inolvidables & Relaciones</h2>
+            <div id="relationContent">
+                <!-- Generado por JS -->
+            </div>
+        </section>
+
+        <!-- Redes Sociales Inferiores -->
+        <div class="social-footer-bar" id="socialFooterBar">
+            <!-- Generado por JS -->
+        </div>
+
+        <!-- Estadísticas & Datos de Países (Solo Administrador) -->
+        <div id="adminStatsContainer" style="margin-top: 35px; background: rgba(0,0,0,0.4); border: 1px dashed var(--neon-purple); padding: 20px; border-radius: 15px; display: none;">
+            <h3 style="color: var(--neon-blue); margin-bottom: 10px;">📊 Estadísticas & Datos de Países (Vista Administrador)</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 10px;">Personas que nos visitan: <span id="visitorCount" style="font-weight: bold; color: var(--neon-pink);">1,428</span> visitas globales.</p>
+            <button class="btn-admin-action" onclick="clearVisitors()" style="background: #d90429;">Borrar Estadísticas</button>
+        </div>
+
+    </main>
+
+    <!-- PIE DE PÁGINA CENTRAL -->
     <footer>
-        <p class="footer-text">©2026 Diseñado por Dulcinea</p>
+        <p>@Dulcinea 2026 💜</p>
     </footer>
 
-    <!-- Bloqueos de Seguridad mediante Javascript Adicionales contra atajos de guardado -->
+    <!-- MODAL DE ADMINISTRACIÓN (TODA LA CONFIGURACIÓN Y ESPACIOS) -->
+    <div class="admin-modal" id="adminModal">
+        <div class="admin-panel-content">
+            <button class="close-admin" onclick="toggleAdminPanel()">&times;</button>
+            <h2 style="color: var(--neon-lila); margin-bottom: 20px; text-align: center;">Panel de Administración General ⚙️</h2>
+
+            <!-- Perfil Admin -->
+            <div class="admin-section-box">
+                <h3>Espacio: Perfil</h3>
+                <div class="form-group">
+                    <label>Título / Nombre:</label>
+                    <input type="text" id="admProfileName" value="Dulcinea Hechizera">
+                </div>
+                <div class="form-group">
+                    <label>Subtítulo / Saludo:</label>
+                    <input type="text" id="admProfileSub" value="Rincon Kawaii magico.">
+                </div>
+                <div class="form-group">
+                    <label>Enlace al hacer click en la foto de perfil:</label>
+                    <input type="text" id="admProfilePhotoLink" value="#profile">
+                </div>
+                <div class="form-group">
+                    <label>Poder Mágico:</label>
+                    <input type="text" id="admStatMp" value="9999 MP">
+                </div>
+                <div class="form-group">
+                    <label>Seguidores:</label>
+                    <input type="text" id="admStatFollowers" value="15.8K">
+                </div>
+                <div class="form-group">
+                    <label>Amor:</label>
+                    <input type="text" id="admStatLove" value="100% 💖">
+                </div>
+                <button class="btn-admin-action" onclick="saveProfileData()">Actualizar Perfil</button>
+            </div>
+
+            <!-- Portafolio Admin -->
+            <div class="admin-section-box">
+                <h3>Espacio: Portafolio (Folios / Obras)</h3>
+                <div class="form-group">
+                    <label>Agregar Obra / Folio (Título, Imagen URL, Enlace):</label>
+                    <input type="text" id="newPortTitle" placeholder="Título de la obra" style="margin-bottom: 5px;">
+                    <input type="text" id="newPortImg" placeholder="URL de la imagen" style="margin-bottom: 5px;">
+                    <input type="text" id="newPortLink" placeholder="Enlace del folio">
+                </div>
+                <button class="btn-admin-action" onclick="addPortfolioItem()">Agregar al Portafolio</button>
+            </div>
+
+            <!-- Tienda Admin -->
+            <div class="admin-section-box">
+                <h3>Espacio: Tienda (Diseños y Buzón de Compras)</h3>
+                <div class="form-group">
+                    <label>Agregar Producto (Nombre, Precio, URL Imagen, Link):</label>
+                    <input type="text" id="newStoreTitle" placeholder="Nombre del producto" style="margin-bottom: 5px;">
+                    <input type="text" id="newStorePrice" placeholder="Precio (ej. $15 USD)" style="margin-bottom: 5px;">
+                    <input type="text" id="newStoreImg" placeholder="URL Imagen" style="margin-bottom: 5px;">
+                    <input type="text" id="newStoreLink" placeholder="Enlace de compra/diseño">
+                </div>
+                <button class="btn-admin-action" onclick="addStoreItem()">Agregar a Tienda</button>
+                <div style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+                    <label style="color: var(--neon-pink); font-weight: bold;">📬 Buzón de Mensajes / Compras de la Tienda:</label>
+                    <div id="storeInboxList" style="background: #0d0614; padding: 10px; border-radius: 8px; margin-top: 5px; font-size: 0.85rem; max-height: 100px; overflow-y: auto;">
+                        <p>Sin compras recientes registradas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amigos Admin -->
+            <div class="admin-section-box">
+                <h3>Espacio: Amigos</h3>
+                <div class="form-group">
+                    <label>Agregar Amigo (Nombre, Foto URL, Mensaje directo):</label>
+                    <input type="text" id="newFriendName" placeholder="Nombre del amigo" style="margin-bottom: 5px;">
+                    <input type="text" id="newFriendImg" placeholder="URL de foto" style="margin-bottom: 5px;">
+                    <input type="text" id="newFriendMsg" placeholder="Mensaje para el amigo">
+                </div>
+                <button class="btn-admin-action" onclick="addFriendItem()">Añadir Amigo</button>
+            </div>
+
+            <!-- Relación Admin -->
+            <div class="admin-section-box">
+                <h3>Espacio: Relación (Married / BFF)</h3>
+                <div class="form-group">
+                    <label>Activar / Desactivar Recuerdos Inolvidables:</label>
+                    <select id="admMemoriesActive">
+                        <option value="enabled">Activar Recuerdos Inolvidables</option>
+                        <option value="disabled">Desactivar</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Añadir Relación (Nombre, Tipo: Married o BFF, URL Foto):</label>
+                    <input type="text" id="newRelName" placeholder="Nombre" style="margin-bottom: 5px;">
+                    <select id="newRelType" style="margin-bottom: 5px;">
+                        <option value="BFF">BFF 💖</option>
+                        <option value="Married">Married 💍</option>
+                    </select>
+                    <input type="text" id="newRelImg" placeholder="URL Foto">
+                </div>
+                <button class="btn-admin-action" onclick="addRelationItem()">Agregar Relación</button>
+            </div>
+
+            <!-- Reproductor Admin -->
+            <div class="admin-section-box">
+                <h3>Espacio: Reproductor y Radio</h3>
+                <div class="form-group">
+                    <label>Agregar Música (Título y Link MP3):</label>
+                    <input type="text" id="newTrackTitle" placeholder="Título de la pista" style="margin-bottom: 5px;">
+                    <input type="text" id="newTrackUrl" placeholder="Link directo MP3">
+                </div>
+                <button class="btn-admin-action" onclick="addTrackItem()">Agregar Música</button>
+                <div class="form-group" style="margin-top: 10px;">
+                    <label>Link de Radio en Vivo (Streaming URL):</label>
+                    <input type="text" id="newRadioUrl" placeholder="URL de Radio streaming">
+                </div>
+                <button class="btn-admin-action" onclick="saveRadioUrl()">Guardar Radio</button>
+            </div>
+
+            <!-- Redes Sociales Admin -->
+            <div class="admin-section-box">
+                <h3>Espacio: Redes Sociales Inferiores</h3>
+                <div class="form-group">
+                    <label>Añadir Red Social (Nombre y Enlace):</label>
+                    <input type="text" id="newSocialName" placeholder="Nombre (ej. TikTok)" style="margin-bottom: 5px;">
+                    <input type="text" id="newSocialUrl" placeholder="Enlace URL">
+                </div>
+                <button class="btn-admin-action" onclick="addSocialItem()">Agregar Red Social</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Mensaje Flotante Notificación -->
+    <div class="popup-msg" id="popupMsg">¡Acción realizada con éxito! 💜</div>
+
     <script>
-        document.addEventListener('keydown', function(e) {
-            // Deshabilita F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-            if (e.keyCode == 123 || 
-                (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || 
-                (e.ctrlKey && e.keyCode == 85) || 
-                (e.ctrlKey && e.keyCode == 83)) {
-                e.preventDefault();
-                return false;
+        // --- ESTADOS Y DATOS INICIALES ---
+        let appData = {
+            profile: {
+                name: "Dulcinea Hechizera",
+                sub: "Rincon Kawaii magico.",
+                photoLink: "#profile",
+                avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300",
+                mp: "9999 MP",
+                followers: "15.8K",
+                love: "100% 💖"
+            },
+            portfolio: [
+                { title: "Estelar Folio I", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=300", link: "#" },
+                { title: "Galaxia Violeta II", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300", link: "#" }
+            ],
+            store: [
+                { title: "Diseño Kawaii VIP", price: "$10 USD", img: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=300", link: "#" }
+            ],
+            friends: [
+                { name: "Luna Mágica", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300", msg: "¡Hola desde el reino estelar!" },
+                { name: "Estrella Fugaz", img: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300", msg: "¡Amistad infinita 💜!" }
+            ],
+            relation: {
+                active: true,
+                items: [
+                    { name: "Alex Star", type: "Married", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300" },
+                    { name: "Mimi Chan", type: "BFF", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300" }
+                ]
+            },
+            tracks: [
+                { title: "Melodía Kawaii 1", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" }
+            ],
+            radioUrl: "",
+            socials: [
+                { name: "Discord", url: "#" },
+                { name: "Instagram", url: "#" }
+            ],
+            inbox: [
+                { text: "Compra de Diseño Kawaii VIP por usuario anónimo." }
+            ]
+        };
+
+        // --- NAVEGACIÓN DE TABS ---
+        function switchTab(tabId, btnElement) {
+            document.querySelectorAll('.section-view').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('nav.nav-buttons button').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            btnElement.classList.add('active');
+        }
+
+        // --- ABRIR / CERRAR PANEL ADMIN Y ESTADÍSTICAS ---
+        function toggleAdminPanel() {
+            const modal = document.getElementById('adminModal');
+            const stats = document.getElementById('adminStatsContainer');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                stats.style.display = 'none';
+            } else {
+                modal.style.display = 'flex';
+                stats.style.display = 'block';
+                renderAdminInbox();
             }
-        });
+        }
+
+        function showPopup(text) {
+            const p = document.getElementById('popupMsg');
+            p.innerText = text;
+            p.style.display = 'block';
+            setTimeout(() => { p.style.display = 'none'; }, 3000);
+        }
+
+        // --- RENDERIZADO GENERAL EN VISTA WEB ---
+        function updateUI() {
+            // Perfil
+            document.getElementById('mainTitleDisplay').innerText = appData.profile.name;
+            document.getElementById('profileNameDisplay').innerText = appData.profile.name;
+            document.getElementById('profileUserTag').innerText = `@${appData.profile.name.replace(/\s+/g,'')} ✦ Creadora`;
+            document.getElementById('profileSubText').innerText = appData.profile.sub;
+            document.getElementById('profileAvatarImg').src = appData.profile.avatar;
+            document.getElementById('statMp').innerText = appData.profile.mp;
+            document.getElementById('statFollowers').innerText = appData.profile.followers;
+            document.getElementById('statLove').innerText = appData.profile.love;
+
+            // Portafolio
+            const pGrid = document.getElementById('portfolioGrid');
+            pGrid.innerHTML = '';
+            appData.portfolio.forEach(item => {
+                pGrid.innerHTML += `
+                    <div class="kawaii-card">
+                        <img src="${item.img}" alt="${item.title}">
+                        <h4 style="color: var(--neon-lila); font-size: 1rem;">${item.title}</h4>
+                    </div>
+                `;
+            });
+
+            // Tienda
+            const sGrid = document.getElementById('storeGrid');
+            sGrid.innerHTML = '';
+            appData.store.forEach(item => {
+                sGrid.innerHTML += `
+                    <div class="kawaii-card" onclick="simulateStorePurchase('${item.title}')">
+                        <img src="${item.img}" alt="${item.title}">
+                        <h4 style="color: var(--neon-pink);">${item.title}</h4>
+                        <p style="font-size: 0.9rem; margin-top: 5px; color: #fff;">${item.price}</p>
+                    </div>
+                `;
+            });
+
+            // Amigos (Con esquinas curvas y mensaje al hacer clic en foto)
+            const fGrid = document.getElementById('friendsGrid');
+            fGrid.innerHTML = '';
+            appData.friends.forEach(f => {
+                fGrid.innerHTML += `
+                    <div class="friend-card">
+                        <img src="${f.img}" alt="${f.name}" onclick="alert('Mensaje de ${f.name}: ${f.msg}')" title="Haz clic para ver mensaje">
+                        <span style="font-weight: bold; color: var(--text-color); font-size: 0.95rem;">${f.name}</span>
+                    </div>
+                `;
+            });
+
+            // Relación (Dos columnas Married / BFF si está activo)
+            const rContainer = document.getElementById('relationContent');
+            if (!appData.relation.active) {
+                rContainer.innerHTML = `<p style="text-align: center; color: var(--neon-pink);">Los recuerdos inolvidables se encuentran desactivados por la administración.</p>`;
+            } else {
+                let html = '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">';
+                ['BFF', 'Married'].forEach(type => {
+                    html += `<div><h3 style="color: var(--neon-lila); margin-bottom: 10px; text-align:center;">${type} 💜</h3>`;
+                    const filtered = appData.relation.items.filter(i => i.type === type);
+                    if(filtered.length === 0) {
+                        html += `<p style="text-align:center; font-size:0.85rem; color:#aaa;">Sin registros activos</p>`;
+                    }
+                    filtered.forEach(rel => {
+                        html += `
+                            <div style="background: rgba(13,6,20,0.5); border:1px solid var(--neon-purple); border-radius:15px; padding:10px; display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                                <img src="${rel.img}" style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
+                                <span>${rel.name}</span>
+                            </div>
+                        `;
+                    });
+                    html += `</div>`;
+                });
+                html += '</div>';
+                rContainer.innerHTML = html;
+            }
+
+            // Redes Sociales Inferiores
+            const socBar = document.getElementById('socialFooterBar');
+            socBar.innerHTML = '';
+            appData.socials.forEach(soc => {
+                socBar.innerHTML += `<a href="${soc.url}" target="_blank" class="social-mini-box">${soc.name}</a>`;
+            });
+
+            // Reproductor
+            if(appData.tracks.length > 0) {
+                document.getElementById('audioSource').src = appData.tracks[0].url;
+                document.getElementById('playerTitleLabel').innerText = appData.tracks[0].title;
+                document.getElementById('mainAudio').load();
+            }
+        }
+
+        // --- ACCIONES DE ENLACE DE FOTO DE PERFIL ---
+        function triggerPhotoLink() {
+            window.location.href = appData.profile.photoLink;
+        }
+
+        // --- SIMULACIÓN DE COMPRA EN TIENDA (BÚZON) ---
+        function simulateStorePurchase(productName) {
+            const msg = `Compra realizada del diseño: ${productName} a las ${new Date().toLocaleTimeString()}`;
+            appData.inbox.push({ text: msg });
+            showPopup(`¡Has adquirido "${productName}" con éxito! Datos enviados al buzón.`);
+        }
+
+        function renderAdminInbox() {
+            const list = document.getElementById('storeInboxList');
+            list.innerHTML = '';
+            if(appData.inbox.length === 0) {
+                list.innerHTML = '<p>Sin compras recientes.</p>';
+            } else {
+                appData.inbox.forEach(ib => {
+                    list.innerHTML += `<p style="margin-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 2px;">• ${ib.text}</p>`;
+                });
+            }
+        }
+
+        function clearVisitors() {
+            document.getElementById('visitorCount').innerText = '0';
+            showPopup('Estadísticas de visitas borradas correctamente.');
+        }
+
+        // --- FUNCIONES DEL PANEL DE ADMINISTRACIÓN (GUARDAR DATOS) ---
+        function saveProfileData() {
+            appData.profile.name = document.getElementById('admProfileName').value;
+            appData.profile.sub = document.getElementById('admProfileSub').value;
+            appData.profile.photoLink = document.getElementById('admProfilePhotoLink').value;
+            appData.profile.mp = document.getElementById('admStatMp').value;
+            appData.profile.followers = document.getElementById('admStatFollowers').value;
+            appData.profile.love = document.getElementById('admStatLove').value;
+            updateUI();
+            showPopup('¡Perfil actualizado con éxito!');
+        }
+
+        function addPortfolioItem() {
+            const t = document.getElementById('newPortTitle').value;
+            const img = document.getElementById('newPortImg').value;
+            const link = document.getElementById('newPortLink').value;
+            if(t && img) {
+                appData.portfolio.push({ title: t, img: img, link: link });
+                updateUI();
+                showPopup('¡Obra agregada al portafolio!');
+            }
+        }
+
+        function addStoreItem() {
+            const t = document.getElementById('newStoreTitle').value;
+            const p = document.getElementById('newStorePrice').value;
+            const img = document.getElementById('newStoreImg').value;
+            const link = document.getElementById('newStoreLink').value;
+            if(t && p && img) {
+                appData.store.push({ title: t, price: p, img: img, link: link });
+                updateUI();
+                showPopup('¡Producto agregado a la tienda!');
+            }
+        }
+
+        function addFriendItem() {
+            const name = document.getElementById('newFriendName').value;
+            const img = document.getElementById('newFriendImg').value;
+            const msg = document.getElementById('newFriendMsg').value;
+            if(name && img) {
+                appData.friends.push({ name: name, img: img, msg: msg || '¡Hola!' });
+                updateUI();
+                showPopup('¡Amigo añadido al círculo!');
+            }
+        }
+
+        function addRelationItem() {
+            const name = document.getElementById('newRelName').value;
+            const type = document.getElementById('newRelType').value;
+            const img = document.getElementById('newRelImg').value;
+            appData.relation.active = document.getElementById('admMemoriesActive').value === 'enabled';
+            if(name && img) {
+                appData.relation.items.push({ name: name, type: type, img: img });
+                updateUI();
+                showPopup('¡Recuerdo de relación agregado!');
+            }
+        }
+
+        function addTrackItem() {
+            const t = document.getElementById('newTrackTitle').value;
+            const u = document.getElementById('newTrackUrl').value;
+            if(t && u) {
+                appData.tracks.push({ title: t, url: u });
+                updateUI();
+                showPopup('¡Pista de música agregada!');
+            }
+        }
+
+        function saveRadioUrl() {
+            const r = document.getElementById('newRadioUrl').value;
+            appData.radioUrl = r;
+            showPopup('¡Radio configurada correctamente!');
+        }
+
+        function addSocialItem() {
+            const name = document.getElementById('newSocialName').value;
+            const url = document.getElementById('newSocialUrl').value;
+            if(name && url) {
+                appData.socials.push({ name: name, url: url });
+                updateUI();
+                showPopup('¡Red social agregada!');
+            }
+        }
+
+        // Inicializar UI al cargar
+        window.onload = function() {
+            updateUI();
+        };
     </script>
 </body>
 </html>
