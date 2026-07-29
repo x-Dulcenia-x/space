@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil Kawaii - Dulcinea Hechizera</title>
+    <title>Perfil Kawaii - @DulcineaHechizera</title>
     <style>
         :root {
             --bg-color: #000000;
             --card-bg: #121212;
-            --primary-pink: #ff69b4;
-            --accent-lila: #da70d6;
-            --accent-blue: #00bfff;
             --text-color: #ffffff;
-            --text-muted: #b0b0b0;
+            --accent-pink: #ff69b4;
+            --accent-lila: #da70d6;
+            --accent-blue: #87ceeb;
+            --pastel-pink: #ffb6c1;
+            --pastel-lila: #e6e6fa;
         }
 
         * {
@@ -34,124 +35,122 @@
             overflow-x: hidden;
         }
 
-        /* Reloj esquina superior derecha */
+        /* Reloj Superior Derecho */
         .clock-container {
             position: absolute;
             top: 15px;
             right: 20px;
-            background: rgba(255, 105, 180, 0.15);
-            border: 2px solid var(--primary-pink);
+            background: rgba(255, 105, 180, 0.1);
+            border: 2px dashed var(--accent-pink);
             padding: 8px 15px;
             border-radius: 20px;
             font-size: 0.9rem;
-            color: var(--primary-pink);
-            font-weight: bold;
-            box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+            color: var(--pastel-pink);
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.2);
             text-align: center;
         }
 
-        .container {
+        /* Contenedor Principal */
+        .main-container {
             width: 100%;
             max-width: 600px;
+            background: var(--card-bg);
+            border: 3px solid var(--accent-lila);
+            border-radius: 25px;
+            padding: 30px 20px;
+            box-shadow: 0 0 25px rgba(218, 112, 214, 0.3);
             margin-top: 50px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* Tarjeta de Perfil Principal */
-        .profile-card {
-            background-color: var(--card-bg);
-            border: 3px dashed var(--primary-pink);
-            border-radius: 25px;
-            padding: 30px 20px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 0 20px rgba(218, 112, 214, 0.2);
-            margin-bottom: 20px;
-        }
-
-        /* Contenedor de la foto con giro y colores específicos */
-        .avatar-wrapper {
+        /* Foto de perfil con contorno giratorio y parpadeo */
+        .profile-pic-container {
             position: relative;
             width: 130px;
             height: 130px;
-            margin: 0 auto 15px auto;
+            margin-bottom: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        .avatar-border {
+        .profile-pic-container::before {
+            content: '';
             position: absolute;
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            border: 4px solid transparent;
-            border-top-color: var(--accent-blue);
-            border-right-color: var(--accent-lila);
-            border-bottom-color: var(--primary-pink);
-            border-left-color: var(--accent-blue);
-            animation: spin 4s linear infinite;
+            background: conic-gradient(var(--accent-blue), var(--accent-lila), var(--accent-pink), var(--accent-blue));
+            animation: rotateGlow 4s linear infinite;
         }
 
-        @keyframes spin {
+        @keyframes rotateGlow {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        .avatar {
-            width: 110px;
-            height: 110px;
+        .profile-img {
+            position: absolute;
+            width: 118px;
+            height: 118px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #000;
+            background: #000;
+            animation: blinkEffect 3s ease-in-out infinite;
         }
 
+        @keyframes blinkEffect {
+            0%, 90%, 100% { opacity: 1; }
+            95% { opacity: 0.3; }
+        }
+
+        /* Textos de Perfil */
         .username {
             font-size: 1.4rem;
-            color: var(--primary-pink);
+            color: var(--pastel-pink);
             font-weight: bold;
+            text-align: center;
             margin-bottom: 5px;
+            text-shadow: 0 0 8px rgba(255, 182, 193, 0.5);
         }
 
         .bio {
             font-size: 1rem;
-            color: var(--text-muted);
-            margin-bottom: 5px;
-        }
-
-        .rincon {
-            font-size: 0.95rem;
-            color: var(--accent-lila);
-            font-weight: 600;
+            color: var(--pastel-lila);
+            text-align: center;
             margin-bottom: 20px;
         }
 
         /* Estadísticas */
-        .stats-container {
-            display: flex;
-            justify-content: space-around;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 15px;
-            padding: 15px 10px;
-            border: 1px solid rgba(255, 105, 180, 0.2);
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            width: 100%;
+            margin-bottom: 25px;
         }
 
         .stat-box {
+            background: rgba(135, 206, 235, 0.05);
+            border: 1px solid var(--accent-blue);
+            border-radius: 15px;
+            padding: 10px;
             text-align: center;
         }
 
-        .stat-value {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: var(--text-color);
+        .stat-title {
+            font-size: 0.75rem;
+            color: var(--accent-blue);
+            margin-bottom: 5px;
+            text-transform: uppercase;
         }
 
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 3px;
+        .stat-value {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
         }
 
         /* Botones de Navegación */
@@ -159,47 +158,59 @@
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            width: 100%;
             justify-content: center;
-            margin-bottom: 20px;
+            width: 100%;
+            margin-bottom: 25px;
         }
 
         .nav-btn {
-            background-color: #1a1a1a;
-            border: 2px solid var(--accent-lila);
-            color: var(--text-color);
-            padding: 10px 20px;
+            background: transparent;
+            border: 2px solid var(--accent-pink);
+            color: var(--pastel-pink);
+            padding: 8px 18px;
             border-radius: 20px;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
-            flex: 1;
-            min-width: 110px;
-            text-align: center;
         }
 
         .nav-btn:hover, .nav-btn.active {
-            background-color: var(--primary-pink);
-            border-color: var(--primary-pink);
+            background: var(--accent-pink);
             color: #000;
-            box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+            box-shadow: 0 0 15px var(--accent-pink);
             transform: translateY(-2px);
         }
 
-        /* Secciones con su propio espacio */
-        .content-section {
-            display: none;
-            background-color: var(--card-bg);
-            border: 2px solid var(--accent-blue);
-            border-radius: 20px;
-            padding: 25px;
+        /* Secciones Independientes */
+        .content-sections {
             width: 100%;
-            box-shadow: 0 0 15px rgba(0, 191, 255, 0.15);
-            animation: fadeIn 0.4s ease;
         }
 
-        .content-section.active {
+        .section-pane {
+            display: none;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px dashed var(--accent-lila);
+            border-radius: 15px;
+            padding: 20px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .section-pane.active {
             display: block;
+        }
+
+        .section-pane h3 {
+            color: var(--accent-lila);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(218, 112, 214, 0.3);
+            padding-bottom: 5px;
+        }
+
+        .section-pane p {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
         @keyframes fadeIn {
@@ -207,106 +218,93 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .section-title {
-            color: var(--accent-blue);
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            border-bottom: 1px dashed rgba(0, 191, 255, 0.3);
-            padding-bottom: 5px;
-        }
-
-        .section-body p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        /* Footer pequeño */
-        footer {
-            margin-top: 30px;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-align: center;
+        /* Responsividad para celulares */
+        @media (max-width: 480px) {
+            .clock-container {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 15px;
+                width: 100%;
+            }
+            .main-container {
+                margin-top: 10px;
+                padding: 20px 15px;
+            }
+            .nav-buttons {
+                flex-direction: column;
+            }
+            .nav-btn {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="clock-container" id="clock">
-        Cargando hora...
+        Cargando horario UTC-7...
     </div>
 
-    <div class="container">
-        <div class="profile-card">
-            <div class="avatar-wrapper">
-                <div class="avatar-border"></div>
-                <img src="https://xatimg.com/image/S39YqVhYkGOf.png" alt="Foto de perfil Dulcinea" class="avatar">
-            </div>
-            <div class="username">@DulcineaHechizera ✦ Creadora</div>
-            <div class="bio">Dulcinea✨ Hechizando el mundo.</div>
-            <div class="rincon">Rincón mágico.</div>
+    <div class="main-container">
+        <div class="profile-pic-container">
+            <img src="https://xatimg.com/image/S39YqVhYkGOf.png" alt="Foto de Perfil" class="profile-img">
+        </div>
 
-            <div class="stats-container">
-                <div class="stat-box">
-                    <div class="stat-value">9999</div>
-                    <div class="stat-label">Poder Mágico</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value">15.8K</div>
-                    <div class="stat-label">Seguidores</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value">100% 💖</div>
-                    <div class="stat-label">Amor</div>
-                </div>
+        <div class="username">@DulcineaHechizera ✦ Creadora</div>
+        <div class="bio">Dulcinea✨ Hechizando el mundo. Rincón mágico.</div>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-title">Poder Mágico</div>
+                <div class="stat-value">9999</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-title">Seguidores</div>
+                <div class="stat-value">15.8K</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-title">Amor</div>
+                <div class="stat-value">100% 💖</div>
             </div>
         </div>
 
         <div class="nav-buttons">
-            <button class="nav-btn active" onclick="switchSection('perfil', event)">Perfil</button>
-            <button class="nav-btn" onclick="switchSection('portafolio', event)">Portafolio</button>
-            <button class="nav-btn" onclick="switchSection('amigos', event)">Amigos</button>
-            <button class="nav-btn" onclick="switchSection('relacion', event)">Relación</button>
+            <button class="nav-btn active" onclick="switchSection(event, 'perfil-section')">Perfil</button>
+            <button class="nav-btn" onclick="switchSection(event, 'portafolio-section')">Portafolio</button>
+            <button class="nav-btn" onclick="switchSection(event, 'amigos-section')">Amigos</button>
+            <button class="nav-btn" onclick="switchSection(event, 'relacion-section')">Relación</button>
         </div>
 
-        <div id="perfil" class="content-section active">
-            <div class="section-title">✨ Sobre Mí (Perfil)</div>
-            <div class="section-body">
-                <p>¡Bienvenid@ a mi espacio mágico! Aquí encontrarás un rincón lleno de luz, hechizos de ternura y buena energía creado especialmente para compartir con todos ustedes.</p>
+        <div class="content-sections">
+            <div id="perfil-section" class="section-pane active">
+                <h3>🌸 Sección Perfil</h3>
+                <p>¡Bienvenido/a a mi espacio personal! Aquí encontrarás la esencia de mis hechizos, gustos mágicos y todo lo referente a mi trayectoria en este rincón kawaii.</p>
             </div>
-        </div>
 
-        <div id="portafolio" class="content-section">
-            <div class="section-title">📂 Portafolio Mágico</div>
-            <div class="section-body">
-                <p>Explora mis creaciones, diseños web kawaii, ediciones y proyectos encantados elaborados con mucho amor y dedicación.</p>
+            <div id="portafolio-section" class="section-pane">
+                <h3>✨ Sección Portafolio</h3>
+                <p>Explora mis creaciones mágicas, proyectos artísticos, diseños destacados y todos los trabajos elaborados con amor y destreza creativa.</p>
             </div>
-        </div>
 
-        <div id="amigos" class="content-section">
-            <div class="section-title">💖 Mis Amigos Estelares</div>
-            <div class="section-body">
-                <p>Un espacio dedicado a las almas bonitas y compañerxs de viaje que hacen que este rincón mágico sea aún más especial.</p>
+            <div id="amigos-section" class="section-pane">
+                <h3>💖 Sección Amigos</h3>
+                <p>Un espacio especial dedicado a las almas aliadas, compañeros de aventuras y amistades entrañables que iluminan este rincón mágico conmigo.</p>
             </div>
-        </div>
 
-        <div id="relacion" class="content-section">
-            <div class="section-title">💞 Relación</div>
-            <div class="section-body">
-                <p>Conexiones especiales, lazos irrompibles y magia compartida con el corazón.</p>
+            <div id="relacion-section" class="section-pane">
+                <h3>🎀 Sección Relación</h3>
+                <p>El apartado reservado para los vínculos del corazón, lazos afectivos importantes y momentos entrañables compartidos con total complicidad.</p>
             </div>
         </div>
     </div>
 
-    <footer>
-        Hecho con 💖 para Dulcinea Hechizera • 2026
-    </footer>
-
     <script>
-        // Función para cambiar de sección de manera interactiva
-        function switchSection(sectionId, event) {
-            const sections = document.querySelectorAll('.content-section');
-            sections.forEach(sec => sec.classList.remove('active'));
+        // Función para cambiar de sección de manera independiente
+        function switchSection(event, sectionId) {
+            const panes = document.querySelectorAll('.section-pane');
+            panes.forEach(pane => pane.classList.remove('active'));
 
             const buttons = document.querySelectorAll('.nav-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
@@ -315,12 +313,12 @@
             event.currentTarget.classList.add('active');
         }
 
-        // Reloj en tiempo real (Horario del Pacífico UTC-7)
+        // Reloj en tiempo real con Horario del Pacífico (UTC-7)
         function updateClock() {
             const now = new Date();
-            // Ajustar a UTC-7
+            // Ajustar a UTC-7 (considerando desplazamiento local)
             const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-            const pacificTime = new Date(utc - (3600000 * 7));
+            const pacificTime = new Date(utc + (3600000 * -7));
 
             let hours = pacificTime.getHours();
             let minutes = pacificTime.getMinutes();
@@ -333,7 +331,7 @@
             seconds = seconds < 10 ? '0' + seconds : seconds;
 
             const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
-            document.getElementById('clock').innerHTML = `🕒 ${timeString}<br><span style="font-size:0.75rem; color:#da70d6;">UTC-7 Pacífico</span>`;
+            document.getElementById('clock').innerHTML = `⏰ ${timeString} <br><span style="font-size: 0.75rem;">Horario del Pacífico (UTC-7)</span>`;
         }
 
         setInterval(updateClock, 1000);
