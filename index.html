@@ -3,28 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dulcinea - Rincón Mágico</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Dulcinea - Panel Kawaii</title>
     <style>
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Quicksand', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: #000000;
-            color: #ffffff;
+            background-color: #000;
+            color: #fff;
             min-height: 100vh;
             overflow-x: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: relative;
         }
 
-        /* Lluvia de corazones Kawaii */
+        /* Fondo con puntos lila, azul y rosa */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(#b19cd9 15%, transparent 16%),
+                radial-gradient(#87ceeb 15%, transparent 16%),
+                radial-gradient(#ffb6c1 15%, transparent 16%);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px, 15px 15px;
+            opacity: 0.15;
+            z-index: -2;
+        }
+
+        /* Contenedor de corazones cayendo */
         .hearts-container {
             position: fixed;
             top: 0;
@@ -32,149 +46,142 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
+            z-index: -1;
             overflow: hidden;
-            z-index: 1;
         }
 
         .heart {
             position: absolute;
             top: -10vh;
             color: #ff69b4;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             animation: fall linear infinite;
-            opacity: 0.8;
+            opacity: 0.7;
         }
 
         @keyframes fall {
             0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
+                transform: translateY(-10vh) translateX(0) rotate(0deg);
             }
             100% {
-                transform: translateY(110vh) rotate(360deg);
-                opacity: 0.2;
+                transform: translateY(110vh) translateX(20px) rotate(360deg);
             }
         }
 
-        /* Panel de Contraseña (Acceso Mágico) */
-        #login-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+        /* Pantalla de Contraseña (Panel de Inicio) */
+        #auth-screen {
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
-            transition: opacity 0.5s ease;
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10;
         }
 
-        .login-box {
-            background: #111;
+        .auth-card {
+            background: rgba(20, 20, 20, 0.9);
             border: 2px solid #ff69b4;
             padding: 30px;
             border-radius: 20px;
             text-align: center;
-            box-shadow: 0 0 25px rgba(255, 105, 180, 0.4);
-            max-width: 350px;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
             width: 90%;
+            max-width: 400px;
         }
 
-        .login-box h2 {
-            color: #ff69b4;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-
-        .login-box input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            border: 2px solid #da70d6;
-            background: #222;
-            color: #da70d6;
-            font-size: 1.2rem;
-            text-align: center;
+        .auth-card h2 {
+            color: #ffb6c1;
             margin-bottom: 15px;
-            outline: none;
-            font-weight: bold;
-        }
-
-        .login-box button {
-            background: linear-gradient(45deg, #ff69b4, #da70d6);
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-size: 1rem;
-            cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.2s;
-            width: 100%;
-        }
-
-        .login-box button:hover {
-            transform: scale(1.05);
         }
 
         .password-hint {
-            margin-top: 15px;
-            font-size: 0.9rem;
-            color: #aaa;
+            background: rgba(177, 156, 217, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            color: #d8bfd8;
+            border: 1px dashed #b19cd9;
         }
 
-        .password-hint span {
-            color: #da70d6;
+        .auth-card input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #87ceeb;
+            background: #111;
+            color: #fff;
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .auth-card button {
+            background: linear-gradient(45deg, #ff69b4, #b19cd9);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: white;
             font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: opacity 0.2s;
+        }
+
+        .auth-card button:hover {
+            opacity: 0.8;
         }
 
         .error-msg {
-            color: #ff4d4d;
-            font-size: 0.85rem;
+            color: #ff6b6b;
             margin-top: 10px;
+            font-size: 0.85rem;
             display: none;
         }
 
-        /* Contenido Principal (Oculto hasta ingresar) */
-        #main-content {
+        /* Panel Principal (Oculto inicialmente) */
+        #main-panel {
             display: none;
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            max-width: 480px;
+            max-width: 800px;
+            margin: 0 auto;
             padding: 20px;
-            margin: auto;
         }
 
-        .profile-card {
-            background: rgba(20, 20, 20, 0.85);
-            border: 2px solid #ff69b4;
-            border-radius: 30px;
-            padding: 30px 20px;
+        header {
             text-align: center;
-            box-shadow: 0 0 30px rgba(218, 112, 214, 0.3);
-            backdrop-filter: blur(5px);
+            padding: 20px 0;
         }
 
-        /* Contenedor de la foto con borde giratorio tricolor */
-        .avatar-container {
-            position: relative;
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 20px auto;
+        .clock-container {
+            font-size: 0.9rem;
+            color: #87ceeb;
+            margin-bottom: 10px;
         }
 
-        .avatar-border {
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
+        /* Estilos de la foto de perfil con animación de aro giratorio y parpadeo */
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .profile-ring {
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
-            background: conic-gradient(#87ceeb, #da70d6, #ffb6c1, #87ceeb);
+            padding: 4px;
+            background: conic-gradient(#87ceeb, #b19cd9, #ffb6c1, #87ceeb);
             animation: spin 4s linear infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(135, 206, 235, 0.5);
         }
 
         @keyframes spin {
@@ -182,278 +189,247 @@
             100% { transform: rotate(360deg); }
         }
 
-        .avatar {
-            position: relative;
-            width: 130px;
-            height: 130px;
+        .profile-inner-white {
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            border-radius: 50%;
+            padding: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid #ffffff;
-            animation: blink-border 1.5s infinite alternate;
+            animation: blink 2s infinite;
         }
 
-        @keyframes blink-border {
-            0% { border-color: #ffffff; box-shadow: 0 0 10px #ffffff; }
-            100% { border-color: #ff69b4; box-shadow: 0 0 20px #ff69b4; }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
         }
 
-        .profile-title {
+        .profile-name {
+            margin-top: 15px;
             font-size: 1.4rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 5px;
-        }
-
-        .profile-title span {
-            color: #da70d6;
+            font-weight: bold;
+            color: #ffb6c1;
+            text-shadow: 0 0 5px rgba(255, 182, 193, 0.5);
         }
 
         .profile-subtitle {
             font-size: 0.95rem;
-            color: #ffb6c1;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-
-        /* Estadísticas */
-        .stats-container {
-            display: flex;
-            justify-content: space-around;
-            background: rgba(255, 105, 180, 0.1);
-            border-radius: 15px;
-            padding: 15px 10px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 105, 180, 0.3);
-        }
-
-        .stat-box h3 {
-            font-size: 1.1rem;
-            color: #ffffff;
-        }
-
-        .stat-box p {
-            font-size: 0.85rem;
-            color: #ffb6c1;
-            margin-top: 3px;
-        }
-
-        /* Menú de Botones / Secciones */
-        .nav-menu {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-
-        .nav-btn {
-            background: linear-gradient(135deg, #1a1a1a, #2a1b2e);
-            border: 1.5px solid #da70d6;
-            color: #ffffff;
-            padding: 12px 20px;
-            border-radius: 15px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            text-decoration: none;
-        }
-
-        .nav-btn:hover {
-            background: linear-gradient(135deg, #da70d6, #ff69b4);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(218, 112, 214, 0.4);
-            color: #000;
-        }
-
-        .nav-btn i {
-            color: #ff69b4;
-        }
-
-        .nav-btn:hover i {
-            color: #000;
-        }
-
-        /* Reproductor con diseño integrado */
-        .player-card {
-            background: rgba(15, 15, 15, 0.9);
-            border: 1.5px solid #87ceeb;
-            border-radius: 15px;
-            padding: 15px;
+            color: #d8bfd8;
+            margin-top: 5px;
             text-align: center;
         }
 
-        .player-card h4 {
-            color: #87ceeb;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
+        /* Menú de Navegación / Secciones */
+        .nav-tabs {
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
         }
 
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-            height: 0;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid #ff69b4;
+        .nav-tab {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #b19cd9;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
+        .nav-tab:hover, .nav-tab.active {
+            background: #ff69b4;
+            border-color: #ff69b4;
+            box-shadow: 0 0 10px #ff69b4;
         }
 
-        /* Reloj Hora Pacífico */
-        .time-box {
-            margin-top: 15px;
-            font-size: 0.85rem;
+        /* Tarjetas de Estadísticas / Info */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(20, 20, 20, 0.7);
+            border: 1px solid #87ceeb;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(135, 206, 235, 0.2);
+        }
+
+        .stat-card h3 {
+            font-size: 1.2rem;
             color: #87ceeb;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        /* Contenido de las secciones */
+        .content-section {
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid #ffb6c1;
+            border-radius: 15px;
+            padding: 20px;
+            display: none;
+            box-shadow: 0 0 15px rgba(255, 182, 193, 0.15);
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .content-section h3 {
+            color: #ff69b4;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Lluvia de corazones -->
-    <div class="hearts-container" id="hearts"></div>
+    <div class="hearts-container" id="heartsContainer"></div>
 
-    <!-- Panel de Contraseña / Acceso Mágico -->
-    <div id="login-overlay">
-        <div class="login-box">
-            <h2>Hechizera</h2>
-            <input type="password" id="pass-input" placeholder="••••" maxlength="6">
-            <button onclick="checkPassword()">Entrar</button>
-            <div class="error-msg" id="error-msg">Contraseña incorrecta, intenta de nuevo 💖</div>
+    <div id="auth-screen">
+        <div class="auth-card">
+            <h2>Panel Hechizera</h2>
             <div class="password-hint">
-                <i class="fa-solid fa-bell"></i> Contraseña visible: <span style="color: #da70d6;">5062</span>
+                🔔 <span style="color: #b19cd9; font-weight: bold;">Contraseña:</span> 5062
             </div>
+            <p style="font-size: 0.85rem; color: #aaa; margin-bottom: 15px;">Ingresa el código para entrar al rincón mágico:</p>
+            <input type="password" id="passInput" placeholder="••••" maxlength="4">
+            <button onclick="checkPassword()">Entrar</button>
+            <p class="error-msg" id="errorMsg">Contraseña incorrecta, intenta de nuevo 💖</p>
         </div>
     </div>
 
-    <!-- Contenido Principal de la Página -->
-    <div id="main-content">
-        <div class="profile-card">
-            
-            <!-- Foto de perfil con parpadeo y borde giratorio tricolor -->
-            <div class="avatar-container">
-                <div class="avatar-border"></div>
-                <img src="https://xatimg.com/image/S39YqVhYkGOf.png" alt="Dulcinea" class="avatar">
-            </div>
+    <div id="main-panel">
+        <header>
+            <div class="clock-container" id="pacificClock">Hora Pacífico: Cargando...</div>
+        </header>
 
-            <div class="profile-title">@DulcineaHechizera ✦ <span>Creadora</span></div>
-            <div class="profile-subtitle">✨ Hechizando el mundo. Rincón mágico.</div>
-
-            <!-- Estadísticas -->
-            <div class="stats-container">
-                <div class="stat-box">
-                    <h3>9999</h3>
-                    <p>Poder Mágico</p>
-                </div>
-                <div class="stat-box">
-                    <h3>15.8K</h3>
-                    <p>Seguidores</p>
-                </div>
-                <div class="stat-box">
-                    <h3>100% 💖</h3>
-                    <p>Amor</p>
+        <div class="profile-container">
+            <div class="profile-ring">
+                <div class="profile-inner-white">
+                    <img src="https://xatimg.com/image/S39YqVhYkGOf.png" alt="Dulcinea" class="profile-pic">
                 </div>
             </div>
+            <div class="profile-name">@DulcineaHechizera</div>
+            <div class="profile-subtitle">✦ Creadora ✨ Hechizando el mundo. Rincón mágico.</div>
+        </div>
 
-            <!-- Menú de Secciones -->
-            <div class="nav-menu">
-                <a href="#perfil" class="nav-btn"><i class="fa-solid fa-user"></i> Perfil</a>
-                <a href="#portafolio" class="nav-btn"><i class="fa-solid fa-briefcase"></i> Portafolio</a>
-                <a href="#amigos" class="nav-btn"><i class="fa-solid fa-users"></i> Amigos</a>
-                <a href="#relacion" class="nav-btn"><i class="fa-solid fa-heart"></i> Relación</a>
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="switchTab('perfil', event)">Perfil</div>
+            <div class="nav-tab" onclick="switchTab('portafolio', event)">Portafolio</div>
+            <div class="nav-tab" onclick="switchTab('amigos', event)">Amigos</div>
+            <div class="nav-tab" onclick="switchTab('relacion', event)">Relación</div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>9999</h3>
+                <p>Poder Mágico</p>
             </div>
-
-            <!-- Reproductor de Música / Video -->
-            <div class="player-card">
-                <h4><i class="fa-solid fa-music"></i> Reproductor Mágico</h4>
-                <div class="video-wrapper">
-                    <!-- Se carga el enlace de YouTube solicitado -->
-                    <iframe src="https://www.youtube.com/embed/F2NA8lr8FkQ?autoplay=1&mute=0&loop=1&playlist=F2NA8lr8FkQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
+            <div class="stat-card">
+                <h3>15.8K</h3>
+                <p>Seguidores</p>
             </div>
-
-            <!-- Hora Pacífico -->
-            <div class="time-box" id="pacific-time">
-                Hora Pacífico: Cargando...
+            <div class="stat-card">
+                <h3>100% 💖</h3>
+                <p>Amor</p>
             </div>
+        </div>
 
+        <div id="perfil" class="content-section active">
+            <h3>✨ Sobre Mí</h3>
+            <p>Bienvenida al corazón de mi espacio kawaii. Disfruta de la magia, la buena vibra y el diseño especial creado para ti.</p>
+        </div>
+        <div id="portafolio" class="content-section">
+            <h3>🎨 Portafolio</h3>
+            <p>Aquí puedes mostrar tus creaciones, ediciones, diseños o proyectos mágicos destacados.</p>
+        </div>
+        <div id="amigos" class="content-section">
+            <h3>🌸 Amigos</h3>
+            <p>Un espacio dedicado a las personitas especiales y aliadas en este viaje virtual.</p>
+        </div>
+        <div id="relacion" class="content-section">
+            <h3>💖 Relación</h3>
+            <p>Detalles y conexiones especiales sincronizadas con el alma de este rincón mágico.</p>
         </div>
     </div>
 
     <script>
-        // Función para validar la contraseña (5062)
+        // Lógica de Contraseña
         function checkPassword() {
-            const inputVal = document.getElementById('pass-input').value;
-            const errorMsg = document.getElementById('error-msg');
-            const overlay = document.getElementById('login-overlay');
-            const mainContent = document.getElementById('main-content');
-
+            const inputVal = document.getElementById('passInput').value;
+            const errorMsg = document.getElementById('errorMsg');
             if (inputVal === '5062') {
-                overlay.style.opacity = '0';
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                    mainContent.style.display = 'block';
-                }, 500);
+                document.getElementById('auth-screen').style.display = 'none';
+                document.getElementById('main-panel').style.display = 'block';
             } else {
                 errorMsg.style.display = 'block';
-                document.getElementById('pass-input').value = '';
             }
         }
 
         // Permitir entrar presionando Enter
-        document.getElementById('pass-input').addEventListener('keypress', function(e) {
+        document.getElementById('passInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 checkPassword();
             }
         });
 
-        // Generar corazones cayendo dinámicamente
+        // Reloj Hora del Pacífico
+        function updatePacificClock() {
+            const options = { timeZone: 'America/Los_Angeles', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            const timeString = new Intl.DateTimeFormat('es-US', options).format(new Date());
+            document.getElementById('pacificClock').innerText = `🕒 Hora Pacífico: ${timeString}`;
+        }
+        setInterval(updatePacificClock, 1000);
+        updatePacificClock();
+
+        // Generador de Corazones Cayendo
         function createHeart() {
-            const heartsContainer = document.getElementById('hearts');
+            const heartsContainer = document.getElementById('heartsContainer');
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.innerHTML = '💖';
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            heart.style.fontSize = (Math.random() * 1 + 0.8) + 'rem';
+            heart.style.fontSize = (Math.random() * 1 + 1) + 'rem';
             heartsContainer.appendChild(heart);
 
             setTimeout(() => {
                 heart.remove();
             }, 6000);
         }
-        setInterval(createHeart, 350);
+        setInterval(createHeart, 400);
 
-        // Reloj en tiempo real para la Hora del Pacífico (America/Los_Angeles o PST/PDT)
-        function updatePacificTime() {
-            const options = {
-                timeZone: 'America/Los_Angeles',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: true
-            };
-            const timeString = new Date().toLocaleTimeString('es-US', options);
-            document.getElementById('pacific-time').innerText = `🕒 Hora Pacífico: ${timeString}`;
+        // Control de Pestañas
+        function switchTab(tabId, event) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(t => t.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
         }
-        setInterval(updatePacificTime, 1000);
-        updatePacificTime();
     </script>
 </body>
 </html>
