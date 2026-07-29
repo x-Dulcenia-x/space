@@ -3,558 +3,457 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Kawaii - Inicio Rápido</title>
-    <!-- Google Fonts para un estilo tierno y moderno -->
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome para el ícono de ver contraseña -->
+    <title>Dulcinea - Rincón Mágico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: 'Quicksand', sans-serif;
         }
 
         body {
-            background-color: #121212;
-            color: #fff;
+            background-color: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-            background-image: radial-gradient(#ff69b4 1px, transparent 1px);
-            background-size: 30px 30px;
         }
 
-        .container {
-            background-color: #1a1a1a;
-            border: 3px solid #ff69b4;
-            border-radius: 25px;
+        /* Lluvia de corazones Kawaii */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            top: -10vh;
+            color: #ff69b4;
+            font-size: 1.2rem;
+            animation: fall linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0.2;
+            }
+        }
+
+        /* Panel de Contraseña (Acceso Mágico) */
+        #login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+
+        .login-box {
+            background: #111;
+            border: 2px solid #ff69b4;
             padding: 30px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
+            border-radius: 20px;
             text-align: center;
-            position: relative;
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.4);
+            max-width: 350px;
+            width: 90%;
         }
 
-        h2 {
+        .login-box h2 {
             color: #ff69b4;
             margin-bottom: 20px;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
         }
 
-        .kawaii-icon {
-            font-size: 3rem;
-            color: #ffb6c1;
-            margin-bottom: 15px;
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        input[type="password"], input[type="text"] {
+        .login-box input {
             width: 100%;
-            padding: 12px 45px 12px 15px;
-            border: 2px solid #ffb6c1;
-            border-radius: 15px;
-            background-color: #2a2a2a;
-            color: #fff;
-            font-size: 1rem;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        input:focus {
-            border-color: #ff69b4;
-            box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #ffb6c1;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        .btn {
-            background-color: #ff69b4;
-            color: white;
-            border: none;
-            border-radius: 15px;
             padding: 12px;
-            width: 100%;
-            font-size: 1.1rem;
+            border-radius: 10px;
+            border: 2px solid #da70d6;
+            background: #222;
+            color: #da70d6;
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 15px;
+            outline: none;
             font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
         }
 
-        .btn:hover {
-            background-color: #ff1493;
-            transform: translateY(-2px);
+        .login-box button {
+            background: linear-gradient(45deg, #ff69b4, #da70d6);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+            width: 100%;
+        }
+
+        .login-box button:hover {
+            transform: scale(1.05);
+        }
+
+        .password-hint {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .password-hint span {
+            color: #da70d6;
+            font-weight: bold;
         }
 
         .error-msg {
-            color: #ff6b6b;
-            font-size: 0.9rem;
+            color: #ff4d4d;
+            font-size: 0.85rem;
             margin-top: 10px;
             display: none;
         }
 
-        /* Panel de Inicio Rápido (Oculto inicialmente) */
-        #quick-panel {
+        /* Contenido Principal (Oculto hasta ingresar) */
+        #main-content {
             display: none;
-        }
-
-        .links-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .quick-link {
-            background-color: #2a2a2a;
-            border: 2px solid #ffb6c1;
-            padding: 12px;
-            border-radius: 15px;
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .quick-link:hover {
-            background-color: #ff69b4;
-            border-color: #fff;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <!-- SECCIÓN DE LOGIN -->
-        <div id="login-section">
-            <div class="kawaii-icon">✨ 🌸 ✨</div>
-            <h2>Acceso al Panel</h2>
-            
-            <div class="input-group">
-                <input type="password" id="passwordBox" placeholder="Ingresa la contraseña">
-                <i class="fa-solid fa-eye toggle-password" id="togglePass"></i>
-            </div>
-            
-            <button class="btn" onclick="checkPassword()">Entrar 💖</button>
-            <p id="errorMsg" class="error-msg">Contraseña incorrecta, ¡intenta de nuevo! 🐾</p>
-        </div>
-
-        <!-- SECCIÓN DE INICIO RÁPIDO (PANEL) -->
-        <div id="quick-panel">
-            <div class="kawaii-icon">🎀 🚀 🎀</div>
-            <h2>Inicio Rápido</h2>
-            <p style="color: #ffb6c1; font-size: 0.9rem;">¡Bienvenida a tu panel personalizado!</p>
-            
-            <div class="links-grid">
-                <a href="#" class="quick-link"><i class="fa-solid fa-house"></i> Enlace Principal</a>
-                <a href="#" class="quick-link"><i class="fa-solid fa-palette"></i> Mis Diseños</a>
-                <a href="#" class="quick-link"><i class="fa-solid fa-star"></i> Favoritos</a>
-                <a href="#" class="quick-link" onclick="location.reload()" style="background-color: #4a1525;"><i class="fa-solid fa-arrow-right-from-bracket"></i> Salir</a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Mostrar / Ocultar Contraseña
-        const togglePass = document.getElementById('togglePass');
-        const passwordBox = document.getElementById('passwordBox');
-
-        togglePass.addEventListener('click', function () {
-            // Cambiar tipo de input
-            const type = passwordBox.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordBox.setAttribute('type', type);
-            
-            // Cambiar ícono del ojo
-            this.classList.toggle('fa-eye');
-            this.classList.toggle('fa-eye-slash');
-        });
-
-        // Verificar Contraseña (5062)
-        function checkPassword() {
-            const pass = passwordBox.value;
-            const errorMsg = document.getElementById('errorMsg');
-            const loginSection = document.getElementById('login-section');
-            const quickPanel = document.getElementById('quick-panel');
-
-            if (pass === "5062") {
-                loginSection.style.display = 'none';
-                quickPanel.style.display = 'block';
-            } else {
-                errorMsg.style.display = 'block';
-                passwordBox.style.borderColor = '#ff6b6b';
-            }
-        }
-
-        // Permitir entrar presionando la tecla Enter
-        passwordBox.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
-        });
-    </script>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil Kawaii - @DulcineaHechizera</title>
-    <style>
-        :root {
-            --bg-color: #000000;
-            --card-bg: #121212;
-            --text-color: #ffffff;
-            --accent-pink: #ff69b4;
-            --accent-lila: #da70d6;
-            --accent-blue: #87ceeb;
-            --pastel-pink: #ffb6c1;
-            --pastel-lila: #e6e6fa;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
             position: relative;
-            overflow-x: hidden;
-        }
-
-        /* Reloj Superior Derecho */
-        .clock-container {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: rgba(255, 105, 180, 0.1);
-            border: 2px dashed var(--accent-pink);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--pastel-pink);
-            box-shadow: 0 0 10px rgba(255, 105, 180, 0.2);
-            text-align: center;
-        }
-
-        /* Contenedor Principal */
-        .main-container {
+            z-index: 2;
             width: 100%;
-            max-width: 600px;
-            background: var(--card-bg);
-            border: 3px solid var(--accent-lila);
-            border-radius: 25px;
-            padding: 30px 20px;
-            box-shadow: 0 0 25px rgba(218, 112, 214, 0.3);
-            margin-top: 50px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            max-width: 480px;
+            padding: 20px;
+            margin: auto;
         }
 
-        /* Foto de perfil con contorno giratorio y parpadeo */
-        .profile-pic-container {
+        .profile-card {
+            background: rgba(20, 20, 20, 0.85);
+            border: 2px solid #ff69b4;
+            border-radius: 30px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(218, 112, 214, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Contenedor de la foto con borde giratorio tricolor */
+        .avatar-container {
             position: relative;
             width: 130px;
             height: 130px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin: 0 auto 20px auto;
         }
 
-        .profile-pic-container::before {
-            content: '';
+        .avatar-border {
             position: absolute;
-            width: 100%;
-            height: 100%;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
             border-radius: 50%;
-            background: conic-gradient(var(--accent-blue), var(--accent-lila), var(--accent-pink), var(--accent-blue));
-            animation: rotateGlow 4s linear infinite;
+            background: conic-gradient(#87ceeb, #da70d6, #ffb6c1, #87ceeb);
+            animation: spin 4s linear infinite;
         }
 
-        @keyframes rotateGlow {
+        @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        .profile-img {
-            position: absolute;
-            width: 118px;
-            height: 118px;
+        .avatar {
+            position: relative;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             object-fit: cover;
-            background: #000;
-            animation: blinkEffect 3s ease-in-out infinite;
+            border: 4px solid #ffffff;
+            animation: blink-border 1.5s infinite alternate;
         }
 
-        @keyframes blinkEffect {
-            0%, 90%, 100% { opacity: 1; }
-            95% { opacity: 0.3; }
+        @keyframes blink-border {
+            0% { border-color: #ffffff; box-shadow: 0 0 10px #ffffff; }
+            100% { border-color: #ff69b4; box-shadow: 0 0 20px #ff69b4; }
         }
 
-        /* Textos de Perfil */
-        .username {
+        .profile-title {
             font-size: 1.4rem;
-            color: var(--pastel-pink);
-            font-weight: bold;
-            text-align: center;
+            font-weight: 700;
+            color: #ffffff;
             margin-bottom: 5px;
-            text-shadow: 0 0 8px rgba(255, 182, 193, 0.5);
         }
 
-        .bio {
-            font-size: 1rem;
-            color: var(--pastel-lila);
-            text-align: center;
+        .profile-title span {
+            color: #da70d6;
+        }
+
+        .profile-subtitle {
+            font-size: 0.95rem;
+            color: #ffb6c1;
             margin-bottom: 20px;
+            line-height: 1.4;
         }
 
         /* Estadísticas */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            width: 100%;
-            margin-bottom: 25px;
-        }
-
-        .stat-box {
-            background: rgba(135, 206, 235, 0.05);
-            border: 1px solid var(--accent-blue);
-            border-radius: 15px;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .stat-title {
-            font-size: 0.75rem;
-            color: var(--accent-blue);
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .stat-value {
-            font-size: 1rem;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        /* Botones de Navegación */
-        .nav-buttons {
+        .stats-container {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            width: 100%;
+            justify-content: space-around;
+            background: rgba(255, 105, 180, 0.1);
+            border-radius: 15px;
+            padding: 15px 10px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 105, 180, 0.3);
+        }
+
+        .stat-box h3 {
+            font-size: 1.1rem;
+            color: #ffffff;
+        }
+
+        .stat-box p {
+            font-size: 0.85rem;
+            color: #ffb6c1;
+            margin-top: 3px;
+        }
+
+        /* Menú de Botones / Secciones */
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
             margin-bottom: 25px;
         }
 
         .nav-btn {
-            background: transparent;
-            border: 2px solid var(--accent-pink);
-            color: var(--pastel-pink);
-            padding: 8px 18px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .nav-btn:hover, .nav-btn.active {
-            background: var(--accent-pink);
-            color: #000;
-            box-shadow: 0 0 15px var(--accent-pink);
-            transform: translateY(-2px);
-        }
-
-        /* Secciones Independientes */
-        .content-sections {
-            width: 100%;
-        }
-
-        .section-pane {
-            display: none;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px dashed var(--accent-lila);
+            background: linear-gradient(135deg, #1a1a1a, #2a1b2e);
+            border: 1.5px solid #da70d6;
+            color: #ffffff;
+            padding: 12px 20px;
             border-radius: 15px;
-            padding: 20px;
-            animation: fadeIn 0.4s ease-in-out;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
         }
 
-        .section-pane.active {
-            display: block;
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #da70d6, #ff69b4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(218, 112, 214, 0.4);
+            color: #000;
         }
 
-        .section-pane h3 {
-            color: var(--accent-lila);
+        .nav-btn i {
+            color: #ff69b4;
+        }
+
+        .nav-btn:hover i {
+            color: #000;
+        }
+
+        /* Reproductor con diseño integrado */
+        .player-card {
+            background: rgba(15, 15, 15, 0.9);
+            border: 1.5px solid #87ceeb;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .player-card h4 {
+            color: #87ceeb;
             margin-bottom: 10px;
-            font-size: 1.2rem;
-            border-bottom: 1px solid rgba(218, 112, 214, 0.3);
-            padding-bottom: 5px;
-        }
-
-        .section-pane p {
-            color: #ccc;
             font-size: 0.95rem;
-            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #ff69b4;
         }
 
-        /* Responsividad para celulares */
-        @media (max-width: 480px) {
-            .clock-container {
-                position: relative;
-                top: 0;
-                right: 0;
-                margin-bottom: 15px;
-                width: 100%;
-            }
-            .main-container {
-                margin-top: 10px;
-                padding: 20px 15px;
-            }
-            .nav-buttons {
-                flex-direction: column;
-            }
-            .nav-btn {
-                width: 100%;
-                text-align: center;
-            }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Reloj Hora Pacífico */
+        .time-box {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: #87ceeb;
         }
     </style>
 </head>
 <body>
 
-    <div class="clock-container" id="clock">
-        Cargando horario UTC-7...
+    <!-- Lluvia de corazones -->
+    <div class="hearts-container" id="hearts"></div>
+
+    <!-- Panel de Contraseña / Acceso Mágico -->
+    <div id="login-overlay">
+        <div class="login-box">
+            <h2>Hechizera</h2>
+            <input type="password" id="pass-input" placeholder="••••" maxlength="6">
+            <button onclick="checkPassword()">Entrar</button>
+            <div class="error-msg" id="error-msg">Contraseña incorrecta, intenta de nuevo 💖</div>
+            <div class="password-hint">
+                <i class="fa-solid fa-bell"></i> Contraseña visible: <span style="color: #da70d6;">5062</span>
+            </div>
+        </div>
     </div>
 
-    <div class="main-container">
-        <div class="profile-pic-container">
-            <img src="https://xatimg.com/image/S39YqVhYkGOf.png" alt="Foto de Perfil" class="profile-img">
-        </div>
-
-        <div class="username">@DulcineaHechizera ✦ Creadora</div>
-        <div class="bio">Dulcinea✨ Hechizando el mundo. Rincón mágico.</div>
-
-        <div class="stats-grid">
-            <div class="stat-box">
-                <div class="stat-title">Poder Mágico</div>
-                <div class="stat-value">9999</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-title">Seguidores</div>
-                <div class="stat-value">15.8K</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-title">Amor</div>
-                <div class="stat-value">100% 💖</div>
-            </div>
-        </div>
-
-        <div class="nav-buttons">
-            <button class="nav-btn active" onclick="switchSection(event, 'perfil-section')">Perfil</button>
-            <button class="nav-btn" onclick="switchSection(event, 'portafolio-section')">Portafolio</button>
-            <button class="nav-btn" onclick="switchSection(event, 'amigos-section')">Amigos</button>
-            <button class="nav-btn" onclick="switchSection(event, 'relacion-section')">Relación</button>
-        </div>
-
-        <div class="content-sections">
-            <div id="perfil-section" class="section-pane active">
-                <h3>🌸 Sección Perfil</h3>
-                <p>¡Bienvenido/a a mi espacio personal! Aquí encontrarás la esencia de mis hechizos, gustos mágicos y todo lo referente a mi trayectoria en este rincón kawaii.</p>
+    <!-- Contenido Principal de la Página -->
+    <div id="main-content">
+        <div class="profile-card">
+            
+            <!-- Foto de perfil con parpadeo y borde giratorio tricolor -->
+            <div class="avatar-container">
+                <div class="avatar-border"></div>
+                <img src="https://xatimg.com/image/S39YqVhYkGOf.png" alt="Dulcinea" class="avatar">
             </div>
 
-            <div id="portafolio-section" class="section-pane">
-                <h3>✨ Sección Portafolio</h3>
-                <p>Explora mis creaciones mágicas, proyectos artísticos, diseños destacados y todos los trabajos elaborados con amor y destreza creativa.</p>
+            <div class="profile-title">@DulcineaHechizera ✦ <span>Creadora</span></div>
+            <div class="profile-subtitle">✨ Hechizando el mundo. Rincón mágico.</div>
+
+            <!-- Estadísticas -->
+            <div class="stats-container">
+                <div class="stat-box">
+                    <h3>9999</h3>
+                    <p>Poder Mágico</p>
+                </div>
+                <div class="stat-box">
+                    <h3>15.8K</h3>
+                    <p>Seguidores</p>
+                </div>
+                <div class="stat-box">
+                    <h3>100% 💖</h3>
+                    <p>Amor</p>
+                </div>
             </div>
 
-            <div id="amigos-section" class="section-pane">
-                <h3>💖 Sección Amigos</h3>
-                <p>Un espacio especial dedicado a las almas aliadas, compañeros de aventuras y amistades entrañables que iluminan este rincón mágico conmigo.</p>
+            <!-- Menú de Secciones -->
+            <div class="nav-menu">
+                <a href="#perfil" class="nav-btn"><i class="fa-solid fa-user"></i> Perfil</a>
+                <a href="#portafolio" class="nav-btn"><i class="fa-solid fa-briefcase"></i> Portafolio</a>
+                <a href="#amigos" class="nav-btn"><i class="fa-solid fa-users"></i> Amigos</a>
+                <a href="#relacion" class="nav-btn"><i class="fa-solid fa-heart"></i> Relación</a>
             </div>
 
-            <div id="relacion-section" class="section-pane">
-                <h3>🎀 Sección Relación</h3>
-                <p>El apartado reservado para los vínculos del corazón, lazos afectivos importantes y momentos entrañables compartidos con total complicidad.</p>
+            <!-- Reproductor de Música / Video -->
+            <div class="player-card">
+                <h4><i class="fa-solid fa-music"></i> Reproductor Mágico</h4>
+                <div class="video-wrapper">
+                    <!-- Se carga el enlace de YouTube solicitado -->
+                    <iframe src="https://www.youtube.com/embed/F2NA8lr8FkQ?autoplay=1&mute=0&loop=1&playlist=F2NA8lr8FkQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
             </div>
+
+            <!-- Hora Pacífico -->
+            <div class="time-box" id="pacific-time">
+                Hora Pacífico: Cargando...
+            </div>
+
         </div>
     </div>
 
     <script>
-        // Función para cambiar de sección de manera independiente
-        function switchSection(event, sectionId) {
-            const panes = document.querySelectorAll('.section-pane');
-            panes.forEach(pane => pane.classList.remove('active'));
+        // Función para validar la contraseña (5062)
+        function checkPassword() {
+            const inputVal = document.getElementById('pass-input').value;
+            const errorMsg = document.getElementById('error-msg');
+            const overlay = document.getElementById('login-overlay');
+            const mainContent = document.getElementById('main-content');
 
-            const buttons = document.querySelectorAll('.nav-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-
-            document.getElementById(sectionId).classList.add('active');
-            event.currentTarget.classList.add('active');
+            if (inputVal === '5062') {
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    mainContent.style.display = 'block';
+                }, 500);
+            } else {
+                errorMsg.style.display = 'block';
+                document.getElementById('pass-input').value = '';
+            }
         }
 
-        // Reloj en tiempo real con Horario del Pacífico (UTC-7)
-        function updateClock() {
-            const now = new Date();
-            // Ajustar a UTC-7 (considerando desplazamiento local)
-            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-            const pacificTime = new Date(utc + (3600000 * -7));
+        // Permitir entrar presionando Enter
+        document.getElementById('pass-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
 
-            let hours = pacificTime.getHours();
-            let minutes = pacificTime.getMinutes();
-            let seconds = pacificTime.getSeconds();
-            let ampm = hours >= 12 ? 'PM' : 'AM';
+        // Generar corazones cayendo dinámicamente
+        function createHeart() {
+            const heartsContainer = document.getElementById('hearts');
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.fontSize = (Math.random() * 1 + 0.8) + 'rem';
+            heartsContainer.appendChild(heart);
 
-            hours = hours % 12;
-            hours = hours ? hours : 12; // la hora '0' debe ser '12'
-            minutes = minutes < 10 ? '0' + minutes : minutes;
-            seconds = seconds < 10 ? '0' + seconds : seconds;
-
-            const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
-            document.getElementById('clock').innerHTML = `⏰ ${timeString} <br><span style="font-size: 0.75rem;">Horario del Pacífico (UTC-7)</span>`;
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
         }
+        setInterval(createHeart, 350);
 
-        setInterval(updateClock, 1000);
-        updateClock();
+        // Reloj en tiempo real para la Hora del Pacífico (America/Los_Angeles o PST/PDT)
+        function updatePacificTime() {
+            const options = {
+                timeZone: 'America/Los_Angeles',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            };
+            const timeString = new Date().toLocaleTimeString('es-US', options);
+            document.getElementById('pacific-time').innerText = `🕒 Hora Pacífico: ${timeString}`;
+        }
+        setInterval(updatePacificTime, 1000);
+        updatePacificTime();
     </script>
 </body>
 </html>
