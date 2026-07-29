@@ -3,1487 +3,341 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dulcinea Hechizera 💜 Kawaii Profile & Web</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Perfil Kawaii - Dulcinea Hechizera</title>
     <style>
         :root {
-            --bg-color: #0b0714;
-            --card-bg: rgba(25, 15, 38, 0.75);
-            --primary: #c084fc;
-            --secondary: #ec4899;
-            --accent: #38bdf8;
-            --text-main: #f3e8ff;
-            --text-muted: #d8b4fe;
-            --border-color: rgba(192, 132, 252, 0.3);
-            --glow: 0 0 20px rgba(192, 132, 252, 0.4);
+            --bg-color: #000000;
+            --card-bg: #121212;
+            --primary-pink: #ff69b4;
+            --accent-lila: #da70d6;
+            --accent-blue: #00bfff;
+            --text-color: #ffffff;
+            --text-muted: #b0b0b0;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Quicksand', sans-serif;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary) var(--bg-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(192, 132, 252, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.1) 0%, transparent 50%);
-            color: var(--text-main);
+            color: var(--text-color);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
             overflow-x: hidden;
         }
 
-        /* HEADER & NAVIGATION */
-        header {
-            background: rgba(15, 10, 25, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 15px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .header-title-container {
-            text-align: center;
-        }
-
-        .animated-title {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            font-weight: 700;
-            font-style: italic;
-            text-shadow: 0 0 10px rgba(255,255,255,0.6);
-            animation: waveMotion 4s ease-in-out infinite alternate;
-            background: linear-gradient(135deg, #ffffff, var(--primary), var(--secondary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
-        }
-
-        @keyframes waveMotion {
-            0% { transform: translateY(0px) rotate(-1deg); filter: hue-rotate(0deg); }
-            50% { transform: translateY(-4px) rotate(1deg); filter: hue-rotate(30deg); }
-            100% { transform: translateY(0px) rotate(-1deg); filter: hue-rotate(60deg); }
-        }
-
-        nav {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .nav-btn {
-            background: rgba(192, 132, 252, 0.1);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 8px 18px;
+        /* Reloj esquina superior derecha */
+        .clock-container {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(255, 105, 180, 0.15);
+            border: 2px solid var(--primary-pink);
+            padding: 8px 15px;
             border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .nav-btn:hover, .nav-btn.active {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            box-shadow: var(--glow);
-            border-color: transparent;
-            transform: translateY(-2px);
-        }
-
-        /* MAIN LAYOUT */
-        main {
-            flex: 1;
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 25px 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .section-view {
-            display: none;
-            animation: fadeIn 0.4s ease forwards;
-        }
-
-        .section-view.active {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* CARD STYLING */
-        .kawaii-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 25px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            position: relative;
-        }
-
-        /* PROFILE SECTION (CENTERED) */
-        .profile-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            font-size: 0.9rem;
+            color: var(--primary-pink);
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
             text-align: center;
-            gap: 20px;
-            max-width: 650px;
-            margin: 0 auto;
+        }
+
+        .container {
             width: 100%;
+            max-width: 600px;
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .profile-avatar-wrapper {
-            position: relative;
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            padding: 4px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-            box-shadow: var(--glow);
-        }
-
-        .profile-avatar {
+        /* Tarjeta de Perfil Principal */
+        .profile-card {
+            background-color: var(--card-bg);
+            border: 3px dashed var(--primary-pink);
+            border-radius: 25px;
+            padding: 30px 20px;
             width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            background: #201035;
-        }
-
-        .profile-info h2 {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-            color: #fff;
-        }
-
-        .profile-info p.handle {
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .profile-info p.bio {
-            color: var(--text-muted);
-            line-height: 1.6;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(218, 112, 214, 0.2);
             margin-bottom: 20px;
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+        /* Contenedor de la foto con giro y colores específicos */
+        .avatar-wrapper {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 15px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .avatar-border {
+            position: absolute;
             width: 100%;
-            margin-bottom: 10px;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: var(--accent-blue);
+            border-right-color: var(--accent-lila);
+            border-bottom-color: var(--primary-pink);
+            border-left-color: var(--accent-blue);
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #000;
+        }
+
+        .username {
+            font-size: 1.4rem;
+            color: var(--primary-pink);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .bio {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .rincon {
+            font-size: 0.95rem;
+            color: var(--accent-lila);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* Estadísticas */
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 15px 10px;
+            border: 1px solid rgba(255, 105, 180, 0.2);
         }
 
         .stat-box {
-            background: rgba(192, 132, 252, 0.08);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 15px 10px;
             text-align: center;
         }
 
-        .stat-box .value {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .stat-box .label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        /* REPLAYER BAR & SCHEDULE */
-        .top-utility-bar {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        @media(max-width: 768px) {
-            .top-utility-bar {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .schedule-box, .player-box {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .widget-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 700;
-            color: var(--primary);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
-        }
-
-        audio {
-            width: 100%;
-            border-radius: 10px;
-            outline: none;
-            filter: drop-shadow(0 2px 8px rgba(192, 132, 252, 0.3));
-        }
-
-        .playlist-select {
-            background: rgba(15, 10, 25, 0.8);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 8px 12px;
-            border-radius: 12px;
-            width: 100%;
-            outline: none;
-        }
-
-        /* PORTFOLIO SECTION */
-        .section-header-title {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 20px;
-        }
-
-        .portfolio-item {
-            background: rgba(25, 15, 38, 0.6);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease;
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--glow);
-        }
-
-        .portfolio-img-container {
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-            background: #11081f;
-        }
-
-        .portfolio-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .portfolio-item:hover .portfolio-img-container img {
-            transform: scale(1.08);
-        }
-
-        .portfolio-content {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            flex: 1;
-        }
-
-        .portfolio-content h3 {
+        .stat-value {
             font-size: 1.1rem;
-            color: #fff;
+            font-weight: bold;
+            color: var(--text-color);
         }
 
-        .portfolio-content p {
-            font-size: 0.9rem;
+        .stat-label {
+            font-size: 0.8rem;
             color: var(--text-muted);
-            flex: 1;
+            margin-top: 3px;
         }
 
-        /* TIENDA SECTION */
-        .store-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 20px;
-        }
-
-        .store-item {
-            background: rgba(25, 15, 38, 0.6);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            overflow: hidden;
+        /* Botones de Navegación */
+        .nav-buttons {
             display: flex;
-            flex-direction: column;
-            padding: 15px;
-            gap: 12px;
-            text-align: center;
-        }
-
-        .store-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 12px;
-            background: #11081f;
-        }
-
-        .store-price {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--secondary);
-        }
-
-        .kawaii-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .kawaii-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
-        }
-
-        /* AMIGOS SECTION */
-        .friends-header-desc {
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-
-        .friends-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        .friend-card {
-            background: rgba(25, 15, 38, 0.6);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 12px;
-            transition: transform 0.3s ease;
-        }
-
-        .friend-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--glow);
-        }
-
-        .friend-avatar {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--primary);
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .friend-avatar:hover {
-            transform: scale(1.05);
-        }
-
-        .friend-name {
-            font-weight: 700;
-            font-size: 1.05rem;
-            color: #fff;
-        }
-
-        .friend-msg {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            background: rgba(192, 132, 252, 0.05);
-            padding: 8px 12px;
-            border-radius: 12px;
-            width: 100%;
-        }
-
-        /* RELACION SECTION */
-        .relation-container {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .relation-columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        @media(max-width: 768px) {
-            .relation-columns {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .relation-column-box {
-            background: rgba(25, 15, 38, 0.6);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .relation-column-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
-        }
-
-        .relation-item-card {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: rgba(15, 10, 25, 0.5);
-            padding: 10px;
-            border-radius: 14px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .relation-item-card img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1px solid var(--secondary);
-        }
-
-        /* STATS & COUNTRIES SECTION (Admin view only or hidden from normal view) */
-        .stats-countries-box {
-            background: rgba(25, 15, 38, 0.8);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .country-stat-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 12px;
-            background: rgba(15, 10, 25, 0.5);
-            border-radius: 10px;
-        }
-
-        /* SOCIAL MEDIA BOTTOM WIDGET */
-        .social-bottom-bar {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
             flex-wrap: wrap;
-            margin-top: 10px;
-        }
-
-        .social-icon-box {
-            background: rgba(192, 132, 252, 0.1);
-            border: 1px solid var(--border-color);
-            width: 45px;
-            height: 45px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-main);
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .social-icon-box:hover {
-            background: var(--primary);
-            color: #fff;
-            transform: translateY(-3px);
-            box-shadow: var(--glow);
-        }
-
-        /* GEAR BUTTON (ADMIN ACCESS) */
-        .gear-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(25, 15, 38, 0.9);
-            border: 1px solid var(--border-color);
-            color: var(--primary);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            cursor: pointer;
-            z-index: 2000;
-            box-shadow: var(--glow);
-            transition: transform 0.3s ease;
-        }
-
-        .gear-btn:hover {
-            transform: rotate(90deg) scale(1.1);
-        }
-
-        /* ADMIN MODAL / PANEL */
-        .admin-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(5, 3, 10, 0.85);
-            backdrop-filter: blur(10px);
-            z-index: 3000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .admin-modal.active {
-            display: flex;
-        }
-
-        .admin-content {
-            background: #180e28;
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            width: 100%;
-            max-width: 900px;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-        }
-
-        .admin-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 15px;
-        }
-
-        .admin-header-row h2 {
-            color: var(--primary);
-            font-size: 1.5rem;
-        }
-
-        .close-admin {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .admin-section-group {
-            background: rgba(15, 10, 25, 0.6);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .admin-section-group h3 {
-            color: var(--secondary);
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        @media(max-width: 600px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .form-group label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .form-group input, .form-group textarea, .form-group select {
-            background: rgba(25, 15, 38, 0.8);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 10px 14px;
-            border-radius: 12px;
-            outline: none;
-            font-size: 0.95rem;
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 8px rgba(192, 132, 252, 0.3);
-        }
-
-        .checkbox-label {
-            display: flex;
-            align-items: center;
             gap: 10px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            color: var(--text-main);
-        }
-
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
-            background: rgba(10, 6, 18, 0.9);
-        }
-
-        /* HELPER ALERTS / MODALS */
-        .friend-msg-modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 4000;
-            padding: 20px;
-        }
-        .friend-msg-modal.active { display: flex; }
-        .friend-msg-content {
-            background: #180e28;
-            border: 1px solid var(--border-color);
-            padding: 25px;
-            border-radius: 20px;
-            max-width: 400px;
             width: 100%;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-btn {
+            background-color: #1a1a1a;
+            border: 2px solid var(--accent-lila);
+            color: var(--text-color);
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 110px;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background-color: var(--primary-pink);
+            border-color: var(--primary-pink);
+            color: #000;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Secciones con su propio espacio */
+        .content-section {
+            display: none;
+            background-color: var(--card-bg);
+            border: 2px solid var(--accent-blue);
+            border-radius: 20px;
+            padding: 25px;
+            width: 100%;
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.15);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed rgba(0, 191, 255, 0.3);
+            padding-bottom: 5px;
+        }
+
+        .section-body p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Footer pequeño */
+        footer {
+            margin-top: 30px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <!-- GEAR BUTTON (ADMIN ACCESS) -->
-    <div class="gear-btn" onclick="openAdminPanel()" title="Panel de Administración General">
-        <i class="fa-solid fa-gear"></i>
+    <div class="clock-container" id="clock">
+        Cargando hora...
     </div>
 
-    <!-- HEADER & NAVIGATION -->
-    <header>
-        <div class="header-title-container">
-            <h1 class="animated-title" id="displayTitle">Dulcinea Hechizera</h1>
-        </div>
-        <nav>
-            <button class="nav-btn active" onclick="switchTab('perfil', this)"><i class="fa-solid fa-user"></i> Perfil</button>
-            <button class="nav-btn" onclick="switchTab('portafolio', this)"><i class="fa-solid fa-briefcase"></i> Portafolio</button>
-            <button class="nav-btn" onclick="switchTab('tienda', this)"><i class="fa-solid fa-store"></i> Tienda</button>
-            <button class="nav-btn" onclick="switchTab('amigos', this)"><i class="fa-solid fa-user-group"></i> Amigos</button>
-            <button class="nav-btn" onclick="switchTab('relacion', this)"><i class="fa-solid fa-heart"></i> Relación</button>
-        </nav>
-    </header>
-
-    <!-- MAIN CONTAINER -->
-    <main>
-
-        <!-- TOP UTILITY BAR (Reproductor & Horario / Radio) -->
-        <div class="top-utility-bar">
-            <!-- REPRODUCTOR & RADIO -->
-            <div class="kawaii-card player-box">
-                <div class="widget-header">
-                    <span><i class="fa-solid fa-music"></i> Reproductor Musical & Radio</span>
-                    <span id="playerActiveStatus" style="font-size:0.8rem; color: var(--secondary);">Activo</span>
-                </div>
-                <select class="playlist-select" id="playlistSelector" onchange="changeTrack(this)">
-                    <!-- Dynamically populated -->
-                </select>
-                <audio id="mainAudioPlayer" controls>
-                    <source src="" type="audio/mpeg">
-                    Tu navegador no soporta audio.
-                </audio>
+    <div class="container">
+        <div class="profile-card">
+            <div class="avatar-wrapper">
+                <div class="avatar-border"></div>
+                <img src="https://xatimg.com/image/S39YqVhYkGOf.png" alt="Foto de perfil Dulcinea" class="avatar">
             </div>
+            <div class="username">@DulcineaHechizera ✦ Creadora</div>
+            <div class="bio">Dulcinea✨ Hechizando el mundo.</div>
+            <div class="rincon">Rincón mágico.</div>
 
-            <!-- HORARIO DEL PACIFICO -->
-            <div class="kawaii-card schedule-box">
-                <div class="widget-header">
-                    <span><i class="fa-solid fa-clock"></i> Horario del Pacífico (UTC-7)</span>
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-value">9999</div>
+                    <div class="stat-label">Poder Mágico</div>
                 </div>
-                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 1; text-align: center; gap: 8px;">
-                    <h3 id="pacificClock" style="font-size: 1.8rem; color: #fff;">00:00:00</h3>
-                    <p style="color: var(--text-muted); font-size: 0.9rem;" id="scheduleDesc">¡Rincón Kawaii mágico transmitiendo en vivo!</p>
+                <div class="stat-box">
+                    <div class="stat-value">15.8K</div>
+                    <div class="stat-label">Seguidores</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">100% 💖</div>
+                    <div class="stat-label">Amor</div>
                 </div>
             </div>
         </div>
 
-        <!-- 1. PERFIL SECTION -->
-        <div id="section-perfil" class="section-view active">
-            <div class="kawaii-card profile-container">
-                <div class="profile-avatar-wrapper">
-                    <img src="" alt="Avatar Dulcinea" class="profile-avatar" id="profileAvatarImg">
-                </div>
-                <div class="profile-info">
-                    <h2 id="profileNameDisplay">Dulcinea Hechizera</h2>
-                    <p class="handle" id="profileHandleDisplay">@DulcineaHechizera ✦ Creadora</p>
-                    <p class="bio" id="profileBioDisplay">Avatar Dulcinea✨ Hechizando el mundo. Rincón Kawaii mágico.</p>
-                </div>
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="switchSection('perfil', event)">Perfil</button>
+            <button class="nav-btn" onclick="switchSection('portafolio', event)">Portafolio</button>
+            <button class="nav-btn" onclick="switchSection('amigos', event)">Amigos</button>
+            <button class="nav-btn" onclick="switchSection('relacion', event)">Relación</button>
+        </div>
 
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <div class="value" id="statMp">9999</div>
-                        <div class="label">Poder Mágico</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="value" id="statFollowers">15.8K</div>
-                        <div class="label">Seguidores</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="value" id="statLove">100% 💖</div>
-                        <div class="label">Amor</div>
-                    </div>
-                </div>
-
-                <!-- Redes Sociales Inferiores (Pequeñas en cuadritos) -->
-                <div class="social-bottom-bar" id="socialBarContainer">
-                    <!-- Populated dynamically -->
-                </div>
+        <div id="perfil" class="content-section active">
+            <div class="section-title">✨ Sobre Mí (Perfil)</div>
+            <div class="section-body">
+                <p>¡Bienvenid@ a mi espacio mágico! Aquí encontrarás un rincón lleno de luz, hechizos de ternura y buena energía creado especialmente para compartir con todos ustedes.</p>
             </div>
         </div>
 
-        <!-- 2. PORTAFOLIO SECTION -->
-        <div id="section-portafolio" class="section-view">
-            <div class="kawaii-card">
-                <div class="section-header-title">
-                    <i class="fa-solid fa-palette"></i> Portafolio (Dos Enlaces / Folios)
-                </div>
-                <p class="friends-header-desc" id="portfolioDescHeader">Obras y diseños gestionados exclusivamente por la Administración General.</p>
-                
-                <div class="portfolio-grid" id="portfolioGridContainer">
-                    <!-- Populated dynamically -->
-                </div>
+        <div id="portafolio" class="content-section">
+            <div class="section-title">📂 Portafolio Mágico</div>
+            <div class="section-body">
+                <p>Explora mis creaciones, diseños web kawaii, ediciones y proyectos encantados elaborados con mucho amor y dedicación.</p>
             </div>
         </div>
 
-        <!-- 3. TIENDA SECTION -->
-        <div id="section-tienda" class="section-view">
-            <div class="kawaii-card">
-                <div class="section-header-title">
-                    <i class="fa-solid fa-store"></i> Tienda de Diseños & Manualidades
-                </div>
-                <p class="friends-header-desc">Explora nuestras creaciones exclusivas. Deja tus datos en nuestro buzón al comprar.</p>
-                
-                <div class="store-grid" id="storeGridContainer">
-                    <!-- Populated dynamically -->
-                </div>
+        <div id="amigos" class="content-section">
+            <div class="section-title">💖 Mis Amigos Estelares</div>
+            <div class="section-body">
+                <p>Un espacio dedicado a las almas bonitas y compañerxs de viaje que hacen que este rincón mágico sea aún más especial.</p>
             </div>
         </div>
 
-        <!-- 4. AMIGOS SECTION -->
-        <div id="section-amigos" class="section-view">
-            <div class="kawaii-card">
-                <div class="section-header-title" style="justify-content: center;" id="friendsTitleMain">
-                    Círculo de Amigos Especiales 🎀
-                </div>
-                <p class="friends-header-desc" id="friendsDescMain">Cuadros especiales con esquinas suaves curvas, con acceso a mensaje directo.</p>
-                
-                <div class="friends-grid" id="friendsGridContainer">
-                    <!-- Populated dynamically -->
-                </div>
+        <div id="relacion" class="content-section">
+            <div class="section-title">💞 Relación</div>
+            <div class="section-body">
+                <p>Conexiones especiales, lazos irrompibles y magia compartida con el corazón.</p>
             </div>
         </div>
+    </div>
 
-        <!-- 5. RELACION SECTION -->
-        <div id="section-relacion" class="section-view">
-            <div class="kawaii-card relation-container">
-                <div class="section-header-title" style="justify-content: center;">
-                    <i class="fa-solid fa-heart-pulse"></i> Relaciones & Vínculos Especiales
-                </div>
-                <p class="friends-header-desc">Espacio exclusivo gestionado por el Administrador General (Married o BFF).</p>
-
-                <div class="relation-columns">
-                    <!-- Married Column -->
-                    <div class="relation-column-box">
-                        <div class="relation-column-title">💍 Married (Casados)</div>
-                        <div id="marriedColumnContainer" style="display: flex; flex-direction: column; gap: 12px;">
-                            <!-- Populated -->
-                        </div>
-                    </div>
-                    <!-- BFF Column -->
-                    <div class="relation-column-box">
-                        <div class="relation-column-title">💖 BFF (Mejores Amigos)</div>
-                        <div id="bffColumnContainer" style="display: flex; flex-direction: column; gap: 12px;">
-                            <!-- Populated -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- FOOTER -->
     <footer>
-        <p id="footerText">@Dulcinea 2026 💜</p>
+        Hecho con 💖 para Dulcinea Hechizera • 2026
     </footer>
 
-    <!-- FRIEND MESSAGE MODAL -->
-    <div class="friend-msg-modal" id="friendMsgModal">
-        <div class="friend-msg-content">
-            <h3 id="modalFriendName" style="color: var(--primary);">Mensaje</h3>
-            <p id="modalFriendText" style="color: var(--text-main); font-size: 0.95rem;"></p>
-            <button class="kawaii-btn" onclick="closeFriendModal()">Cerrar</button>
-        </div>
-    </div>
-
-    <!-- ADMIN PANEL MODAL (CON TUERCA / GEAR) -->
-    <div class="admin-modal" id="adminModal">
-        <div class="admin-content">
-            <div class="admin-header-row">
-                <h2><i class="fa-solid fa-sliders"></i> Panel de Administración General</h2>
-                <button class="close-admin" onclick="closeAdminPanel()"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-
-            <!-- PERFIL CONFIG -->
-            <div class="admin-section-group">
-                <h3><i class="fa-solid fa-user-pen"></i> Configuración de Perfil</h3>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Título / Nombre Principal</label>
-                        <input type="text" id="adminTitleInput" value="Dulcinea Hechizera">
-                    </div>
-                    <div class="form-group">
-                        <label>Avatar URL (Foto)</label>
-                        <input type="text" id="adminAvatarInput" value="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400">
-                    </div>
-                    <div class="form-group">
-                        <label>Handle (@usuario)</label>
-                        <input type="text" id="adminHandleInput" value="@DulcineaHechizera ✦ Creadora">
-                    </div>
-                    <div class="form-group">
-                        <label>Poder Mágico (MP)</label>
-                        <input type="text" id="adminMpInput" value="9999">
-                    </div>
-                    <div class="form-group">
-                        <label>Seguidores</label>
-                        <input type="text" id="adminFollowersInput" value="15.8K">
-                    </div>
-                    <div class="form-group">
-                        <label>Amor (%)</label>
-                        <input type="text" id="adminLoveInput" value="100% 💖">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Biografía / Mensaje del Perfil</label>
-                    <textarea id="adminBioInput" rows="2">Avatar Dulcinea✨ Hechizando el mundo. Rincón Kawaii mágico.</textarea>
-                </div>
-            </div>
-
-            <!-- TEXTOS PERSONALIZADOS AMIGOS Y TITULOS -->
-            <div class="admin-section-group">
-                <h3><i class="fa-solid fa-font"></i> Textos y Encabezados</h3>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Título Sección Amigos</label>
-                        <input type="text" id="adminFriendsTitleInput" value="Círculo de Amigos Especiales 🎀">
-                    </div>
-                    <div class="form-group">
-                        <label>Descripción Sección Amigos</label>
-                        <input type="text" id="adminFriendsDescInput" value="Cuadros especiales con esquinas suaves curvas, con acceso a mensaje directo.">
-                    </div>
-                </div>
-            </div>
-
-            <!-- REPRODUCTOR / MUSICA / RADIO CONFIG -->
-            <div class="admin-section-group">
-                <h3><i class="fa-solid fa-music"></i> Reproductor y Radio (Admin General)</h3>
-                <p style="font-size:0.85rem; color: var(--text-muted);">Solo la administración general puede gestionar canciones y streams de radio.</p>
-                <div id="adminPlaylistContainer" style="display: flex; flex-direction: column; gap: 10px;">
-                    <!-- Dynamically filled list of tracks -->
-                </div>
-                <button class="kawaii-btn" style="align-self: flex-start; margin-top: 5px;" onclick="addTrackInput()">Agregar Canción / Radio</button>
-            </div>
-
-            <!-- PORTAFOLIO CONFIG -->
-            <div class="admin-section-group">
-                <h3><i class="fa-solid fa-briefcase"></i> Portafolio (Dos Enlaces / Folios)</h3>
-                <div id="adminPortfolioContainer" style="display: flex; flex-direction: column; gap: 10px;">
-                    <!-- Dynamic portfolio items -->
-                </div>
-                <button class="kawaii-btn" style="align-self: flex-start; margin-top: 5px;" onclick="addPortfolioItem()">Agregar Obra / Folio</button>
-            </div>
-
-            <!-- TIENDA CONFIG & BUZON DE COMPRAS -->
-            <div class="admin-section-group">
-                <h3><i class="fa-solid fa-store"></i> Tienda & Buzón de Compras</h3>
-                <div id="adminStoreContainer" style="display: flex; flex-direction: column; gap: 10px;">
-                    <!-- Dynamic store items -->
-                </div>
-                <button class="kawaii-btn" style="align-self: flex-start; margin-top: 5px;" onclick="addStoreItem()">Agregar Artículo</button>
-                
-                <div style="margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 15px;">
-                    <h4 style="color: var(--primary); margin-bottom: 8px;"><i class="fa-solid fa-inbox"></i> Buzón de Compras y Mensajes de Tienda</h4>
-                    <div id="inboxMessagesContainer" style="background: rgba(10,6,18,0.5); padding: 12px; border-radius: 12px; max-height: 150px; overflow-y: auto; font-size: 0.9rem; color: var(--text-muted);">
-                        No hay mensajes nuevos en el buzón.
-                    </div>
-                </div>
-            </div>
-
-            <!-- AMIGOS CONFIG -->
-            <div class="admin-section-group">
-                <h3><i class="fa-solid fa-user-group"></i> Gestión de Amigos</h3>
-                <div id="adminFriendsContainer" style="display: flex; flex-direction: column; gap: 10px;">
-                    <!-- Dynamic friends -->
-                </div>
-                <button class="kawaii-btn" style="align-self: flex-start; margin-top: 5px;" onclick="addFriendItem()">Agregar Amigo</button>
-            </div>
-
-            <!-- RELACION CONFIG (Married / BFF) -->
-            <div class="admin-section-group">
-                <h3><i class="fa-solid fa-heart"></i> Gestión de Relaciones (Married / BFF)</h3>
-                <div id="adminRelationContainer" style="display: flex; flex-direction: column; gap: 10px;">
-                    <!-- Dynamic relations -->
-                </div>
-                <button class="kawaii-btn" style="align-self: flex-start; margin-top: 5px;" onclick="addRelationItem()">Agregar Vínculo</button>
-            </div>
-
-            <!-- ESTADISTICAS & PAISES (Admin Only) -->
-            <div class="admin-section-group">
-                <h3><i class="fa-solid fa-chart-pie"></i> Estadísticas & Datos de Países (Solo Administrador)</h3>
-                <div class="stats-countries-box" id="adminStatsBox">
-                    <div class="country-stat-row">
-                        <span>🇲🇽 México (Visitas)</span>
-                        <div style="display:flex; gap:10px; align-items:center;">
-                            <b>4,210</b>
-                            <button onclick="deleteStatRow(this)" style="background:none; border:none; color:#ef4444; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
-                        </div>
-                    </div>
-                    <div class="country-stat-row">
-                        <span>🇺🇸 Estados Unidos (Visitas)</span>
-                        <div style="display:flex; gap:10px; align-items:center;">
-                            <b>1,850</b>
-                            <button onclick="deleteStatRow(this)" style="background:none; border:none; color:#ef4444; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
-                        </div>
-                    </div>
-                    <div class="country-stat-row">
-                        <span>🇪🇸 España (Visitas)</span>
-                        <div style="display:flex; gap:10px; align-items:center;">
-                            <b>940</b>
-                            <button onclick="deleteStatRow(this)" style="background:none; border:none; color:#ef4444; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- REDES SOCIALES INFERIORES -->
-            <div class="admin-section-group">
-                <h3><i class="fa-solid fa-share-nodes"></i> Redes Sociales Inferiores (Activar / Editar)</h3>
-                <div id="adminSocialContainer" style="display: flex; flex-direction: column; gap: 10px;">
-                    <!-- Dynamic social links -->
-                </div>
-                <button class="kawaii-btn" style="align-self: flex-start; margin-top: 5px;" onclick="addSocialItem()">Agregar Red Social</button>
-            </div>
-
-            <button class="kawaii-btn" style="padding: 14px; font-size: 1.1rem; width: 100%; margin-top: 10px;" onclick="saveAllAdminChanges()">Guardar Cambios y Actualizar</button>
-        </div>
-    </div>
-
     <script>
-        /* APP DATA STATE */
-        let appData = {
-            title: "Dulcinea Hechizera",
-            avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
-            handle: "@DulcineaHechizera ✦ Creadora",
-            mp: "9999",
-            followers: "15.8K",
-            love: "100% 💖",
-            bio: "Avatar Dulcinea✨ Hechizando el mundo. Rincón Kawaii mágico.",
-            friendsTitle: "Círculo de Amigos Especiales 🎀",
-            friendsDesc: "Cuadros especiales con esquinas suaves curvas, con acceso a mensaje directo.",
-            playlist: [
-                { name: "✨ Dulcinea Kawaii Chill Mix", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
-                { name: "📻 Radio Hechizo Live Stream", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" }
-            ],
-            portfolio: [
-                { title: "Folio 1: Estelar Dream", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500", desc: "Arte digital y tipografía 4D violeta." },
-                { title: "Folio 2: Galaxia Rosa", img: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=500", desc: "Composición Kawaii en alta definición." }
-            ],
-            store: [
-                { name: "Pack Diseños Kawaii Resina", price: "$299 MXN", img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=500", link: "#" },
-                { name: "Top Tejido & Llaveros", price: "$150 MXN", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500", link: "#" }
-            ],
-            friends: [
-                { name: "Sakura Mágica", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300", msg: "¡Hola amiga! Gracias por estar siempre en el rincón mágico. 💜" },
-                { name: "Asteroid Boy", avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300", msg: "¡Excelente música en la radio! Sigue hechizando." }
-            ],
-            relations: [
-                { type: "Married", name: "Prince Starlight", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300", active: true },
-                { type: "BFF", name: "Luna Kawaii", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300", active: true }
-            ],
-            socials: [
-                { icon: "fa-brands fa-facebook", url: "#", active: true },
-                { icon: "fa-brands fa-instagram", url: "#", active: true },
-                { icon: "fa-brands fa-discord", url: "#", active: true }
-            ]
-        };
+        // Función para cambiar de sección de manera interactiva
+        function switchSection(sectionId, event) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(sec => sec.classList.remove('active'));
 
-        /* INITIALIZATION & RENDERING */
-        document.addEventListener("DOMContentLoaded", () => {
-            renderApp();
-            startPacificClock();
-        });
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
 
-        function renderApp() {
-            // Header Title
-            document.getElementById("displayTitle").innerText = appData.title;
-
-            // Profile
-            document.getElementById("profileAvatarImg").src = appData.avatar;
-            document.getElementById("profileNameDisplay").innerText = appData.title;
-            document.getElementById("profileHandleDisplay").innerText = appData.handle;
-            document.getElementById("profileBioDisplay").innerText = appData.bio;
-            document.getElementById("statMp").innerText = appData.mp;
-            document.getElementById("statFollowers").innerText = appData.followers;
-            document.getElementById("statLove").innerText = appData.love;
-
-            // Friends Header text
-            document.getElementById("friendsTitleMain").innerText = appData.friendsTitle;
-            document.getElementById("friendsDescMain").innerText = appData.friendsDesc;
-
-            // Playlist / Player
-            const playlistSelect = document.getElementById("playlistSelector");
-            playlistSelect.innerHTML = "";
-            appData.playlist.forEach((track, index) => {
-                let opt = document.createElement("option");
-                opt.value = track.url;
-                opt.innerText = track.name;
-                playlistSelect.appendChild(opt);
-            });
-            if(appData.playlist.length > 0) {
-                const audioPlayer = document.getElementById("mainAudioPlayer");
-                if(!audioPlayer.src || audioPlayer.src === window.location.href) {
-                    audioPlayer.src = appData.playlist[0].url;
-                }
-            }
-
-            // Portfolio Grid
-            const portGrid = document.getElementById("portfolioGridContainer");
-            portGrid.innerHTML = "";
-            appData.portfolio.forEach(item => {
-                portGrid.innerHTML += `
-                    <div class="portfolio-item">
-                        <div class="portfolio-img-container">
-                            <img src="${item.img}" alt="${item.title}">
-                        </div>
-                        <div class="portfolio-content">
-                            <h3>${item.title}</h3>
-                            <p>${item.desc}</p>
-                        </div>
-                    </div>
-                `;
-            });
-
-            // Store Grid
-            const storeGrid = document.getElementById("storeGridContainer");
-            storeGrid.innerHTML = "";
-            appData.store.forEach(item => {
-                storeGrid.innerHTML += `
-                    <div class="store-item">
-                        <img src="${item.img}" class="store-img" alt="${item.name}">
-                        <h3>${item.name}</h3>
-                        <div class="store-price">${item.price}</div>
-                        <button class="kawaii-btn" onclick="openStoreBuyModal('${item.name}')">Comprar / Buzón</button>
-                    </div>
-                `;
-            });
-
-            // Friends Grid (Sin boton de mandar mensaje, con acceso a mensaje al hacer click en foto)
-            const friendsGrid = document.getElementById("friendsGridContainer");
-            friendsGrid.innerHTML = "";
-            appData.friends.forEach(friend => {
-                friendsGrid.innerHTML += `
-                    <div class="friend-card">
-                        <img src="${friend.avatar}" class="friend-avatar" alt="${friend.name}" onclick="showFriendMsg('${friend.name}', '${friend.msg}')" title="Haz clic para ver mensaje">
-                        <div class="friend-name">${friend.name}</div>
-                        <div class="friend-msg">"${friend.msg}"</div>
-                    </div>
-                `;
-            });
-
-            // Relations Columns (Married / BFF)
-            const marriedCol = document.getElementById("marriedColumnContainer");
-            const bffCol = document.getElementById("bffColumnContainer");
-            marriedCol.innerHTML = "";
-            bffCol.innerHTML = "";
-
-            appData.relations.forEach(rel => {
-                if(!rel.active) return;
-                let htmlCard = `
-                    <div class="relation-item-card">
-                        <img src="${rel.avatar}" alt="${rel.name}">
-                        <div>
-                            <div style="font-weight: 700; color: #fff;">${rel.name}</div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted);">Vínculo ${rel.type} Activo 💜</div>
-                        </div>
-                    </div>
-                `;
-                if(rel.type === "Married") {
-                    marriedCol.innerHTML += htmlCard;
-                } else {
-                    bffCol.innerHTML += htmlCard;
-                }
-            });
-
-            // Social Media Bottom Bar
-            const socialBar = document.getElementById("socialBarContainer");
-            socialBar.innerHTML = "";
-            appData.socials.forEach(soc => {
-                if(!soc.active) return;
-                socialBar.innerHTML += `
-                    <a href="${soc.url}" target="_blank" class="social-icon-box"><i class="${soc.icon}"></i></a>
-                `;
-            });
+            document.getElementById(sectionId).classList.add('active');
+            event.currentTarget.classList.add('active');
         }
 
-        /* NAVIGATION TABS */
-        function switchTab(tabId, btnElement) {
-            document.querySelectorAll('.section-view').forEach(sec => sec.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        // Reloj en tiempo real (Horario del Pacífico UTC-7)
+        function updateClock() {
+            const now = new Date();
+            // Ajustar a UTC-7
+            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            const pacificTime = new Date(utc - (3600000 * 7));
 
-            document.getElementById(`section-${tabId}`).classList.add('active');
-            btnElement.classList.add('active');
+            let hours = pacificTime.getHours();
+            let minutes = pacificTime.getMinutes();
+            let seconds = pacificTime.getSeconds();
+            let ampm = hours >= 12 ? 'PM' : 'AM';
+
+            hours = hours % 12;
+            hours = hours ? hours : 12; // la hora '0' debe ser '12'
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
+            document.getElementById('clock').innerHTML = `🕒 ${timeString}<br><span style="font-size:0.75rem; color:#da70d6;">UTC-7 Pacífico</span>`;
         }
 
-        /* AUDIO PLAYER */
-        function changeTrack(selectObj) {
-            const audioPlayer = document.getElementById("mainAudioPlayer");
-            audioPlayer.src = selectObj.value;
-            audioPlayer.play().catch(e => console.log("Audio autoplay prevented by browser."));
-        }
-
-        /* PACIFIC CLOCK */
-        function startPacificClock() {
-            setInterval(() => {
-                const now = new Date();
-                // UTC-7 offset
-                const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-                const pacificTime = new Date(utc - (7 * 3600000));
-                document.getElementById("pacificClock").innerText = pacificTime.toLocaleTimeString();
-            }, 1000);
-        }
-
-        /* FRIEND MODAL */
-        function showFriendMsg(name, msg) {
-            document.getElementById("modalFriendName").innerText = name;
-            document.getElementById("modalFriendText").innerText = `"${msg}"`;
-            document.getElementById("friendMsgModal").classList.add("active");
-        }
-        function closeFriendModal() {
-            document.getElementById("friendMsgModal").classList.remove("active");
-        }
-
-        /* STORE BUY MODAL / INBOX */
-        function openStoreBuyModal(itemName) {
-            let userMsg = prompt(`Estás comprando: ${itemName}. Deja tus datos y mensaje para la tienda (Buzón de Administración General):`, "¡Hola! Me interesa este diseño, mis datos de contacto son...");
-            if(userMsg) {
-                let inboxContainer = document.getElementById("inboxMessagesContainer");
-                if(inboxContainer.innerText.includes("No hay mensajes")) {
-                    inboxContainer.innerHTML = "";
-                }
-                let timestamp = new Date().toLocaleTimeString();
-                inboxContainer.innerHTML += `
-                    <div style="border-bottom: 1px solid rgba(255,255,255,0.1); padding: 8px 0; margin-bottom: 6px;">
-                        <b>[${timestamp}] Compra: ${itemName}</b><br>
-                        <span>${userMsg}</span>
-                    </div>
-                `;
-                alert("¡Compra y datos enviados con éxito al buzón del Administrador General! 💜");
-            }
-        }
-
-        /* ADMIN PANEL CONTROLS */
-        function openAdminPanel() {
-            // Populate admin inputs from state
-            document.getElementById("adminTitleInput").value = appData.title;
-            document.getElementById("adminAvatarInput").value = appData.avatar;
-            document.getElementById("adminHandleInput").value = appData.handle;
-            document.getElementById("adminMpInput").value = appData.mp;
-            document.getElementById("adminFollowersInput").value = appData.followers;
-            document.getElementById("adminLoveInput").value = appData.love;
-            document.getElementById("adminBioInput").value = appData.bio;
-            document.getElementById("adminFriendsTitleInput").value = appData.friendsTitle;
-            document.getElementById("adminFriendsDescInput").value = appData.friendsDesc;
-
-            renderAdminDynamicLists();
-            document.getElementById("adminModal").classList.add("active");
-        }
-
-        function closeAdminPanel() {
-            document.getElementById("adminModal").classList.remove("active");
-        }
-
-        function renderAdminDynamicLists() {
-            // Playlist
-            let plContainer = document.getElementById("adminPlaylistContainer");
-            plContainer.innerHTML = "";
-            appData.playlist.forEach((track, idx) => {
-                plContainer.innerHTML += `
-                    <div style="display:flex; gap:10px; align-items:center;">
-                        <input type="text" value="${track.name}" id="pl_name_${idx}" style="flex:1;">
-                        <input type="text" value="${track.url}" id="pl_url_${idx}" style="flex:2;">
-                        <button onclick="removeListItem('playlist', ${idx})" style="background:none; border:none; color:#ef4444; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
-                    </div>
-                `;
-            });
-
-            // Portfolio
-            let portContainer = document.getElementById("adminPortfolioContainer");
-            portContainer.innerHTML = "";
-            appData.portfolio.forEach((item, idx) => {
-                portContainer.innerHTML += `
-                    <div style="display:flex; flex-direction:column; gap:6px; background:rgba(25,15,38,0.4); padding:10px; border-radius:10px;">
-                        <input type="text" value="${item.title}" id="port_title_${idx}" placeholder="Título">
-                        <input type="text" value="${item.img}" id="port_img_${idx}" placeholder="Imagen URL">
-                        <input type="text" value="${item.desc}" id="port_desc_${idx}" placeholder="Descripción">
-                        <button onclick="removeListItem('portfolio', ${idx})" style="background:none; border:none; color:#ef4444; cursor:pointer; align-self:flex-end;"><i class="fa-solid fa-trash"></i> Eliminar Obra</button>
-                    </div>
-                `;
-            });
-
-            // Store
-            let storeContainer = document.getElementById("adminStoreContainer");
-            storeContainer.innerHTML = "";
-            appData.store.forEach((item, idx) => {
-                storeContainer.innerHTML += `
-                    <div style="display:flex; flex-direction:column; gap:6px; background:rgba(25,15,38,0.4); padding:10px; border-radius:10px;">
-                        <input type="text" value="${item.name}" id="store_name_${idx}" placeholder="Nombre producto">
-                        <input type="text" value="${item.price}" id="store_price_${idx}" placeholder="Precio">
-                        <input type="text" value="${item.img}" id="store_img_${idx}" placeholder="Imagen URL">
-                        <button onclick="removeListItem('store', ${idx})" style="background:none; border:none; color:#ef4444; cursor:pointer; align-self:flex-end;"><i class="fa-solid fa-trash"></i> Eliminar Artículo</button>
-                    </div>
-                `;
-            });
-
-            // Friends
-            let friendsContainer = document.getElementById("adminFriendsContainer");
-            friendsContainer.innerHTML = "";
-            appData.friends.forEach((friend, idx) => {
-                friendsContainer.innerHTML += `
-                    <div style="display:flex; flex-direction:column; gap:6px; background:rgba(25,15,38,0.4); padding:10px; border-radius:10px;">
-                        <input type="text" value="${friend.name}" id="friend_name_${idx}" placeholder="Nombre amigo">
-                        <input type="text" value="${friend.avatar}" id="friend_avatar_${idx}" placeholder="Foto Avatar URL">
-                        <input type="text" value="${friend.msg}" id="friend_msg_${idx}" placeholder="Mensaje de amigo">
-                        <button onclick="removeListItem('friends', ${idx})" style="background:none; border:none; color:#ef4444; cursor:pointer; align-self:flex-end;"><i class="fa-solid fa-trash"></i> Eliminar Amigo</button>
-                    </div>
-                `;
-            });
-
-            // Relations
-            let relContainer = document.getElementById("adminRelationContainer");
-            relContainer.innerHTML = "";
-            appData.relations.forEach((rel, idx) => {
-                relContainer.innerHTML += `
-                    <div style="display:flex; gap:10px; align-items:center; background:rgba(25,15,38,0.4); padding:10px; border-radius:10px;">
-                        <select id="rel_type_${idx}">
-                            <option value="Married" ${rel.type==='Married'?'selected':''}>Married</option>
-                            <option value="BFF" ${rel.type==='BFF'?'selected':''}>BFF</option>
-                        </select>
-                        <input type="text" value="${rel.name}" id="rel_name_${idx}" placeholder="Nombre" style="flex:1;">
-                        <input type="text" value="${rel.avatar}" id="rel_avatar_${idx}" placeholder="Avatar URL" style="flex:1;">
-                        <label style="font-size:0.8rem; display:flex; align-items:center; gap:4px;">
-                            <input type="checkbox" id="rel_active_${idx}" ${rel.active?'checked':''}> Activo
-                        </label>
-                        <button onclick="removeListItem('relations', ${idx})" style="background:none; border:none; color:#ef4444; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
-                    </div>
-                `;
-            });
-
-            // Socials
-            let socialContainer = document.getElementById("adminSocialContainer");
-            socialContainer.innerHTML = "";
-            appData.socials.forEach((soc, idx) => {
-                socialContainer.innerHTML += `
-                    <div style="display:flex; gap:10px; align-items:center; background:rgba(25,15,38,0.4); padding:10px; border-radius:10px;">
-                        <input type="text" value="${soc.icon}" id="soc_icon_${idx}" placeholder="Icono FontAwesome (ej. fa-brands fa-facebook)" style="flex:1;">
-                        <input type="text" value="${soc.url}" id="soc_url_${idx}" placeholder="URL" style="flex:1;">
-                        <label style="font-size:0.8rem; display:flex; align-items:center; gap:4px;">
-                            <input type="checkbox" id="soc_active_${idx}" ${soc.active?'checked':''}> Activo
-                        </label>
-                        <button onclick="removeListItem('socials', ${idx})" style="background:none; border:none; color:#ef4444; cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
-                    </div>
-                `;
-            });
-        }
-
-        /* ADD / REMOVE DYNAMIC BUILDERS */
-        function addTrackInput() {
-            appData.playlist.push({ name: "Nueva Canción / Radio", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" });
-            renderAdminDynamicLists();
-        }
-        function addPortfolioItem() {
-            appData.portfolio.push({ title: "Nueva Obra", img: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=500", desc: "Descripción de la obra." });
-            renderAdminDynamicLists();
-        }
-        function addStoreItem() {
-            appData.store.push({ name: "Nuevo Producto", price: "$100 MXN", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500", link: "#" });
-            renderAdminDynamicLists();
-        }
-        function addFriendItem() {
-            appData.friends.push({ name: "Nuevo Amigo", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300", msg: "¡Hola! Mi mensaje especial." });
-            renderAdminDynamicLists();
-        }
-        function addRelationItem() {
-            appData.relations.push({ type: "BFF", name: "Nuevo Vínculo", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300", active: true });
-            renderAdminDynamicLists();
-        }
-        function addSocialItem() {
-            appData.socials.push({ icon: "fa-brands fa-instagram", url: "#", active: true });
-            renderAdminDynamicLists();
-        }
-        function removeListItem(category, index) {
-            appData[category].splice(index, 1);
-            renderAdminDynamicLists();
-        }
-        function deleteStatRow(btn) {
-            btn.closest('.country-stat-row').remove();
-        }
-
-        /* SAVE ALL ADMIN CHANGES */
-        function saveAllAdminChanges() {
-            // Basic profile
-            appData.title = document.getElementById("adminTitleInput").value;
-            appData.avatar = document.getElementById("adminAvatarInput").value;
-            appData.handle = document.getElementById("adminHandleInput").value;
-            appData.mp = document.getElementById("adminMpInput").value;
-            appData.followers = document.getElementById("adminFollowersInput").value;
-            appData.love = document.getElementById("adminLoveInput").value;
-            appData.bio = document.getElementById("adminBioInput").value;
-            appData.friendsTitle = document.getElementById("adminFriendsTitleInput").value;
-            appData.friendsDesc = document.getElementById("adminFriendsDescInput").value;
-
-            // Playlist inputs
-            appData.playlist = appData.playlist.map((item, idx) => ({
-                name: document.getElementById(`pl_name_${idx}`)?.value || item.name,
-                url: document.getElementById(`pl_url_${idx}`)?.value || item.url
-            }));
-
-            // Portfolio inputs
-            appData.portfolio = appData.portfolio.map((item, idx) => ({
-                title: document.getElementById(`port_title_${idx}`)?.value || item.title,
-                img: document.getElementById(`port_img_${idx}`)?.value || item.img,
-                desc: document.getElementById(`port_desc_${idx}`)?.value || item.desc
-            }));
-
-            // Store inputs
-            appData.store = appData.store.map((item, idx) => ({
-                name: document.getElementById(`store_name_${idx}`)?.value || item.name,
-                price: document.getElementById(`store_price_${idx}`)?.value || item.price,
-                img: document.getElementById(`store_img_${idx}`)?.value || item.img,
-                link: item.link
-            }));
-
-            // Friends inputs
-            appData.friends = appData.friends.map((item, idx) => ({
-                name: document.getElementById(`friend_name_${idx}`)?.value || item.name,
-                avatar: document.getElementById(`friend_avatar_${idx}`)?.value || item.avatar,
-                msg: document.getElementById(`friend_msg_${idx}`)?.value || item.msg
-            }));
-
-            // Relations inputs
-            appData.relations = appData.relations.map((item, idx) => ({
-                type: document.getElementById(`rel_type_${idx}`)?.value || item.type,
-                name: document.getElementById(`rel_name_${idx}`)?.value || item.name,
-                avatar: document.getElementById(`rel_avatar_${idx}`)?.value || item.avatar,
-                active: document.getElementById(`rel_active_${idx}`)?.checked ?? item.active
-            }));
-
-            // Socials inputs
-            appData.socials = appData.socials.map((item, idx) => ({
-                icon: document.getElementById(`soc_icon_${idx}`)?.value || item.icon,
-                url: document.getElementById(`soc_url_${idx}`)?.value || item.url,
-                active: document.getElementById(`soc_active_${idx}`)?.checked ?? item.active
-            }));
-
-            renderApp();
-            closeAdminPanel();
-            alert("¡Cambios guardados y aplicados exitosamente por la Administración General! 💜");
-        }
+        setInterval(updateClock, 1000);
+        updateClock();
     </script>
 </body>
 </html>
