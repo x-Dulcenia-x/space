@@ -3,31 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dulcinea Graphic - Perfil & Tienda</title>
+    <title>Dulcinea Graphic</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Fuente cursiva bonita -->
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body oncontextmenu="return false;">
 
-    {/* Fondo de corazones y flores cayendo */}
+    <!-- ANIMACIÓN DE FONDO: Corazones y Flores -->
     <div class="falling-bg" id="fallingBg"></div>
 
-    {/* PANTALLA DE BLOQUEO / CONTRASEÑA */}
+    <!-- PANTALLA DE ACCESO (CONTRASEÑA: 5062) -->
     <div id="lockScreen" class="lock-screen">
         <div class="lock-card">
-            <div class="lock-logo">
-                <div class="dg-3d">DG</div>
+            <div class="profile-logo-container">
+                <div class="dg-3d-logo">DG</div>
             </div>
-            <h2>Dulcinea Graphic</h2>
-            <p>Ingresa la contraseña para acceder</p>
+            <h2 class="cursive-title">Dulcinea Graphic</h2>
+            <p>Ingresa la contraseña para entrar</p>
             
-            <div class="password-display-container">
-                <span id="passVisible"></span>
-                <button id="toggleEye" class="eye-btn">👁️</button>
+            <!-- Contraseña visible arriba de donde escribe -->
+            <div id="displayPassword" class="password-display"></div>
+            
+            <div class="input-container">
+                <input type="password" id="passInput" readonly placeholder="****">
+                <i class="fa-solid fa-eye" id="togglePass" onclick="togglePasswordVisibility()"></i>
             </div>
-            <input type="password" id="passInput" readonly placeholder="----">
 
-            <div class="keypad">
+            <!-- Teclado numérico -->
+            <div class="num-pad">
                 <button onclick="pressNum('1')">1</button>
                 <button onclick="pressNum('2')">2</button>
                 <button onclick="pressNum('3')">3</button>
@@ -39,133 +45,100 @@
                 <button onclick="pressNum('9')">9</button>
                 <button onclick="clearPass()">C</button>
                 <button onclick="pressNum('0')">0</button>
-                <button onclick="submitPass()" class="enter-btn">➔</button>
-            </div>
-            <div class="admin-access">
-                <span title="Super Administrador" onclick="openAdminLogin()" class="crown-icon">👑</span>
+                <button onclick="submitPass()"><i class="fa-solid fa-check"></i></button>
             </div>
         </div>
     </div>
 
-    {/* CONTENIDO PRINCIPAL DEL XATSPACE */}
-    <div id="mainContainer" class="main-container hidden">
+    <!-- CONTENIDO PRINCIPAL (XATSPACE) -->
+    <div id="mainContent" class="main-container hidden">
         
-        {/* BARRA LATERAL IZQUIERDA */}
+        <!-- BARRA LATERAL IZQUIERDA -->
         <aside class="sidebar">
             <div class="sidebar-header">
-                <div class="profile-logo-3d">DG</div>
+                <div class="dg-logo-small">DG</div>
                 <h1 class="cursive-title">Dulcinea Graphic</h1>
             </div>
+            
             <nav class="nav-menu">
-                <button class="nav-btn active" onclick="switchSection('inicio')">🏠 Inicio</button>
+                <button class="nav-btn active" onclick="switchSection('inicio')"><i class="fa-solid fa-house"></i> Inicio</button>
                 
                 <div class="nav-group">
-                    <span class="nav-group-title">✨ GIF</span>
+                    <span class="nav-category"><i class="fa-solid fa-wand-magic-sparkles"></i> GIF</span>
                     <button class="sub-btn" onclick="switchSection('gif-4d')">↳ 4d</button>
                     <button class="sub-btn" onclick="switchSection('gif-parpadeo')">↳ Parpadeo</button>
                 </div>
 
                 <div class="nav-group">
-                    <span class="nav-group-title">🎨 Pstyle</span>
+                    <span class="nav-category"><i class="fa-solid fa-palette"></i> Pstyle</span>
                     <button class="sub-btn" onclick="switchSection('pstyle-normal')">↳ Normal</button>
                     <button class="sub-btn" onclick="switchSection('pstyle-gif')">↳ Gif</button>
                 </div>
 
                 <div class="nav-group">
-                    <span class="nav-group-title">💻 Pcback</span>
+                    <span class="nav-category"><i class="fa-solid fa-computer"></i> Pcback</span>
                     <button class="sub-btn" onclick="switchSection('pcback-normal')">↳ Normal</button>
                     <button class="sub-btn" onclick="switchSection('pcback-gif')">↳ Gif</button>
                 </div>
-
-                <button class="nav-btn admin-link-btn hidden" id="adminNavBtn" onclick="openAdminPanel()">⚙️ Panel Admin</button>
             </nav>
+
+            <!-- Corona de Super Administrador (Contraseña: 6258) -->
+            <div class="admin-access" onclick="openAdminLogin()">
+                <i class="fa-solid fa-crown"></i> <span>Panel Admin</span>
+            </div>
         </aside>
 
-        {/* CONTENIDO DINÁMICO */}
+        <!-- ÁREA DE CONTENIDO -->
         <main class="content-area">
-            
-            {/* SECCIÓN INICIO */}
-            <section id="sec-inicio" class="section-pane active">
-                <h2>Precios Oficiales (Xats)</h2>
-                <div class="prices-grid" id="pricesGrid">
-                    {/* Generado por JS */}
-                </div>
-            </section>
+            <header class="top-bar">
+                <h2 id="sectionTitle">Inicio</h2>
+                <div class="user-badge">Dulcinea Graphic</div>
+            </header>
 
-            {/* SECCIÓN GIF - 4D */}
-            <section id="sec-gif-4d" class="section-pane">
-                <h2>GIF ➔ 4D</h2>
-                <div class="gallery-grid" id="grid-gif-4d"></div>
-            </section>
+            <div id="dynamicDisplay" class="dynamic-display">
+                <!-- Se inyecta contenido dinámicamente -->
+            </div>
 
-            {/* SECCIÓN GIF - PARPADEO */}
-            <section id="sec-gif-parpadeo" class="section-pane">
-                <h2>GIF ➔ Parpadeo</h2>
-                <div class="gallery-grid" id="grid-gif-parpadeo"></div>
-            </section>
-
-            {/* SECCIÓN PSTYLE - NORMAL */}
-            <section id="sec-pstyle-normal" class="section-pane">
-                <h2>Pstyle ➔ Normal</h2>
-                <div class="gallery-grid" id="grid-pstyle-normal"></div>
-            </section>
-
-            {/* SECCIÓN PSTYLE - GIF */}
-            <section id="sec-pstyle-gif" class="section-pane">
-                <h2>Pstyle ➔ Gif</h2>
-                <div class="gallery-grid" id="grid-pstyle-gif"></div>
-            </section>
-
-            {/* SECCIÓN PCBACK - NORMAL */}
-            <section id="sec-pcback-normal" class="section-pane">
-                <h2>Pcback ➔ Normal</h2>
-                <div class="gallery-grid" id="grid-pcback-normal"></div>
-            </section>
-
-            {/* SECCIÓN PCBACK - GIF */}
-            <section id="sec-pcback-gif" class="section-pane">
-                <h2>Pcback ➔ Gif</h2>
-                <div class="gallery-grid" id="grid-pcback-gif"></div>
-            </section>
-
-            {/* PIE DE PÁGINA */}
+            <!-- PIE DE PÁGINA -->
             <footer class="footer">
-                Hecho por bolitadequeso <span class="heart-icon">💖</span>
+                <p>Hecho por bolitadequeso <i class="fa-solid fa-heart" style="color: #ff69b4;"></i></p>
             </footer>
         </main>
     </div>
 
-    {/* MODAL PARA VER FOTO GRANDE */}
-    <div id="imageModal" class="modal">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImg">
-        <div id="modalCaption"></div>
+    <!-- MODAL LIGHTBOX PARA VER FOTO GRANDE -->
+    <div id="lightboxModal" class="lightbox" onclick="closeLightbox()">
+        <span class="close-btn">&times;</span>
+        <img id="lightboxImg" src="" alt="Diseño Ampliado">
     </div>
 
-    {/* PANEL DE ADMINISTRADOR */}
-    <div id="adminModal" class="modal">
-        <div class="admin-content">
-            <span class="close-modal" onclick="closeAdminPanel()">&times;</span>
-            <h2>Panel de Administrador 👑</h2>
-            <p>Sube o edita tus diseños, nombres y precios por sección.</p>
-            
-            <div class="admin-form">
-                <select id="adminSection">
-                    <option value="gif-4d">GIF - 4d</option>
-                    <option value="gif-parpadeo">GIF - Parpadeo</option>
-                    <option value="pstyle-normal">Pstyle - Normal</option>
-                    <option value="pstyle-gif">Pstyle - Gif</option>
-                    <option value="pcback-normal">Pcback - Normal</option>
-                    <option value="pcback-gif">Pcback - Gif</option>
-                </select>
-                <input type="text" id="adminTitle" placeholder="Nombre del diseño">
-                <input type="text" id="adminPrice" placeholder="Precio en Xats (ej. 250 xats)">
-                <input type="text" id="adminImgUrl" placeholder="Link de la imagen">
-                <button onclick="addNewItem()">Agregar / Guardar Diseño</button>
+    <!-- MODAL DE ACCESO AL ADMIN -->
+    <div id="adminLoginModal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <h3>Acceso Super Administrador</h3>
+            <p>Ingresa la clave de administración:</p>
+            <input type="password" id="adminPassInput" placeholder="Contraseña admin">
+            <div class="modal-buttons">
+                <button onclick="verifyAdminPass()">Entrar</button>
+                <button onclick="closeAdminLogin()" class="cancel-btn">Cancelar</button>
             </div>
+        </div>
+    </div>
 
-            <h3>Diseños Registrados</h3>
-            <div id="adminItemsList" class="admin-items-list"></div>
+    <!-- PANEL DE ADMINISTRADOR -->
+    <div id="adminPanelModal" class="modal-overlay hidden">
+        <div class="admin-dashboard">
+            <div class="admin-header">
+                <h2>Panel de Administración - Dulcinea Graphic</h2>
+                <button onclick="closeAdminPanel()" class="close-dash">&times;</button>
+            </div>
+            <div class="admin-body">
+                <p>Aquí puedes modificar precios, nombres y enlaces de los diseños.</p>
+                <div id="adminEditorList">
+                    <!-- Generado por JS -->
+                </div>
+                <button class="save-admin-btn" onclick="saveAdminChanges()">Guardar Cambios</button>
+            </div>
         </div>
     </div>
 
