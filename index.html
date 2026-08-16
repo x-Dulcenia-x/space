@@ -3,682 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dulcinea Hechizera - Panel Kawaii</title>
-    <style>
-        /* Estilos Generales y Fondo Kawaii */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #000000;
-            color: #ffffff;
-            min-height: 100vh;
-            overflow-x: hidden;
-            /* Cursor personalizado de corazón */
-            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path fill='%23ff99cc' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>"), auto;
-        }
-
-        /* Puntos de fondo (lila, azul, rosa) */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                radial-gradient(#c8a2c8 1px, transparent 1px),
-                radial-gradient(#87ceeb 1px, transparent 1px),
-                radial-gradient(#ffb6c1 1px, transparent 1px);
-            background-size: 50px 50px;
-            background-position: 0 0, 25px 25px, 12px 37px;
-            opacity: 0.25;
-            z-index: -2;
-        }
-
-        /* Lluvia de corazones */
-        .heart-rain {
-            position: fixed;
-            top: -10vh;
-            color: #ff99cc;
-            font-size: 1.2rem;
-            user-select: none;
-            z-index: -1;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0.2; }
-        }
-
-        /* Panel de Contraseña Inicial */
-        #auth-panel {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.92);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-
-        .auth-card {
-            background: #111;
-            border: 2px solid #c8a2c8;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 0 25px rgba(200, 162, 200, 0.4);
-            width: 90%;
-            max-width: 400px;
-        }
-
-        .auth-card h2 {
-            color: #d8b4fe;
-            margin-bottom: 15px;
-            animation: textGlow 2s infinite alternate;
-        }
-
-        @keyframes textGlow {
-            0% { text-shadow: 0 0 5px #87ceeb, 0 0 10px #c8a2c8; }
-            100% { text-shadow: 0 0 10px #ffb6c1, 0 0 20px #d8b4fe; }
-        }
-
-        .password-box {
-            position: relative;
-            margin: 20px 0;
-        }
-
-        .auth-card input {
-            width: 100%;
-            padding: 12px 40px 12px 15px;
-            background: #222;
-            border: 1px solid #87ceeb;
-            border-radius: 8px;
-            color: white;
-            font-size: 1.1rem;
-            outline: none;
-        }
-
-        .toggle-eye {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #c8a2c8;
-            font-size: 1.2rem;
-        }
-
-        .auth-card button {
-            background: linear-gradient(135deg, #c8a2c8, #ffb6c1);
-            border: none;
-            padding: 10px 25px;
-            color: #000;
-            font-weight: bold;
-            font-size: 1.1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .auth-card button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px #ffb6c1;
-        }
-
-        .error-msg {
-            color: #ff6b6b;
-            margin-top: 10px;
-            font-size: 0.9rem;
-            display: none;
-        }
-
-        /* Contenido Principal Oculto al Inicio */
-        #main-content {
-            display: none;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Header / Reloj / Menú */
-        header {
-            text-align: center;
-            padding: 20px 0;
-            border-bottom: 1px dashed rgba(200, 162, 200, 0.3);
-            margin-bottom: 20px;
-        }
-
-        .title-kawaii {
-            font-size: 2.2rem;
-            font-weight: bold;
-            animation: colorBlink 3s infinite;
-        }
-
-        @keyframes colorBlink {
-            0% { color: #87ceeb; text-shadow: 0 0 10px #87ceeb; }
-            33% { color: #c8a2c8; text-shadow: 0 0 10px #c8a2c8; }
-            66% { color: #ffb6c1; text-shadow: 0 0 10px #ffb6c1; }
-            100% { color: #87ceeb; text-shadow: 0 0 10px #87ceeb; }
-        }
-
-        .clock {
-            font-size: 0.95rem;
-            color: #b19cd9;
-            margin-top: 5px;
-        }
-
-        /* Menú de Navegación */
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-
-        nav button {
-            background: rgba(20, 20, 20, 0.8);
-            border: 1px solid #c8a2c8;
-            color: #fff;
-            padding: 8px 18px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: 0.3s;
-        }
-
-        nav button:hover, nav button.active {
-            background: #c8a2c8;
-            color: #000;
-            box-shadow: 0 0 10px #c8a2c8;
-        }
-
-        /* Secciones Independientes */
-        .section-tab {
-            display: none;
-            background: rgba(15, 15, 15, 0.85);
-            border: 1px solid rgba(200, 162, 200, 0.3);
-            border-radius: 15px;
-            padding: 25px;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .section-tab.active-section {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* SECCIÓN PERFIL */
-        .profile-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .avatar-wrap {
-            position: relative;
-            width: 160px;
-            height: 160px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .avatar-ring {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 4px dotted transparent;
-            border-top-color: #87ceeb;
-            border-right-color: #c8a2c8;
-            border-bottom-color: #ffb6c1;
-            animation: spinRing 6s linear infinite;
-        }
-
-        @keyframes spinRing {
-            100% { transform: rotate(360deg); }
-        }
-
-        .avatar-img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            background: #fff;
-            object-fit: cover;
-            border: 4px solid #ffffff;
-            animation: blinkPhoto 2s infinite alternate;
-        }
-
-        @keyframes blinkPhoto {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
-
-        .profile-handle {
-            font-size: 1.2rem;
-            color: #d8b4fe;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .profile-bio {
-            color: #ccc;
-            font-size: 0.95rem;
-            max-width: 500px;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        .stats-grid {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .stat-box {
-            background: #1a1a1a;
-            border: 1px solid #444;
-            padding: 10px 20px;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .stat-num {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #ffb6c1;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: #aaa;
-        }
-
-        /* SECCIÓN AMIGOS (Dividida Izquierda/Mujeres y Derecha/Hombres) */
-        .friends-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        @media(max-width: 768px) {
-            .friends-layout {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .friend-column {
-            background: rgba(25, 25, 25, 0.5);
-            border: 1px dashed #444;
-            border-radius: 12px;
-            padding: 15px;
-        }
-
-        .friend-column h3 {
-            text-align: center;
-            margin-bottom: 15px;
-            color: #d8b4fe;
-            font-size: 1.1rem;
-            border-bottom: 1px solid #333;
-            padding-bottom: 8px;
-        }
-
-        .friend-card {
-            background: #161616;
-            border: 1px solid #333;
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: 0.3s;
-        }
-
-        .friend-card:hover {
-            border-color: #c8a2c8;
-            box-shadow: 0 0 10px rgba(200, 162, 200, 0.2);
-        }
-
-        .friend-avatar-wrap {
-            position: relative;
-            width: 70px;
-            height: 70px;
-            flex-shrink: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .friend-ring-kawaii {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 3px dotted transparent;
-            border-top-color: #87ceeb;
-            border-right-color: #c8a2c8;
-            border-bottom-color: #ffb6c1;
-            animation: spinRing 5s linear infinite;
-        }
-
-        .friend-ring-dark {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 3px dotted transparent;
-            border-top-color: #87ceeb;
-            border-right-color: #00ff7f;
-            border-bottom-color: #000;
-            border-left-color: #32cd32;
-            animation: spinRing 5s linear infinite;
-        }
-
-        .friend-img {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #fff;
-        }
-
-        .friend-info {
-            flex-grow: 1;
-        }
-
-        .friend-name {
-            font-weight: bold;
-            color: #fff;
-            font-size: 1rem;
-            margin-bottom: 4px;
-        }
-
-        .msg-btn {
-            background: #2a2a2a;
-            border: 1px solid #87ceeb;
-            color: #87ceeb;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .msg-btn:hover {
-            background: #87ceeb;
-            color: #000;
-        }
-
-        .gisse-msg-box {
-            display: none;
-            margin-top: 8px;
-            background: #0d0d0d;
-            border-left: 3px solid #ffb6c1;
-            padding: 10px;
-            font-size: 0.85rem;
-            color: #f1f1f1;
-            line-height: 1.4;
-            border-radius: 0 6px 6px 0;
-            white-space: pre-line;
-        }
-
-        /* SECCIONES PORTAFOLIO Y RELACIÓN */
-        .content-placeholder {
-            text-align: center;
-            color: #aaa;
-            padding: 30px 0;
-            font-size: 1rem;
-        }
-    </style>
+    <title>Dulcinea Graphic - Perfil & Tienda</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div id="rain-container"></div>
+    {/* Fondo de corazones y flores cayendo */}
+    <div class="falling-bg" id="fallingBg"></div>
 
-    <div id="auth-panel">
-        <div class="auth-card">
-            <h2>Dulcinea</h2>
-            <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 10px;">Contraseña para entrar: <span style="color:#d8b4fe; font-weight:bold;">5062</span></p>
-            <div class="password-box">
-                <input type="password" id="pass-input" placeholder="Contraseña (5062)" maxlength="6">
-                <span class="toggle-eye" id="toggle-eye" title="Ver contraseña">👁️</span>
+    {/* PANTALLA DE BLOQUEO / CONTRASEÑA */}
+    <div id="lockScreen" class="lock-screen">
+        <div class="lock-card">
+            <div class="lock-logo">
+                <div class="dg-3d">DG</div>
             </div>
-            <button onclick="verificarPassword()">Entrar</button>
-            <div class="error-msg" id="error-msg">Contraseña incorrecta, intenta de nuevo ✨</div>
+            <h2>Dulcinea Graphic</h2>
+            <p>Ingresa la contraseña para acceder</p>
+            
+            <div class="password-display-container">
+                <span id="passVisible"></span>
+                <button id="toggleEye" class="eye-btn">👁️</button>
+            </div>
+            <input type="password" id="passInput" readonly placeholder="----">
+
+            <div class="keypad">
+                <button onclick="pressNum('1')">1</button>
+                <button onclick="pressNum('2')">2</button>
+                <button onclick="pressNum('3')">3</button>
+                <button onclick="pressNum('4')">4</button>
+                <button onclick="pressNum('5')">5</button>
+                <button onclick="pressNum('6')">6</button>
+                <button onclick="pressNum('7')">7</button>
+                <button onclick="pressNum('8')">8</button>
+                <button onclick="pressNum('9')">9</button>
+                <button onclick="clearPass()">C</button>
+                <button onclick="pressNum('0')">0</button>
+                <button onclick="submitPass()" class="enter-btn">➔</button>
+            </div>
+            <div class="admin-access">
+                <span title="Super Administrador" onclick="openAdminLogin()" class="crown-icon">👑</span>
+            </div>
         </div>
     </div>
 
-    <div id="main-content">
-        <header>
-            <div class="title-kawaii">Dulcinea</div>
-            <div class="clock" id="live-clock">Cargando hora...</div>
-        </header>
-
-        <nav>
-            <button onclick="switchTab('perfil')" id="btn-perfil" class="active">Perfil</button>
-            <button onclick="switchTab('portafolio')" id="btn-portafolio">Portafolio</button>
-            <button onclick="switchTab('amigos')" id="btn-amigos">Amigos</button>
-            <button onclick="switchTab('relacion')" id="btn-relacion">Relación</button>
-        </nav>
-
-        <div id="sec-perfil" class="section-tab active-section">
-            <div class="profile-container">
-                <div class="avatar-wrap">
-                    <div class="avatar-ring"></div>
-                    <img src="https://xatimg.com/image/S39YqVhYkGOf.png" alt="Dulcinea" class="avatar-img">
-                </div>
-                <div class="profile-handle">@DulcineaHechizera</div>
-                <div class="profile-bio">
-                    ✦ Creadora ✨ Hechizando el mundo.<br>
-                    Rincón mágico.
-                </div>
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <div class="stat-num">9999</div>
-                        <div class="stat-label">Poder Mágico</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-num">15.8K</div>
-                        <div class="stat-label">Seguidores</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-num">100%</div>
-                        <div class="stat-label">💖 Amor</div>
-                    </div>
-                </div>
+    {/* CONTENIDO PRINCIPAL DEL XATSPACE */}
+    <div id="mainContainer" class="main-container hidden">
+        
+        {/* BARRA LATERAL IZQUIERDA */}
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="profile-logo-3d">DG</div>
+                <h1 class="cursive-title">Dulcinea Graphic</h1>
             </div>
-        </div>
-
-        <div id="sec-portafolio" class="section-tab">
-            <h2 style="color: #d8b4fe; margin-bottom: 15px; text-align: center;">Portafolio Mágico</h2>
-            <div class="content-placeholder">
-                Espacio independiente de portafolio listo para tus creaciones y proyectos de hechizos. ✨
-            </div>
-        </div>
-
-        <div id="sec-amigos" class="section-tab">
-            <div class="friends-layout">
+            <nav class="nav-menu">
+                <button class="nav-btn active" onclick="switchSection('inicio')">🏠 Inicio</button>
                 
-                <div class="friend-column">
-                    <h3>Mujeres 💖</h3>
-
-                    <div class="friend-card">
-                        <div class="friend-avatar-wrap">
-                            <div class="friend-ring-kawaii"></div>
-                            <img src="https://xatimg.com/image/MjxtztH9qgVR.png" alt="Mara" class="friend-img">
-                        </div>
-                        <div class="friend-info">
-                            <div class="friend-name">Mara</div>
-                            <div style="font-size: 0.8rem; color: #aaa;">Amiga especial 🌸</div>
-                        </div>
-                    </div>
-
-                    <div class="friend-card" style="flex-direction: column; align-items: stretch;">
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <div class="friend-avatar-wrap">
-                                <div class="friend-ring-kawaii"></div>
-                                <img src="https://xatimg.com/image/G1DieN63In4H.png" alt="Gisse" class="friend-img">
-                            </div>
-                            <div class="friend-info">
-                                <div class="friend-name">Gisse</div>
-                                <button class="msg-btn" onclick="toggleGisseMsg()">Ver Mensaje 💌</button>
-                            </div>
-                        </div>
-                        <div id="gisse-msg-content" class="gisse-msg-box">
-Para Dulcinea (duchi)
-De: Gisse (la Chamaca) 
-Tengo mucho que decirte duchi y todo termina en agradecimiento, desde que nos conocemos te has dedicado a cuidarme como lo haria un madre y eso es algo que agradece siempre, te quiero mucho y creeme que el cariño es mutuo y genuino, y aunque a veces no te haga caso como la chamaca rebelde que soy (me parezo ah mi papi Jahlice) jajaja yo entiendo que solo quieres cuidarme y verme feliz. 
-con cariño... Gisselle
-                        </div>
-                    </div>
-
+                <div class="nav-group">
+                    <span class="nav-group-title">✨ GIF</span>
+                    <button class="sub-btn" onclick="switchSection('gif-4d')">↳ 4d</button>
+                    <button class="sub-btn" onclick="switchSection('gif-parpadeo')">↳ Parpadeo</button>
                 </div>
 
-                <div class="friend-column">
-                    <h3>Amigos ✨</h3>
-
-                    <div class="friend-card">
-                        <div class="friend-avatar-wrap">
-                            <div class="friend-ring-dark"></div>
-                            <img src="https://xatimg.com/image/1GZEZMgMganV.jpg" alt="Jahlize" class="friend-img">
-                        </div>
-                        <div class="friend-info">
-                            <div class="friend-name">Jahlize</div>
-                            <div style="font-size: 0.8rem; color: #aaa;">Aliado del rincón 🔮</div>
-                        </div>
-                    </div>
-
-                    <div class="friend-card">
-                        <div class="friend-avatar-wrap">
-                            <div class="friend-ring-dark"></div>
-                            <img src="https://xatimg.com/image/blcDDDgcfPhH.png" alt="Diego" class="friend-img">
-                        </div>
-                        <div class="friend-info">
-                            <div class="friend-name">Diego</div>
-                            <div style="font-size: 0.8rem; color: #aaa;">Amigo fiel 🌙</div>
-                        </div>
-                    </div>
-
+                <div class="nav-group">
+                    <span class="nav-group-title">🎨 Pstyle</span>
+                    <button class="sub-btn" onclick="switchSection('pstyle-normal')">↳ Normal</button>
+                    <button class="sub-btn" onclick="switchSection('pstyle-gif')">↳ Gif</button>
                 </div>
 
-            </div>
-        </div>
+                <div class="nav-group">
+                    <span class="nav-group-title">💻 Pcback</span>
+                    <button class="sub-btn" onclick="switchSection('pcback-normal')">↳ Normal</button>
+                    <button class="sub-btn" onclick="switchSection('pcback-gif')">↳ Gif</button>
+                </div>
 
-        <div id="sec-relacion" class="section-tab">
-            <h2 style="color: #d8b4fe; margin-bottom: 15px; text-align: center;">Relación & Vínculos</h2>
-            <div class="content-placeholder">
-                Espacio independiente para plasmar los lazos y conexiones del rincón mágico. 💫
+                <button class="nav-btn admin-link-btn hidden" id="adminNavBtn" onclick="openAdminPanel()">⚙️ Panel Admin</button>
+            </nav>
+        </aside>
+
+        {/* CONTENIDO DINÁMICO */}
+        <main class="content-area">
+            
+            {/* SECCIÓN INICIO */}
+            <section id="sec-inicio" class="section-pane active">
+                <h2>Precios Oficiales (Xats)</h2>
+                <div class="prices-grid" id="pricesGrid">
+                    {/* Generado por JS */}
+                </div>
+            </section>
+
+            {/* SECCIÓN GIF - 4D */}
+            <section id="sec-gif-4d" class="section-pane">
+                <h2>GIF ➔ 4D</h2>
+                <div class="gallery-grid" id="grid-gif-4d"></div>
+            </section>
+
+            {/* SECCIÓN GIF - PARPADEO */}
+            <section id="sec-gif-parpadeo" class="section-pane">
+                <h2>GIF ➔ Parpadeo</h2>
+                <div class="gallery-grid" id="grid-gif-parpadeo"></div>
+            </section>
+
+            {/* SECCIÓN PSTYLE - NORMAL */}
+            <section id="sec-pstyle-normal" class="section-pane">
+                <h2>Pstyle ➔ Normal</h2>
+                <div class="gallery-grid" id="grid-pstyle-normal"></div>
+            </section>
+
+            {/* SECCIÓN PSTYLE - GIF */}
+            <section id="sec-pstyle-gif" class="section-pane">
+                <h2>Pstyle ➔ Gif</h2>
+                <div class="gallery-grid" id="grid-pstyle-gif"></div>
+            </section>
+
+            {/* SECCIÓN PCBACK - NORMAL */}
+            <section id="sec-pcback-normal" class="section-pane">
+                <h2>Pcback ➔ Normal</h2>
+                <div class="gallery-grid" id="grid-pcback-normal"></div>
+            </section>
+
+            {/* SECCIÓN PCBACK - GIF */}
+            <section id="sec-pcback-gif" class="section-pane">
+                <h2>Pcback ➔ Gif</h2>
+                <div class="gallery-grid" id="grid-pcback-gif"></div>
+            </section>
+
+            {/* PIE DE PÁGINA */}
+            <footer class="footer">
+                Hecho por bolitadequeso <span class="heart-icon">💖</span>
+            </footer>
+        </main>
+    </div>
+
+    {/* MODAL PARA VER FOTO GRANDE */}
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImg">
+        <div id="modalCaption"></div>
+    </div>
+
+    {/* PANEL DE ADMINISTRADOR */}
+    <div id="adminModal" class="modal">
+        <div class="admin-content">
+            <span class="close-modal" onclick="closeAdminPanel()">&times;</span>
+            <h2>Panel de Administrador 👑</h2>
+            <p>Sube o edita tus diseños, nombres y precios por sección.</p>
+            
+            <div class="admin-form">
+                <select id="adminSection">
+                    <option value="gif-4d">GIF - 4d</option>
+                    <option value="gif-parpadeo">GIF - Parpadeo</option>
+                    <option value="pstyle-normal">Pstyle - Normal</option>
+                    <option value="pstyle-gif">Pstyle - Gif</option>
+                    <option value="pcback-normal">Pcback - Normal</option>
+                    <option value="pcback-gif">Pcback - Gif</option>
+                </select>
+                <input type="text" id="adminTitle" placeholder="Nombre del diseño">
+                <input type="text" id="adminPrice" placeholder="Precio en Xats (ej. 250 xats)">
+                <input type="text" id="adminImgUrl" placeholder="Link de la imagen">
+                <button onclick="addNewItem()">Agregar / Guardar Diseño</button>
             </div>
+
+            <h3>Diseños Registrados</h3>
+            <div id="adminItemsList" class="admin-items-list"></div>
         </div>
     </div>
 
-    <script>
-        // Sistema de validación de contraseña
-        function verificarPassword() {
-            const pass = document.getElementById('pass-input').value;
-            const errorMsg = document.getElementById('error-msg');
-            const authPanel = document.getElementById('auth-panel');
-            const mainContent = document.getElementById('main-content');
-
-            if (pass === '5062') {
-                authPanel.style.opacity = '0';
-                setTimeout(() => {
-                    authPanel.style.display = 'none';
-                    mainContent.style.display = 'block';
-                }, 500);
-            } else {
-                errorMsg.style.display = 'block';
-            }
-        }
-
-        // Permitir presionar Enter para iniciar sesión
-        document.getElementById('pass-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                verificarPassword();
-            }
-        });
-
-        // Toggle del ojo para ver/ocultar contraseña
-        const toggleEye = document.getElementById('toggle-eye');
-        const passInput = document.getElementById('pass-input');
-        toggleEye.addEventListener('click', () => {
-            if (passInput.type === 'password') {
-                passInput.type = 'text';
-                toggleEye.textContent = '🔒';
-            } else {
-                passInput.type = 'password';
-                toggleEye.textContent = '👁️';
-            }
-        });
-
-        // Reloj en vivo (Zona horaria CDMX / America/Mexico_City)
-        function actualizarReloj() {
-            try {
-                const opciones = { 
-                    timeZone: 'America/Mexico_City', 
-                    hour: '2-digit', 
-                    minute: '2-digit', 
-                    second: '2-digit',
-                    hour12: true 
-                };
-                const horaLocal = new Date().toLocaleTimeString('es-MX', opciones);
-                document.getElementById('live-clock').textContent = `Hora actual (CDMX): ${horaLocal}`;
-            } catch(e) {
-                document.getElementById('live-clock').textContent = "Hora del Pacífico / CDMX";
-            }
-        }
-        setInterval(actualizarReloj, 1000);
-        actualizarReloj();
-
-        // Control de pestañas independientes
-        function switchTab(tabName) {
-            const tabs = document.querySelectorAll('.section-tab');
-            tabs.forEach(tab => tab.classList.remove('active-section'));
-
-            const buttons = document.querySelectorAll('nav button');
-            buttons.forEach(btn => btn.classList.remove('active'));
-
-            document.getElementById('sec-' + tabName).classList.add('active-section');
-            document.getElementById('btn-' + tabName).classList.add('active');
-        }
-
-        // Botón interactivo para desplegar el mensaje especial de Gisse
-        function toggleGisseMsg() {
-            const box = document.getElementById('gisse-msg-content');
-            if (box.style.display === 'block') {
-                box.style.display = 'none';
-            } else {
-                box.style.display = 'block';
-            }
-        }
-
-        // Generar corazones cayendo de fondo
-        const rainContainer = document.getElementById('rain-container');
-        const heartSymbols = ['💖', '✨', '💜', '💙', '🌸'];
-        for (let i = 0; i < 20; i++) {
-            const heart = document.createElement('div');
-            heart.className = 'heart-rain';
-            heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
-            heart.style.animationDelay = (Math.random() * 5) + 's';
-            rainContainer.appendChild(heart);
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
