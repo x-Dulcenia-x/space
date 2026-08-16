@@ -3,145 +3,806 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dulcinea Graphic</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Fuente cursiva bonita -->
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Dulcinea Graphic - XatSpace Designer & Store</title>
+    <style>
+        :root {
+            --primary-pink: #ffb7b2;
+            --light-pink: #ffe6e8;
+            --lilac: #dcd0ff;
+            --soft-blue: #b5ead7;
+            --accent-blue: #a0c4ff;
+            --white: #ffffff;
+            --text-dark: #4a4a4a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--light-pink), var(--lilac), var(--soft-blue));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Lluvia de corazones y flores */
+        .falling-element {
+            position: fixed;
+            top: -10vh;
+            font-size: 1.2rem;
+            user-select: none;
+            z-index: 1;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0.2;
+            }
+        }
+
+        /* Pantalla de Bloqueo / Teclado */
+        #auth-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .auth-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(220, 208, 255, 0.5);
+            text-align: center;
+            border: 3px solid var(--lilac);
+            max-width: 320px;
+            width: 90%;
+        }
+
+        .auth-card h2 {
+            font-size: 1.5rem;
+            color: #8a79af;
+            margin-bottom: 10px;
+        }
+
+        .auth-card p {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .pin-display {
+            font-size: 1.8rem;
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+            background: var(--light-pink);
+            padding: 10px;
+            border-radius: 12px;
+            min-height: 50px;
+            color: #d87093;
+            border: 2px dashed var(--primary-pink);
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .key-btn {
+            background: linear-gradient(135deg, var(--lilac), var(--accent-blue));
+            border: none;
+            padding: 15px;
+            font-size: 1.2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.1s, background 0.2s;
+        }
+
+        .key-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Layout Web de XatSpace */
+        .xatspace-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            max-width: 1200px;
+            margin: 20px auto;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(160, 196, 255, 0.3);
+            overflow: hidden;
+            border: 4px solid var(--lilac);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Panel Izquierdo */
+        .sidebar-left {
+            background: #fff0f3;
+            border-right: 3px dashed var(--primary-pink);
+            padding: 25px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .brand-logo-container {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .dg-logo-3d {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 3px 3px 0px rgba(220, 208, 255, 0.8), 6px 6px 15px rgba(160, 196, 255, 0.5);
+            letter-spacing: -3px;
+            margin-bottom: 5px;
+            font-family: 'Arial Black', sans-serif;
+        }
+
+        .brand-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #7d6b91;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: white;
+            border: 2px solid var(--lilac);
+            padding: 10px 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: left;
+            font-weight: bold;
+            color: #6c5b7b;
+            transition: all 0.3s;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.02);
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: linear-gradient(135deg, var(--lilac), var(--accent-blue));
+            color: white;
+            border-color: transparent;
+            transform: translateX(5px);
+        }
+
+        /* Panel Derecho / Contenido Principal */
+        .main-content {
+            padding: 30px;
+            background: #faf8ff;
+            min-height: 600px;
+            position: relative;
+        }
+
+        .section-panel {
+            display: none;
+        }
+
+        .section-panel.active-panel {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2.section-heading {
+            color: #6c5b7b;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 2px dashed var(--soft-blue);
+            padding-bottom: 8px;
+        }
+
+        /* Estilos de Regloneo y Precios (Xats) */
+        .price-table {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .price-row {
+            background: white;
+            padding: 12px 18px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--lilac);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.02);
+        }
+
+        .price-row .item-name {
+            font-weight: 600;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .price-row .item-price {
+            background: var(--light-pink);
+            color: #d87093;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        /* Galería Estilo Web Mediano */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid var(--lilac);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .media-preview-container {
+            width: 100%;
+            height: 140px;
+            background: #f7f3f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .media-preview-container img, .media-preview-container video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            pointer-events: none; /* Bloqueo de interacción de arrastre/guardado nativo rápido */
+        }
+
+        .file-label {
+            padding: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #7d6b91;
+            background: #fff;
+            border-top: 1px dashed var(--light-pink);
+            word-break: break-all;
+        }
+
+        /* Panel de Control Super Admin */
+        .admin-controls-box {
+            background: white;
+            border: 2px dashed var(--accent-blue);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .admin-controls-box h4 {
+            color: #5a738e;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* Visor de Imagen Grande (Modal) */
+        #image-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        #modal-img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 10px;
+            border: 4px solid white;
+            box-shadow: 0 0 25px rgba(255,255,255,0.3);
+            pointer-events: none;
+        }
+
+        .close-modal-btn {
+            margin-top: 15px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Alerta Antihurto / Captura de Pantalla */
+        #screenshot-alert {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2b2b2b;
+            color: #ffde59;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease-in-out;
+            z-index: 100001;
+            font-size: 0.9rem;
+            border: 2px solid #ffde59;
+            text-align: center;
+        }
+
+        #screenshot-alert.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Pie de Página */
+        footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 0.85rem;
+            color: #887297;
+            background: rgba(255, 255, 255, 0.8);
+            border-top: 2px solid var(--lilac);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            position: relative;
+            z-index: 10;
+        }
+
+        footer .girly-cursive {
+            font-family: 'Brush Script MT', cursive, sans-serif;
+            font-size: 1.1rem;
+            color: #d87093;
+            font-style: italic;
+        }
+
+        /* Adaptabilidad Celular y Computadora (Media Queries) */
+        @media (max-width: 768px) {
+            .xatspace-container {
+                grid-template-columns: 1fr;
+                margin: 5px;
+                border-radius: 10px;
+            }
+            .sidebar-left {
+                border-right: none;
+                border-bottom: 3px dashed var(--primary-pink);
+                padding: 15px;
+            }
+            .nav-menu {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            .main-content {
+                padding: 15px;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+        }
+    </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
 
-    <!-- ANIMACIÓN DE FONDO: Corazones y Flores -->
-    <div class="falling-bg" id="fallingBg"></div>
+    <!-- Lluvia de corazones y flores en el fondo -->
+    <div id="rain-container"></div>
 
-    <!-- PANTALLA DE ACCESO (CONTRASEÑA: 5062) -->
-    <div id="lockScreen" class="lock-screen">
-        <div class="lock-card">
-            <div class="profile-logo-container">
-                <div class="dg-3d-logo">DG</div>
-            </div>
-            <h2 class="cursive-title">Dulcinea Graphic</h2>
+    <!-- PANTALLA DE ACCESO CON TECLADO -->
+    <div id="auth-screen">
+        <div class="auth-card">
+            <h2>Acceso Seguro</h2>
             <p>Ingresa la contraseña para entrar</p>
-            
-            <!-- Contraseña visible arriba de donde escribe -->
-            <div id="displayPassword" class="password-display"></div>
-            
-            <div class="input-container">
-                <input type="password" id="passInput" readonly placeholder="****">
-                <i class="fa-solid fa-eye" id="togglePass" onclick="togglePasswordVisibility()"></i>
+            <div class="pin-display" id="pin-dots">••••</div>
+            <div class="keypad">
+                <button class="key-btn" onclick="pressKey('1')">1</button>
+                <button class="key-btn" onclick="pressKey('2')">2</button>
+                <button class="key-btn" onclick="pressKey('3')">3</button>
+                <button class="key-btn" onclick="pressKey('4')">4</button>
+                <button class="key-btn" onclick="pressKey('5')">5</button>
+                <button class="key-btn" onclick="pressKey('6')">6</button>
+                <button class="key-btn" onclick="pressKey('7')">7</button>
+                <button class="key-btn" onclick="pressKey('8')">8</button>
+                <button class="key-btn" onclick="pressKey('9')">9</button>
+                <button class="key-btn" onclick="clearPin()" style="font-size: 0.8rem; background: #ffb7b2;">CLR</button>
+                <button class="key-btn" onclick="pressKey('0')">0</button>
+                <button class="key-btn" onclick="verifyPin()" style="font-size: 0.8rem; background: var(--soft-blue); color: #333;">OK</button>
             </div>
-
-            <!-- Teclado numérico -->
-            <div class="num-pad">
-                <button onclick="pressNum('1')">1</button>
-                <button onclick="pressNum('2')">2</button>
-                <button onclick="pressNum('3')">3</button>
-                <button onclick="pressNum('4')">4</button>
-                <button onclick="pressNum('5')">5</button>
-                <button onclick="pressNum('6')">6</button>
-                <button onclick="pressNum('7')">7</button>
-                <button onclick="pressNum('8')">8</button>
-                <button onclick="pressNum('9')">9</button>
-                <button onclick="clearPass()">C</button>
-                <button onclick="pressNum('0')">0</button>
-                <button onclick="submitPass()"><i class="fa-solid fa-check"></i></button>
+            <div style="margin-top: 15px;">
+                <span style="font-size: 0.65rem; color: #aaa;">Contraseña 5062</span>
             </div>
         </div>
     </div>
 
-    <!-- CONTENIDO PRINCIPAL (XATSPACE) -->
-    <div id="mainContent" class="main-container hidden">
-        
-        <!-- BARRA LATERAL IZQUIERDA -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <div class="dg-logo-small">DG</div>
-                <h1 class="cursive-title">Dulcinea Graphic</h1>
+    <!-- CONTENEDOR PRINCIPAL XATSPACE -->
+    <div class="xatspace-container">
+        <!-- SECCIÓN LADO IZQUIERDO -->
+        <aside class="sidebar-left">
+            <div class="brand-logo-container">
+                <!-- Logotipo DG 3D enlazado y cruzado con profundidad lila, rosa, azul -->
+                <div class="dg-logo-3d">DG</div>
+                <div class="brand-title">Dulcinea Graphic</div>
             </div>
-            
+
+            <!-- Navegación de Secciones -->
             <nav class="nav-menu">
-                <button class="nav-btn active" onclick="switchSection('inicio')"><i class="fa-solid fa-house"></i> Inicio</button>
-                
-                <div class="nav-group">
-                    <span class="nav-category"><i class="fa-solid fa-wand-magic-sparkles"></i> GIF</span>
-                    <button class="sub-btn" onclick="switchSection('gif-4d')">↳ 4d</button>
-                    <button class="sub-btn" onclick="switchSection('gif-parpadeo')">↳ Parpadeo</button>
-                </div>
-
-                <div class="nav-group">
-                    <span class="nav-category"><i class="fa-solid fa-palette"></i> Pstyle</span>
-                    <button class="sub-btn" onclick="switchSection('pstyle-normal')">↳ Normal</button>
-                    <button class="sub-btn" onclick="switchSection('pstyle-gif')">↳ Gif</button>
-                </div>
-
-                <div class="nav-group">
-                    <span class="nav-category"><i class="fa-solid fa-computer"></i> Pcback</span>
-                    <button class="sub-btn" onclick="switchSection('pcback-normal')">↳ Normal</button>
-                    <button class="sub-btn" onclick="switchSection('pcback-gif')">↳ Gif</button>
-                </div>
+                <button class="nav-btn active" onclick="switchSection('sec-inicio', this)">Inicio & Precios</button>
+                <button class="nav-btn" onclick="switchSection('sec-gif', this)">GIF (4D / Parpadeo)</button>
+                <button class="nav-btn" onclick="switchSection('sec-pstyle', this)">Pstyle (Normal / Gif)</button>
+                <button class="nav-btn" onclick="switchSection('sec-pcback', this)">Pcback (Normal / Gif)</button>
+                <button class="nav-btn" onclick="switchSection('sec-fotoperfil', this)">Foto Perfil & Panel</button>
+                <button class="nav-btn" onclick="switchSection('sec-admin', this)">Panel Administrador</button>
             </nav>
-
-            <!-- Corona de Super Administrador (Contraseña: 6258) -->
-            <div class="admin-access" onclick="openAdminLogin()">
-                <i class="fa-solid fa-crown"></i> <span>Panel Admin</span>
-            </div>
         </aside>
 
-        <!-- ÁREA DE CONTENIDO -->
-        <main class="content-area">
-            <header class="top-bar">
-                <h2 id="sectionTitle">Inicio</h2>
-                <div class="user-badge">Dulcinea Graphic</div>
-            </header>
+        <!-- SECCIÓN LADO DERECHO (CONTENIDO WEB) -->
+        <main class="main-content">
 
-            <div id="dynamicDisplay" class="dynamic-display">
-                <!-- Se inyecta contenido dinámicamente -->
-            </div>
+            <!-- 1. SECCIÓN INICIO (Precios en Xats) -->
+            <section id="sec-inicio" class="section-panel active-panel">
+                <h2 class="section-heading">Precios de Diseños y Reglonaje</h2>
+                <div class="price-table">
+                    <div class="price-row">
+                        <span class="item-name">Inicio - Renglón General</span>
+                        <span class="item-price">150 Xats</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="item-name">GIF Sub Renglón 4D</span>
+                        <span class="item-price">250 Xats</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="item-name">GIF Sub Renglón Parpadeo</span>
+                        <span class="item-price">200 Xats</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="item-name">Pstyle Sub Renglón Normal</span>
+                        <span class="item-price">100 Xats</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="item-name">Pstyle Sub Renglón Gif</span>
+                        <span class="item-price">180 Xats</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="item-name">Pcback Sub Renglón Normal</span>
+                        <span class="item-price">120 Xats</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="item-name">Pcback Sub Renglón Gif</span>
+                        <span class="item-price">220 Xats</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="item-name">Foto Perfil & Panel Inicio Completo</span>
+                        <span class="item-price">300 Xats</span>
+                    </div>
+                </div>
+            </section>
 
-            <!-- PIE DE PÁGINA -->
-            <footer class="footer">
-                <p>Hecho por bolitadequeso <i class="fa-solid fa-heart" style="color: #ff69b4;"></i></p>
-            </footer>
+            <!-- 2. SECCIÓN GIF (4D / Parpadeo) -->
+            <section id="sec-gif" class="section-panel">
+                <h2 class="section-heading">Galería GIF (4D y Parpadeo)</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <div class="media-preview-container" onclick="openModal('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=60')">
+                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=60" alt="gif_4d_estelar.gif">
+                        </div>
+                        <div class="file-label">gif_4d_estelar.gif</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="media-preview-container" onclick="openModal('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=500&auto=format&fit=crop&q=60')">
+                            <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=500&auto=format&fit=crop&q=60" alt="parpadeo_neon_rosa.gif">
+                        </div>
+                        <div class="file-label">parpadeo_neon_rosa.gif</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. SECCIÓN PSTYLE (Normal / Gif) -->
+            <section id="sec-pstyle" class="section-panel">
+                <h2 class="section-heading">Galería Pstyle (Normal y GIF)</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <div class="media-preview-container" onclick="openModal('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500&auto=format&fit=crop&q=60')">
+                            <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500&auto=format&fit=crop&q=60" alt="pstyle_normal_lila.png">
+                        </div>
+                        <div class="file-label">pstyle_normal_lila.png</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="media-preview-container" onclick="openModal('https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=500&auto=format&fit=crop&q=60')">
+                            <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=500&auto=format&fit=crop&q=60" alt="pstyle_animado_azul.gif">
+                        </div>
+                        <div class="file-label">pstyle_animado_azul.gif</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. SECCIÓN PCBACK (Normal / Gif) -->
+            <section id="sec-pcback" class="section-panel">
+                <h2 class="section-heading">Galería Pcback (Normal y GIF)</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <div class="media-preview-container" onclick="openModal('https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&auto=format&fit=crop&q=60')">
+                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&auto=format&fit=crop&q=60" alt="pcback_fondo_soft.png">
+                        </div>
+                        <div class="file-label">pcback_fondo_soft.png</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="media-preview-container" onclick="openModal('https://images.unsplash.com/photo-1557683316-973673baf926?w=500&auto=format&fit=crop&q=60')">
+                            <img src="https://images.unsplash.com/photo-1557683316-973673baf926?w=500&auto=format&fit=crop&q=60" alt="pcback_gif_movimiento.gif">
+                        </div>
+                        <div class="file-label">pcback_gif_movimiento.gif</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. SECCIÓN FOTO PERFIL Y PANEL INICIO -->
+            <section id="sec-fotoperfil" class="section-panel">
+                <h2 class="section-heading">Foto de Perfil & Panel de Inicio</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <div class="media-preview-container" onclick="openModal('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=60')">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=60" alt="foto_perfil_dg.png">
+                        </div>
+                        <div class="file-label">foto_perfil_dg.png</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="media-preview-container" onclick="openModal('https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=500&auto=format&fit=crop&q=60')">
+                            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=500&auto=format&fit=crop&q=60" alt="panel_inicio_preview.png">
+                        </div>
+                        <div class="file-label">panel_inicio_preview.png</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. PANEL DE ADMINISTRADOR SUPER -->
+            <section id="sec-admin" class="section-panel">
+                <h2 class="section-heading">Panel de Administrador Super ⚡</h2>
+                
+                <div class="admin-controls-box">
+                    <h4>Gestión por Renglón: Inicio</h4>
+                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Estado actual: Activo y Sincronizado en tienda.</p>
+                    <button class="nav-btn" style="width: auto; padding: 6px 12px; font-size: 0.8rem;" onclick="alert('Configuración de Inicio actualizada con éxito.')">Editar Precios / Textos</button>
+                </div>
+
+                <div class="admin-controls-box">
+                    <h4>Gestión por Renglón: GIF (4D & Parpadeo)</h4>
+                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Sub-reglones activos de animación.</p>
+                    <button class="nav-btn" style="width: auto; padding: 6px 12px; font-size: 0.8rem;" onclick="alert('Sub-reglón GIF gestionado.')">Subir Nuevo GIF</button>
+                </div>
+
+                <div class="admin-controls-box">
+                    <h4>Gestión por Renglón: Pstyle (Normal & Gif)</h4>
+                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Control de estilos de fuente / burbuja.</p>
+                    <button class="nav-btn" style="width: auto; padding: 6px 12px; font-size: 0.8rem;" onclick="alert('Pstyle actualizado.')">Modificar Pstyle</button>
+                </div>
+
+                <div class="admin-controls-box">
+                    <h4>Gestión por Renglón: Pcback (Normal & Gif)</h4>
+                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Control de fondos de chat.</p>
+                    <button class="nav-btn" style="width: auto; padding: 6px 12px; font-size: 0.8rem;" onclick="alert('Pcback sincronizado.')">Ajustar Pcback</button>
+                </div>
+
+                <div class="admin-controls-box">
+                    <h4>Gestión Foto Perfil y Panel Inicio</h4>
+                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Actualizar avatares principales.</p>
+                    <button class="nav-btn" style="width: auto; padding: 6px 12px; font-size: 0.8rem;" onclick="alert('Perfil actualizado.')">Cambiar Imagen</button>
+                </div>
+            </section>
+
         </main>
     </div>
 
-    <!-- MODAL LIGHTBOX PARA VER FOTO GRANDE -->
-    <div id="lightboxModal" class="lightbox" onclick="closeLightbox()">
-        <span class="close-btn">&times;</span>
-        <img id="lightboxImg" src="" alt="Diseño Ampliado">
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        Hecho por bolitadequeso <span style="color: #ff6b6b; font-size: 1rem;">❤</span> <span class="girly-cursive">Dulce Diseñadora</span>
+    </footer>
+
+    <!-- MODAL DE IMAGEN GRANDE -->
+    <div id="image-modal">
+        <img id="modal-img" src="" alt="Vista ampliada">
+        <button class="close-modal-btn" onclick="closeModal()">Cerrar</button>
     </div>
 
-    <!-- MODAL DE ACCESO AL ADMIN -->
-    <div id="adminLoginModal" class="modal-overlay hidden">
-        <div class="modal-card">
-            <h3>Acceso Super Administrador</h3>
-            <p>Ingresa la clave de administración:</p>
-            <input type="password" id="adminPassInput" placeholder="Contraseña admin">
-            <div class="modal-buttons">
-                <button onclick="verifyAdminPass()">Entrar</button>
-                <button onclick="closeAdminLogin()" class="cancel-btn">Cancelar</button>
-            </div>
-        </div>
-    </div>
+    <!-- ALERTA DE CAPTURA DE PANTALLA -->
+    <div id="screenshot-alert">¡Ya caché tomando captura! 📸🤭 ¡Guardar está bloqueado!</div>
 
-    <!-- PANEL DE ADMINISTRADOR -->
-    <div id="adminPanelModal" class="modal-overlay hidden">
-        <div class="admin-dashboard">
-            <div class="admin-header">
-                <h2>Panel de Administración - Dulcinea Graphic</h2>
-                <button onclick="closeAdminPanel()" class="close-dash">&times;</button>
-            </div>
-            <div class="admin-body">
-                <p>Aquí puedes modificar precios, nombres y enlaces de los diseños.</p>
-                <div id="adminEditorList">
-                    <!-- Generado por JS -->
-                </div>
-                <button class="save-admin-btn" onclick="saveAdminChanges()">Guardar Cambios</button>
-            </div>
-        </div>
-    </div>
+    <script>
+        /* --- BLOQUEO DE LINK / NAVEGACIÓN INTERNA --- */
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('¡Bloqueo de link activo! No puedes salir de esta carpeta.');
+            });
+        });
 
-    <script src="script.js"></script>
+        /* --- LÓGICA DE TECLADO CONTRASEÑA 5062 --- */
+        let enteredPin = "";
+        const correctPin = "5062";
+
+        function pressKey(num) {
+            if (enteredPin.length < 4) {
+                enteredPin += num;
+                updatePinDisplay();
+            }
+        }
+
+        function clearPin() {
+            enteredPin = "";
+            updatePinDisplay();
+        }
+
+        function updatePinDisplay() {
+            let dots = "";
+            for (let i = 0; i < 4; i++) {
+                if (i < enteredPin.length) {
+                    dots += "•"; // Ocultar o mostrar número según preferencia, usar bolitas limpias
+                } else {
+                    dots += "•";
+                }
+            }
+            // Mostrar los números reales pequeños como se solicitó "escrita con la clave Contraseña 5062 letras pequeña"
+            let displayText = enteredPin.padEnd(4, '•');
+            document.getElementById('pin-dots').innerText = displayText;
+        }
+
+        function verifyPin() {
+            if (enteredPin === correctPin) {
+                const authScreen = document.getElementById('auth-screen');
+                authScreen.style.opacity = '0';
+                setTimeout(() => {
+                    authScreen.style.display = 'none';
+                }, 500);
+            } else {
+                alert('Contraseña incorrecta. Intenta de nuevo.');
+                clearPin();
+            }
+        }
+
+        /* --- CAMBIO DE SECCIONES TIPO WEB --- */
+        function switchSection(sectionId, btnElement) {
+            // Ocultar todas las secciones
+            const panels = document.querySelectorAll('.section-panel');
+            panels.forEach(panel => panel.classList.remove('active-panel'));
+
+            // Mostrar la seleccionada
+            document.getElementById(sectionId).classList.add('active-panel');
+
+            // Actualizar botones de navegación
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+        }
+
+        /* --- VISOR DE IMAGEN GRANDE --- */
+        function openModal(imgSrc) {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-img');
+            modalImg.src = imgSrc;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('image-modal');
+            modal.style.display = 'none';
+        }
+
+        /* --- BLOQUEO DE GUARDAR / CLIC DERECHO / DRAG & DROP Y DETECTOR DE CAPTURA --- */
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            triggerAntiScreenshotAlert("¡Ey! El clic derecho está bloqueado 🚫");
+        });
+
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+        });
+
+        // Detectar intentos comunes de captura de pantalla (Teclas Impr Pant / Shortcuts)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'PrintScreen' || (e.ctrlKey && e.shiftKey && (e.key === 'S' || e.key === 's')) || (e.metaKey && e.shiftKey && e.key === '3')) {
+                e.preventDefault();
+                triggerAntiScreenshotAlert("¡Ya caché tomando captura! 📸🤭 ¡Protegido!");
+            }
+        });
+
+        function triggerAntiScreenshotAlert(customMsg) {
+            const alertBox = document.getElementById('screenshot-alert');
+            if (customMsg) alertBox.innerText = customMsg;
+            alertBox.classList.add('show');
+            setTimeout(() => {
+                alertBox.classList.remove('show');
+            }, 3500);
+        }
+
+        /* --- GENERADOR DINÁMICO DE LLUVIA DE CORAZONES Y FLORES --- */
+        function createFallingElements() {
+            const container = document.getElementById('rain-container');
+            const symbols = ['🌸', '💖', '✨', '🌷', '💕', '🌺', '💘'];
+            
+            setInterval(() => {
+                const el = document.createElement('div');
+                el.classList.add('falling-element');
+                el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                el.style.fontSize = (Math.random() * 1 + 0.8) + 'rem';
+                container.appendChild(el);
+
+                setTimeout(() => {
+                    el.remove();
+                }, 10000);
+            }, 600);
+        }
+
+        createFallingElements();
+    </script>
 </body>
 </html>
