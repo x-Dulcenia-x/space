@@ -3,883 +3,297 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dulcinea Graphic | Perfil & Tienda</title>
+    <title>Dulcinea Hechizera Xatspace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        :root {
-            --color-lila: #d8b4fe;
-            --color-rosa: #f472b6;
-            --color-azul: #60a5fa;
-            --color-rosa-claro: #fdf2f8;
-            --color-rosa-muy-claro: #fff1f2;
-            --color-texto: #4b5563;
-            --color-oscuro: #1f2937;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at center, #1a0b2e 0%, #080310 100%);
+            color: #e2d9f3;
+            overflow-x: hidden;
             user-select: none;
             -webkit-user-select: none;
-            -webkit-touch-callout: none;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #fbcfe8, #e9d5ff, #bfdbfe);
-            background-attachment: fixed;
-            color: var(--color-texto);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
+        .cinzel-font {
+            font-family: 'Cinzel', serif;
         }
 
-        /* --- EFECTO DE CORAZONES Y FLORES CAYENDO --- */
-        .falling-container {
+        /* 3D Floating Name Animation */
+        @keyframes floatText {
+            0%, 100% {
+                transform: translateY(0px) rotateX(0deg);
+                text-shadow: 0 5px 15px rgba(168, 85, 247, 0.4),
+                             0 0 30px rgba(147, 51, 234, 0.6),
+                             2px 2px 0px #4c1d95,
+                             4px 4px 0px #2e1065;
+            }
+            50% {
+                transform: translateY(-8px) rotateX(3deg);
+                text-shadow: 0 12px 25px rgba(168, 85, 247, 0.7),
+                             0 0 40px rgba(216, 180, 254, 0.8),
+                             2px 6px 0px #4c1d95,
+                             4px 8px 0px #2e1065;
+            }
+        }
+
+        .title-3d {
+            animation: floatText 4s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        /* Rainbow/Neon border cycling animation */
+        @keyframes neonCycle {
+            0% { border-color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.6); }
+            33% { border-color: #ec4899; box-shadow: 0 0 15px rgba(236, 72, 153, 0.6); }
+            66% { border-color: #6366f1; box-shadow: 0 0 15px rgba(99, 102, 241, 0.6); }
+            100% { border-color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.6); }
+        }
+
+        .avatar-border {
+            animation: neonCycle 6s linear infinite;
+        }
+
+        /* Heart beating animation */
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.25); }
+        }
+
+        .heart-beat {
+            animation: heartbeat 1.2s ease-in-out infinite;
+            display: inline-block;
+            color: #ec4899;
+        }
+
+        /* Glassmorphism card */
+        .glass-card {
+            background: rgba(20, 10, 35, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        /* Canvas for Oracle Rain */
+        #oracle-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 9999;
-            overflow: hidden;
+            z-index: 1;
         }
 
-        .falling-item {
-            position: absolute;
-            top: -10%;
-            animation: fall linear infinite;
-            opacity: 0.7;
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(-10vh) rotate(0deg);
-                opacity: 0.9;
-            }
-            100% {
-                transform: translateY(110vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* --- PANEL DE INICIO CONTRASEÑA --- */
-        #auth-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(31, 41, 55, 0.85);
-            backdrop-filter: blur(8px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-        }
-
-        .auth-card {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(244, 114, 182, 0.4);
-            border: 3px solid var(--color-rosa);
-            max-width: 320px;
-            width: 90%;
-        }
-
-        .auth-card h2 {
-            color: var(--color-rosa);
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-
-        .auth-card input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid var(--color-lila);
-            border-radius: 10px;
-            text-align: center;
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            outline: none;
-            background: var(--color-rosa-muy-claro);
-            color: var(--color-oscuro);
-        }
-
-        .auth-card button {
-            background: linear-gradient(135deg, var(--color-rosa), var(--color-lila));
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-size: 1rem;
-            cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.2s;
-            width: 100%;
-        }
-
-        .auth-card button:hover {
-            transform: scale(1.03);
-        }
-
-        .key-hint {
-            font-size: 0.75rem;
-            color: #9ca3af;
-            margin-top: 10px;
-        }
-
-        /* --- DISEÑO PRINCIPAL TIPO WEB (RESPONSIVE) --- */
-        .main-wrapper {
-            display: flex;
-            min-height: 100vh;
-            max-width: 1400px;
-            margin: 0 auto;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(5px);
-        }
-
-        /* --- LADO IZQUIERDO: ROSITA BAJITO --- */
-        .sidebar {
-            width: 300px;
-            background-color: var(--color-rosa-claro);
-            border-right: 2px dashed rgba(244, 114, 182, 0.3);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* Content wrapper above canvas */
+        .content-layer {
             position: relative;
-            flex-shrink: 0;
+            z-index: 10;
         }
 
-        .admin-badge-container {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            cursor: pointer;
-            font-size: 1.5rem;
-            transition: transform 0.2s;
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-        .admin-badge-container:hover {
-            transform: scale(1.2);
+        ::-webkit-scrollbar-track {
+            background: #080310;
         }
-
-        .logo-container {
-            margin-top: 25px;
-            text-align: center;
-            margin-bottom: 20px;
+        ::-webkit-scrollbar-thumb {
+            background: #4c1d95;
+            border-radius: 4px;
         }
-
-        /* Logo DG 3D con profundidad lila/rosa/azul */
-        .logo-dg-3d {
-            font-size: 3.5rem;
-            font-weight: 900;
-            font-style: italic;
-            background: linear-gradient(45deg, var(--color-rosa), var(--color-lila), var(--color-azul));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 3px 3px 0px #fbcfe8, 5px 5px 10px rgba(96, 165, 250, 0.5);
-            letter-spacing: -2px;
-            margin-bottom: 5px;
-        }
-
-        .sidebar h1 {
-            font-size: 1.2rem;
-            color: var(--color-oscuro);
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .profile-pic-box {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 4px solid var(--color-rosa);
-            overflow: hidden;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .profile-pic-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .nav-sections {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .nav-btn {
-            background: #ffffff;
-            border: 2px solid var(--color-lila);
-            padding: 10px 15px;
-            border-radius: 12px;
-            text-align: left;
-            font-weight: bold;
-            color: var(--color-oscuro);
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-btn:hover, .nav-btn.active {
-            background: linear-gradient(135deg, var(--color-rosa), var(--color-lila));
-            color: white;
-            border-color: transparent;
-        }
-
-        /* --- CONTENIDO PRINCIPAL --- */
-        .content-area {
-            flex-grow: 1;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .section-panel {
-            display: none;
-        }
-
-        .section-panel.active-panel {
-            display: block;
-            animation: fadeIn 0.4s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            color: var(--color-oscuro);
-            margin-bottom: 20px;
-            border-bottom: 3px solid var(--color-rosa);
-            padding-bottom: 5px;
-            display: inline-block;
-        }
-
-        /* --- PRECIOS EN XATS (INICIO) --- */
-        .prices-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .price-card {
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid var(--color-lila);
-            border-radius: 15px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .price-card h3 {
-            font-size: 1.1rem;
-            color: var(--color-oscuro);
-            margin-bottom: 8px;
-        }
-
-        .price-tag {
-            background: linear-gradient(135deg, var(--color-azul), var(--color-lila));
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-weight: bold;
-            display: inline-block;
-            font-size: 0.95rem;
-        }
-
-        /* --- GALERÍAS Y REGLONES (TAMAÑO MEDIANO) --- */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 15px;
-        }
-
-        .gallery-item {
-            background: white;
-            border-radius: 15px;
-            padding: 12px;
-            border: 2px solid var(--color-rosa);
-            box-shadow: 0 4px 10px rgba(244, 114, 182, 0.15);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .gallery-img-container {
-            width: 100%;
-            height: 160px; /* Tamaño mediano */
-            border-radius: 10px;
-            overflow: hidden;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .gallery-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .gallery-img-container img:hover {
-            transform: scale(1.05);
-        }
-
-        .item-name {
-            margin-top: 10px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: var(--color-oscuro);
-            text-align: center;
-            word-break: break-all;
-        }
-
-        /* --- MODAL PARA FOTO GRANDE --- */
-        #img-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 20000;
-        }
-
-        .modal-content-box {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-            text-align: center;
-        }
-
-        .modal-content-box img {
-            max-width: 100%;
-            max-height: 80vh;
-            border-radius: 15px;
-            border: 4px solid white;
-        }
-
-        .close-modal-btn {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            background: var(--color-rosa);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        /* --- PANEL DE ADMINISTRADOR SUPER --- */
-        #admin-panel-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 15000;
-        }
-
-        .admin-panel-card {
-            background: #ffffff;
-            width: 90%;
-            max-width: 700px;
-            max-height: 85vh;
-            border-radius: 20px;
-            padding: 25px;
-            overflow-y: auto;
-            border: 4px solid var(--color-azul);
-            box-shadow: 0 10px 30px rgba(96, 165, 250, 0.4);
-        }
-
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--color-azul);
-            padding-bottom: 10px;
-        }
-
-        .admin-header h2 {
-            color: var(--color-azul);
-            font-size: 1.4rem;
-        }
-
-        .close-admin-btn {
-            background: #ef4444;
-            color: white;
-            border: none;
-            padding: 5px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .admin-section-group {
-            margin-bottom: 15px;
-            background: var(--color-rosa-muy-claro);
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid var(--color-lila);
-        }
-
-        .admin-section-group h3 {
-            font-size: 1rem;
-            color: var(--color-oscuro);
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .admin-sub-options {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .admin-sub-options label {
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            background: white;
-            padding: 4px 8px;
-            border-radius: 6px;
-            border: 1px solid #d1d5db;
-        }
-
-        /* --- PIE DE PÁGINA --- */
-        footer {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 0.95rem;
-            color: var(--color-oscuro);
-            border-top: 1px dashed rgba(244, 114, 182, 0.3);
-            padding-top: 15px;
-        }
-
-        .footer-heart {
-            color: var(--color-rosa);
-            display: inline-block;
-            animation: pulseHeart 1.2s infinite;
-        }
-
-        @keyframes pulseHeart {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.25); }
-            100% { transform: scale(1); }
-        }
-
-        .signature-text {
-            font-family: 'Brush Script MT', cursive, sans-serif;
-            font-size: 1.3rem;
-            color: var(--color-rosa);
-            font-weight: bold;
-        }
-
-        /* --- ADVERTENCIA CAPTURA DE PANTALLA --- */
-        #screenshot-alert {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-100px);
-            background: linear-gradient(135deg, #f43f5e, #db2777);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 20px;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            transition: transform 0.4s ease-in-out;
-            z-index: 30000;
-            text-align: center;
-        }
-
-        #screenshot-alert.show {
-            transform: translateX(-50%) translateY(0);
-        }
-
-        /* --- MEDIA QUERY PARA CELULAR --- */
-        @media (max-width: 768px) {
-            .main-wrapper {
-                flex-direction: column;
-            }
-            .sidebar {
-                width: 100%;
-                border-right: none;
-                border-bottom: 2px dashed rgba(244, 114, 182, 0.3);
-            }
-            .content-area {
-                padding: 15px;
-            }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6d28d9;
         }
     </style>
 </head>
-<body oncontextmenu="return false;">
+<body class="min-h-screen flex flex-col justify-between text-white selection:bg-purple-600 selection:text-white">
 
-    <!-- EFECTO CORAZONES Y FLORES CAYENDO -->
-    <div class="falling-container" id="fallingContainer"></div>
+    <canvas id="oracle-canvas"></canvas>
 
-    <!-- PANEL DE INICIO CONTRASEÑA -->
-    <div id="auth-overlay">
-        <div class="auth-card">
-            <h2>Acceso Restringido</h2>
-            <input type="password" id="access-password" placeholder="Contraseña...">
-            <button onclick="checkPassword()">Entrar</button>
-            <div class="key-hint">Contraseña 5062 letras pequeña</div>
-        </div>
-    </div>
-
-    <!-- ALERTA DE CAPTURA DE PANTALLA -->
-    <div id="screenshot-alert">¡Ya caché tomando captura! 📸✨ Te pillé con las manos en la masa.</div>
-
-    <!-- MODAL FOTO GRANDE -->
-    <div id="img-modal" onclick="closeModal()">
-        <div class="modal-content-box" onclick="event.stopPropagation()">
-            <button class="close-modal-btn" onclick="closeModal()">Cerrar ✖</button>
-            <img id="modal-img-element" src="" alt="Vista ampliada">
-        </div>
-    </div>
-
-    <!-- PANEL ADMINISTRADOR SUPER -->
-    <div id="admin-panel-overlay">
-        <div class="admin-panel-card">
-            <div class="admin-header">
-                <h2>Panel de Administrador Super 👑</h2>
-                <button class="close-admin-btn" onclick="closeAdminPanel()">Cerrar</button>
-            </div>
+    <main class="content-layer flex-grow flex items-center justify-center p-4 sm:p-6">
+        <div class="glass-card w-full max-w-md rounded-3xl p-6 sm:p-8 flex flex-col items-center text-center transition-all duration-300">
             
-            <div class="admin-section-group">
-                <h3>Inicio</h3>
-                <div class="admin-sub-options">
-                    <label>Subreglón: 4d</label>
-                    <label>Parpadeo</label>
+            <!-- Profile Picture with Cross-Fade & Neon Cycle Border -->
+            <div class="relative mb-6">
+                <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 border-2 avatar-border overflow-hidden relative shadow-2xl bg-black/40">
+                    <!-- Image 1 -->
+                    <img id="avatar-1" src="https://i.ibb.co/cS7N4z54/73893d63-43de-4984-816b-e92301fb0b9b.png" 
+                         alt="Dulcinea Hechizera 1" 
+                         onerror="this.src='https://placehold.co/128x128/1a0b2e/a855f7?text=DH'"
+                         class="w-full h-full object-cover rounded-full transition-opacity duration-700 absolute inset-0 opacity-100">
+                    <!-- Image 2 -->
+                    <img id="avatar-2" src="https://i.ibb.co/27SrHVDM/d2cf7244-a61d-4cb5-b56c-c472e3ae8986.png" 
+                         alt="Dulcinea Hechizera 2" 
+                         onerror="this.src='https://placehold.co/128x128/2e1065/ec4899?text=DH2'"
+                         class="w-full h-full object-cover rounded-full transition-opacity duration-700 absolute inset-0 opacity-0 filter grayscale contrast-125">
+                </div>
+                <div class="absolute -bottom-2 -right-2 bg-purple-900 border border-purple-500 text-purple-200 text-xs px-2 py-0.5 rounded-full shadow-lg flex items-center gap-1">
+                    <i class="fa-solid fa-wand-magic-sparkles text-amber-300 text-[10px]"></i> Bruja
                 </div>
             </div>
 
-            <div class="admin-section-group">
-                <h3>GIF</h3>
-                <div class="admin-sub-options">
-                    <label>Pstyle: <input type="radio" name="pstyle-gif" checked> Normal <input type="radio" name="pstyle-gif"> Gif</label>
-                    <label>Pcback: <input type="radio" name="pcback-gif" checked> Normal <input type="radio" name="pcback-gif"> Gif</label>
-                </div>
+            <!-- 3D Floating Name -->
+            <h1 class="cinzel-font text-2xl sm:text-3xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-purple-400 title-3d mb-2">
+                Dulcinea Hechizera
+            </h1>
+            
+            <p class="text-xs sm:text-sm text-purple-300/80 tracking-widest uppercase mb-6 font-semibold">
+                ✦ Sacerdotesa de la Noche & Xatspace ✦
+            </p>
+
+            <!-- Biography Section -->
+            <div class="w-full bg-purple-950/30 border border-purple-800/30 rounded-2xl p-4 sm:p-5 mb-6 text-xs sm:text-sm text-purple-100/90 leading-relaxed shadow-inner">
+                <p class="mb-3">
+                    🔮 Habitante de reinos ocultos, tejedora de hechizos estelares y guardiana de los misterios de medianoche. 
+                </p>
+                <p>
+                    Bienvenido a mi rincón sagrado en Xatspace. Donde la magia oscura y los destellos púrpuras convergen en armonía eterna.
+                </p>
             </div>
 
-            <div class="admin-section-group">
-                <h3>Foto Perfil</h3>
-                <div class="admin-sub-options">
-                    <label><input type="checkbox" checked> Activa en Panel de Inicio</label>
-                </div>
+            <!-- Social / Magic Links -->
+            <div class="w-full flex flex-col gap-3 mb-2">
+                <a href="#grimoire" onclick="triggerMagicNotice(event, 'Abriendo el Grimorio secreto...')" class="group flex items-center justify-between p-3 rounded-xl bg-purple-900/40 hover:bg-purple-800/60 border border-purple-500/30 hover:border-purple-400 transition-all duration-300 shadow-md">
+                    <span class="flex items-center gap-3 text-xs sm:text-sm font-medium text-purple-200 group-hover:text-white">
+                        <i class="fa-solid fa-book-skull text-purple-400 text-base"></i> Grimorio de Hechizos
+                    </span>
+                    <i class="fa-solid fa-chevron-right text-xs text-purple-400 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+
+                <a href="#oracle" onclick="triggerMagicNotice(event, 'Consultando los astros de Xatspace...')" class="flex items-center justify-between p-3 rounded-xl bg-purple-900/40 hover:bg-purple-800/60 border border-purple-500/30 hover:border-purple-400 transition-all duration-300 shadow-md group">
+                    <span class="flex items-center gap-3 text-xs sm:text-sm font-medium text-purple-200 group-hover:text-white">
+                        <i class="fa-solid fa-moon text-amber-300 text-base"></i> Oráculo Estelar
+                    </span>
+                    <i class="fa-solid fa-chevron-right text-xs text-purple-400 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+
+                <a href="#altar" onclick="triggerMagicNotice(event, 'Conectando con el Altar principal...')" class="flex items-center justify-between p-3 rounded-xl bg-purple-900/40 hover:bg-purple-800/60 border border-purple-500/30 hover:border-purple-400 transition-all duration-300 shadow-md group">
+                    <span class="flex items-center gap-3 text-xs sm:text-sm font-medium text-purple-200 group-hover:text-white">
+                        <i class="fa-solid fa-hat-wizard text-purple-300 text-base"></i> Altar de Pociones
+                    </span>
+                    <i class="fa-solid fa-chevron-right text-xs text-purple-400 group-hover:translate-x-1 transition-transform"></i>
+                </a>
             </div>
 
-            <div class="admin-section-group">
-                <h3>Galeria Principal</h3>
-                <div class="admin-sub-options">
-                    <label>Subreglón: 4d</label>
-                    <label>Parpadeo</label>
-                </div>
-            </div>
         </div>
-    </div>
+    </main>
 
-    <!-- CONTENEDOR PRINCIPAL TIPO WEB -->
-    <div class="main-wrapper">
-        
-        <!-- LADO IZQUIERDO: ROSITA BAJITO -->
-        <aside class="sidebar">
-            <!-- Corona lado derecho de la sección superior -->
-            <div class="admin-badge-container" onclick="openAdminPanel()" title="Panel Administrador">👑</div>
+    <footer class="content-layer w-full py-4 text-center text-[10px] sm:text-xs text-purple-300/70 border-t border-purple-900/40 bg-black/50 backdrop-blur-md">
+        <div class="flex items-center justify-center gap-1.5 flex-wrap px-4">
+            <span>© 2026 Dulcinea Hechizera</span>
+            <span>•</span>
+            <span class="heart-beat"><i class="fa-solid fa-heart"></i></span>
+            <span>•</span>
+            <span>Bolita de Queso</span>
+            <span class="heart-beat" style="animation-delay: 0.6s;"><i class="fa-solid fa-heart"></i></span>
+        </div>
+    </footer>
 
-            <div class="logo-container">
-                <div class="logo-dg-3d">DG</div>
-                <h1>Dulcinea Graphic</h1>
-            </div>
-
-            <div class="profile-pic-box">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80" alt="Foto Perfil" class="protected-img">
-            </div>
-
-            <div class="nav-sections">
-                <button class="nav-btn active" onclick="switchSection('inicio', this)">
-                    <span>🏠 Inicio</span>
-                </button>
-                <button class="nav-btn" onclick="switchSection('gif', this)">
-                    <span>✨ GIF / Diseños</span>
-                </button>
-                <button class="nav-btn" onclick="switchSection('galeria', this)">
-                    <span>🖼️ Galería 4D & Efectos</span>
-                </button>
-            </div>
-        </aside>
-
-        <!-- CONTENIDO CENTRAL -->
-        <main class="content-area">
-            <div>
-                <!-- SECCIÓN 1: INICIO (Precios en xats) -->
-                <div id="inicio" class="section-panel active-panel">
-                    <h2 class="section-title">Precios y Servicios (Xats)</h2>
-                    <p style="margin-bottom: 15px; font-size: 0.9rem;">Precios oficiales de diseño adaptados para celular y computadora.</p>
-                    
-                    <div class="prices-grid">
-                        <div class="price-card">
-                            <h3>Logo DG 3D Personalizado</h3>
-                            <div class="price-tag">250 xats</div>
-                        </div>
-                        <div class="price-card">
-                            <h3>Reglón 4D Estilizado</h3>
-                            <div class="price-tag">150 xats</div>
-                        </div>
-                        <div class="price-card">
-                            <h3>Animación GIF & Parpadeo</h3>
-                            <div class="price-tag">200 xats</div>
-                        </div>
-                        <div class="price-card">
-                            <h3>Pstyle & Pcback Personalizado</h3>
-                            <div class="price-tag">180 xats</div>
-                        </div>
-                        <div class="price-card">
-                            <h3>Foto de Perfil Web / Xat</h3>
-                            <div class="price-tag">100 xats</div>
-                        </div>
-                        <div class="price-card">
-                            <h3>Maquetación Web Completa</h3>
-                            <div class="price-tag">500 xats</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECCIÓN 2: GIF (Con nombres exactos y enlaces bloqueados) -->
-                <div id="gif" class="section-panel">
-                    <h2 class="section-title">Sección de GIF / Animaciones</h2>
-                    <p style="margin-bottom: 15px; font-size: 0.9rem;">Diseños dinámicos con efectos especiales y transiciones fluidas.</p>
-
-                    <div class="gallery-grid">
-                        <!-- Elemento 1 -->
-                        <div class="gallery-item">
-                            <div class="gallery-img-container" onclick="openModal('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=80')">
-                                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=80" alt="gif_animado_lila_neon.gif" class="protected-img">
-                            </div>
-                            <div class="item-name">gif_animado_lila_neon.gif</div>
-                        </div>
-
-                        <!-- Elemento 2 -->
-                        <div class="gallery-item">
-                            <div class="gallery-img-container" onclick="openModal('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=500&auto=format&fit=crop&q=80')">
-                                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=500&auto=format&fit=crop&q=80" alt="banner_rosa_cyber.gif" class="protected-img">
-                            </div>
-                            <div class="item-name">banner_rosa_cyber.gif</div>
-                        </div>
-
-                        <!-- Elemento 3 -->
-                        <div class="gallery-item">
-                            <div class="gallery-img-container" onclick="openModal('https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=500&auto=format&fit=crop&q=80')">
-                                <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=500&auto=format&fit=crop&q=80" alt="loader_azul_pastel.gif" class="protected-img">
-                            </div>
-                            <div class="item-name">loader_azul_pastel.gif</div>
-                        </div>
-
-                        <!-- Elemento 4 -->
-                        <div class="gallery-item">
-                            <div class="gallery-img-container" onclick="openModal('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500&auto=format&fit=crop&q=80')">
-                                <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=500&auto=format&fit=crop&q=80" alt="textura_degradado_dg.gif" class="protected-img">
-                            </div>
-                            <div class="item-name">textura_degradado_dg.gif</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECCIÓN 3: GALERÍA (4D y Parpadeo) -->
-                <div id="galeria" class="section-panel">
-                    <h2 class="section-title">Galería 4D & Efectos</h2>
-                    <p style="margin-bottom: 15px; font-size: 0.9rem;">Muestra de tipografía 4D y efectos de parpadeo profesional.</p>
-
-                    <div class="gallery-grid">
-                        <!-- Elemento 1 -->
-                        <div class="gallery-item">
-                            <div class="gallery-img-container" onclick="openModal('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500&auto=format&fit=crop&q=80')">
-                                <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500&auto=format&fit=crop&q=80" alt="tipografia_4d_dulcinea.png" class="protected-img">
-                            </div>
-                            <div class="item-name">tipografia_4d_dulcinea.png</div>
-                        </div>
-
-                        <!-- Elemento 2 -->
-                        <div class="gallery-item">
-                            <div class="gallery-img-container" onclick="openModal('https://images.unsplash.com/photo-1563089145-599997674d42?w=500&auto=format&fit=crop&q=80')">
-                                <img src="https://images.unsplash.com/photo-1563089145-599997674d42?w=500&auto=format&fit=crop&q=80" alt="efecto_parpadeo_rosa.png" class="protected-img">
-                            </div>
-                            <div class="item-name">efecto_parpadeo_rosa.png</div>
-                        </div>
-
-                        <!-- Elemento 3 -->
-                        <div class="gallery-item">
-                            <div class="gallery-img-container" onclick="openModal('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&auto=format&fit=crop&q=80')">
-                                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&auto=format&fit=crop&q=80" alt="pstyle_normal_pcback.png" class="protected-img">
-                            </div>
-                            <div class="item-name">pstyle_normal_pcback.png</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PIE DE PÁGINA -->
-            <footer>
-                Hecho por <span class="signature-text">bolitadequeso</span> <span class="footer-heart">❤</span>
-            </footer>
-        </main>
+    <!-- Magic Toast Notification Box (Replaces alert) -->
+    <div id="magic-toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 translate-y-20 opacity-0 transition-all duration-500 z-50 bg-purple-950/90 border border-purple-500 text-purple-200 px-5 py-3 rounded-2xl shadow-2xl backdrop-blur-md text-xs sm:text-sm flex items-center gap-3 pointer-events-none">
+        <i class="fa-solid fa-wand-magic-sparkles text-amber-300 animate-spin"></i>
+        <span id="toast-message">Mensaje mágico</span>
     </div>
 
     <script>
-        /* --- VALIDACIÓN DE CONTRASEÑA --- */
-        function checkPassword() {
-            const pass = document.getElementById('access-password').value;
-            if (pass === '5062') {
-                document.getElementById('auth-overlay').style.display = 'none';
+        // --- 1. Cross-Fade Profile Picture Alternator ---
+        const img1 = document.getElementById('avatar-1');
+        const img2 = document.getElementById('avatar-2');
+        let showFirst = true;
+
+        setInterval(() => {
+            if (showFirst) {
+                img1.style.opacity = '0';
+                img2.style.opacity = '1';
             } else {
-                alert('Contraseña incorrecta. Recuerda: contraseña 5062 en letras pequeñas.');
-                document.getElementById('access-password').value = '';
+                img1.style.opacity = '1';
+                img2.style.opacity = '0';
             }
+            showFirst = !showFirst;
+        }, 3000); // Switches every 3 seconds with smooth cross-fade
+
+        // --- 2. Oracle Particle Rain Canvas Animation ---
+        const canvas = document.getElementById('oracle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const particles = [];
+        const particleCount = Math.floor(window.innerWidth < 768 ? 40 : 80);
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2 + 0.8,
+                speedY: Math.random() * 1.2 + 0.4,
+                speedX: (Math.random() - 0.5) * 0.4,
+                opacity: Math.random() * 0.7 + 0.2,
+                color: Math.random() > 0.4 ? '#a855f7' : (Math.random() > 0.5 ? '#ec4899' : '#ffffff')
+            });
         }
 
-        /* --- NAVEGACIÓN ENTRE SECCIONES (BLOQUEO DE REDIRECCIÓN A OTRA CARPETA) --- */
-        function switchSection(sectionId, btnElement) {
-            // Ocultar todos los paneles
-            const panels = document.querySelectorAll('.section-panel');
-            panels.forEach(panel => panel.classList.remove('active-panel'));
+        function animateOracleRain() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Mostrar el panel seleccionado
-            document.getElementById(sectionId).classList.add('active-panel');
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = p.opacity;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = p.color;
+                ctx.fill();
 
-            // Actualizar botones activos
-            const buttons = document.querySelectorAll('.nav-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            btnElement.classList.add('active');
+                // Move particle
+                p.y += p.speedY;
+                p.x += p.speedX;
+
+                // Reset position if out of bounds
+                if (p.y > canvas.height) {
+                    p.y = -10;
+                    p.x = Math.random() * canvas.width;
+                }
+                if (p.x > canvas.width || p.x < 0) {
+                    p.x = Math.random() * canvas.width;
+                }
+            });
+
+            requestAnimationFrame(animateOracleRain);
         }
+        animateOracleRain();
 
-        /* --- MODAL PARA AMPLIAR FOTOS --- */
-        function openModal(imgSrc) {
-            const modal = document.getElementById('img-modal');
-            const modalImg = document.getElementById('modal-img-element');
-            modalImg.src = imgSrc;
-            modal.style.display = 'flex';
-        }
+        // --- 3. Custom Notification Toast (No alert() used) ---
+        function triggerMagicNotice(e, msg) {
+            e.preventDefault();
+            const toast = document.getElementById('magic-toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = msg;
 
-        function closeModal() {
-            document.getElementById('img-modal').style.display = 'none';
-        }
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
 
-        /* --- PANEL DE ADMINISTRADOR SUPER --- */
-        function openAdminPanel() {
-            const pass = prompt('Ingrese clave de Administrador Super:');
-            if (pass === '5062') {
-                document.getElementById('admin-panel-overlay').style.display = 'flex';
-            } else if (pass !== null) {
-                alert('Clave incorrecta. Acceso denegado.');
-            }
-        }
-
-        function closeAdminPanel() {
-            document.getElementById('admin-panel-overlay').style.display = 'none';
-        }
-
-        /* --- BLOQUEO DE GUARDAR IMÁGENES Y MENSAJE DE CAPTURA CHISTOSO --- */
-        // Bloquear menú contextual (clic derecho) en fotos
-        document.addEventListener('contextmenu', function(e) {
-            if (e.target.tagName === 'IMG') {
-                e.preventDefault();
-                showScreenshotAlert();
-            }
-        });
-
-        // Detectar intento de guardar por arrastre (drag)
-        document.addEventListener('dragstart', function(e) {
-            if (e.target.tagName === 'IMG') {
-                e.preventDefault();
-            }
-        });
-
-        // Detectar tecla de captura de pantalla (PrintScreen) o atajos comunes de captura
-        let alertTimeout;
-        function showScreenshotAlert() {
-            const alertBox = document.getElementById('screenshot-alert');
-            alertBox.classList.add('show');
-            clearTimeout(alertTimeout);
-            alertTimeout = setTimeout(() => {
-                alertBox.classList.remove('show');
-            }, 4000);
-        }
-
-        window.addEventListener('keyup', function(e) {
-            if (e.key === 'PrintScreen') {
-                showScreenshotAlert();
-            }
-        });
-
-        // Detectar combinaciones de teclas para capturas (Ctrl+Shift+S, Cmd+Shift+4, etc.)
-        window.addEventListener('keydown', function(e) {
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 's' || e.key === 'S' || e.key === '4' || e.key === '3')) {
-                showScreenshotAlert();
-            }
-        });
-
-        /* --- GENERADOR DINÁMICO DE CORAZONES Y FLORES CAYENDO --- */
-        const fallingContainer = document.getElementById('fallingContainer');
-        const symbols = ['❤', '🌸', '💖', '🌷', '✨', '💕', '🌺', '💗'];
-
-        function createFallingItem() {
-            const item = document.createElement('div');
-            item.classList.add('falling-item');
-            item.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-            
-            // Posición horizontal aleatoria
-            item.style.left = Math.random() * 100 + 'vw';
-            
-            // Tamaño aleatorio
-            const size = Math.random() * 1.2 + 0.8;
-            item.style.fontSize = size + 'rem';
-            
-            // Duración de caída aleatoria (entre 4 y 9 segundos)
-            const duration = Math.random() * 5 + 4;
-            item.style.animationDuration = duration + 's';
-            
-            fallingContainer.appendChild(item);
-
-            // Eliminar elemento al finalizar la animación
             setTimeout(() => {
-                item.remove();
-            }, duration * 1000);
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
         }
 
-        // Generar nuevos elementos cada 400ms
-        setInterval(createFallingItem, 400);
-    </script>
-</body>
-</html>
+        // --- 4. Security & Privacy Protection (Right-click & Screenshot/Print Screen Warning) ---
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            triggerMagicNotice(e, '⚠️ ¡Protección mágica activa! El menú oculto está sellado.');
+        });
+
+        document.addEventListener('keydown', function(e) {
+            // Block PrintScreen, C
